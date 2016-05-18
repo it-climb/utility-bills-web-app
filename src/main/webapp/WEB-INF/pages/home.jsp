@@ -8,12 +8,10 @@
 
 </head>
 <body>
-Hello ghfghfghhfh
-
+Hello World
 <form method="get" action="/except">
   <input type="submit" value="Check log">
 </form>
-
 </body>
 
 </html>
