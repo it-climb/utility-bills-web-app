@@ -1,5 +1,7 @@
 package alex.pol.controllers;
 
+import alex.pol.util.ClassNameUtil;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,16 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
+    private static final Logger log = Logger.getLogger(ClassNameUtil.getCurrentClassName());
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
-
         return new ModelAndView("home");
     }
 
     @RequestMapping(value = "/except", method = RequestMethod.GET)
     public ModelAndView showExcept() {
         ModelAndView modelAndView = new ModelAndView("/exceptions/except");
+
+        log.fatal("fatal message");
+        log.error("error message");
+        log.warn("warning message");
+        log.info("info message");
+        log.trace("trace message");
+        log.debug("debug message");
+
         return modelAndView;
     }
 
