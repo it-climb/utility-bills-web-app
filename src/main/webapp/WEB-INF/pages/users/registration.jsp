@@ -17,7 +17,6 @@
 <body>
 
 <div id="container">
-
     <form:form action="regSave" modelAttribute="user">
         <label for="emailInp">Email: </label>
         <form:input path="email" id="emailInp" />
