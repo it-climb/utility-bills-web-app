@@ -30,6 +30,9 @@ Hello ghfghfghhfh
   Template 2077 Modern Town
 
   http://www.tooplate.com/view/2077-modern-town
+<form method="get" action="/except">
+  <input type="submit" value="Check log">
+</form>
 
   -->
   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
