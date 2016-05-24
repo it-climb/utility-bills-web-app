@@ -16,7 +16,10 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("home");
+
+        ModelAndView modelAndView =new ModelAndView("home");
+        modelAndView.addObject("name","hello");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/except", method = RequestMethod.GET)
