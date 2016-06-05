@@ -85,6 +85,7 @@ Hello ghfghfghhfh
         <li><a href="#testimonial" class="smoothScroll">TESTIMONIALS</a></li>
         <li><a href="#blog" class="smoothScroll">BLOG</a></li>
         <li><a href="#contact" class="smoothScroll">CONTACT</a></li>
+        <li><a href=/login >LOGIN</a></li>
       </ul>
     </div>
 
@@ -365,6 +366,8 @@ Hello ghfghfghhfh
         </div>
       </div>
 
+    </div>
+  </div>
 </footer>
 
 <!-- Javascript
