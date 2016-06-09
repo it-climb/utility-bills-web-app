@@ -19,7 +19,7 @@ Hello ghfghfghhfh
 <head>
 
   <meta charset="utf-8">
-  <title>Modern Town - Responsive HTML5 Template</title>
+  <title>Utility Bills</title>
 
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,6 +85,7 @@ Hello ghfghfghhfh
         <li><a href="#testimonial" class="smoothScroll">TESTIMONIALS</a></li>
         <li><a href="#blog" class="smoothScroll">BLOG</a></li>
         <li><a href="#contact" class="smoothScroll">CONTACT</a></li>
+        <li><a href=/login >LOGIN</a></li>
       </ul>
     </div>
 
@@ -104,7 +105,7 @@ Hello ghfghfghhfh
 
       <div class="col-md-6 col-sm-12">
         <div class="about-des">
-          <h4>The most active lifestyle</h4>
+          <h4>Created by Agios & Co.</h4>
           <h3>Living in MODERN TOWN</h3>
           <p>This is new HTML5 template that is easy to modify and apply for any kind of your website. This layout is based on Bootstrap v3.3.5 responsive framework. Visit <a rel="nofollow" href="http://www.tooplate.com" target="_parent">Tooplate</a> for more website themes or templates. Credits go to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unsplash</a> and <a rel="nofollow" href="http://pixabay.com" target="_parent">Pixabay</a> for images. Lorem ipsum dolor sit amet, maecenas eget vestibulum.</p>
         </div>
@@ -365,6 +366,8 @@ Hello ghfghfghhfh
         </div>
       </div>
 
+    </div>
+  </div>
 </footer>
 
 <!-- Javascript
