@@ -89,7 +89,7 @@
     <div class="row">
       <!---->
       <div class="col-md-6 col-sm-12">
-        <img src="<spring:message code="about.section1.img"/>" class="img-responsive" alt="about img 1">
+        <img src="resources/assets/images/about-img-1.jpg" class="img-responsive" alt="about img 1">
       </div>
 
       <div class="col-md-6 col-sm-12">
@@ -113,7 +113,7 @@
       </div>
 
       <div class="col-md-6 col-sm-12">
-        <img src="<spring:message code="about.section2.img"/>" class="img-responsive" alt="about img 2">
+        <img src="resources/assets/images/about-img-2.jpg" class="img-responsive" alt="about img 2">
       </div>
 
     </div>
@@ -133,7 +133,7 @@
         <div class="item">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
-              <img src="<spring:message code="service.section.foto1"/>" class="img-responsive img-circle" alt="testimonial img">
+              <img src="resources/assets/images/testimonial-img-1.jpg" class="img-responsive img-circle" alt="testimonial img">
               <h2><spring:message code="service.section1.h2"/></h2>
               <p><spring:message code="service.section1.p"/></p>
             </div>
@@ -142,7 +142,7 @@
         <div class="item">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
-              <img src="<spring:message code="service.section.foto2"/>" class="img-responsive img-circle" alt="testimonial img">
+              <img src="resources/assets/images/testimonial-img-2.jpg" class="img-responsive img-circle" alt="testimonial img">
               <h2><spring:message code="service.section2.h2"/></h2>
               <p><spring:message code="service.section2.p"/></p>
             </div>
@@ -151,7 +151,7 @@
         <div class="item">
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
-              <img src="<spring:message code="service.section.foto3"/>" class="img-responsive img-circle" alt="testimonial img">
+              <img src="resources/assets/images/testimonial-img-3.jpg" class="img-responsive img-circle" alt="testimonial img">
               <h2><spring:message code="service.section3.h2"/></h2>
               <p><spring:message code="service.section3.p"/></p>
             </div>
@@ -207,7 +207,7 @@
 
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section1.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-1.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section1.h3.link"/></a></h3>
             <small><spring:message code="blog.section1.small"/></small>
             <p><spring:message code="blog.section1.p"/></p>
@@ -215,7 +215,7 @@
         </div>
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section2.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-2.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section2.h3.link"/></a></h3>
             <small><spring:message code="blog.section2.small"/></small>
             <p><spring:message code="blog.section2.p"/></p>
@@ -223,7 +223,7 @@
         </div>
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section3.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-3.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section3.h3.link"/></a></h3>
             <small><spring:message code="blog.section3.small"/></small>
             <p><spring:message code="blog.section3.p"/></p>
@@ -231,7 +231,7 @@
         </div>
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.6s">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section4.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-4.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section4.h3.link"/></a></h3>
             <small><spring:message code="blog.section4.small"/></small>
             <p><spring:message code="blog.section4.p"/></p>
@@ -239,7 +239,7 @@
         </div>
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section5.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-5.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section5.h3.link"/></a></h3>
             <small><spring:message code="blog.section5.small"/></small>
             <p><spring:message code="blog.section5.p"/></p>
@@ -247,7 +247,7 @@
         </div>
         <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="1.0s">
           <div class="blog-wrapper">
-            <img src="<spring:message code="blog.section6.img"/>" class="img-responsive" alt="blog img">
+            <img src="resources/assets/images/blog-img-6.jpg" class="img-responsive" alt="blog img">
             <h3><a href="#"><spring:message code="blog.section6.h3.link"/></a></h3>
             <small><spring:message code="blog.section6.small"/></small>
             <p><spring:message code="blog.section6.p"/></p>
