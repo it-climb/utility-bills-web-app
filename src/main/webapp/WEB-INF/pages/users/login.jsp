@@ -4,7 +4,7 @@
 <head>
     <title>Login</title>
 </head>
-<body>
+<body><!-- ng-app="app" ng-controller="home as home"-->
 <form:form method="post" action="/userLogin">
     <div align="right"><strong>${email}</strong></div>
     <table>
@@ -24,6 +24,38 @@
         </tr>
     </table>
     <a href="/regSave">Registration</a>
+    <!--
+
+
+    class="container"
+    <div                             ng-show="!home.authenticated">
+        <a href="/facebookLogin">Log in with Facebook</a>
+    </div>
+    -->
+
 </form:form>
+<!--div>
+    Login with Facebook: <a href="/loginFacebook">click here</a>
+</div-->
+
+<!--<form action="/facebookLogin" method="post">
+    <input type="hidden" name="scope" value="user_posts" >
+    <p><button type="submit">Login with Facebook</button></p>
+</form>-->
+<!---->
+
+<!--<script type="text/javascript" src="resources/assets/js/owl.carousel.min.js"></script>
+<script type="text/javascript">
+    angular.module("app", []).controller("home", function($http) {
+        var self = this;
+        $http.get("/user").success(function(data) {
+            self.user = data.userAuthentication.details.name;
+            self.authenticated = true;
+        }).error(function() {
+            self.user = "N/A";
+            self.authenticated = false;
+        });
+    });
+</script>-->
 </body>
 </html>

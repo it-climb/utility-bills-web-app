@@ -85,6 +85,13 @@ Hello ghfghfghhfh
         <li><a href="#testimonial" class="smoothScroll">TESTIMONIALS</a></li>
         <li><a href="#blog" class="smoothScroll">BLOG</a></li>
         <li><a href="#contact" class="smoothScroll">CONTACT</a></li>
+        <li><a href="/login" class="smoothScroll">LOGIN</a></li>
+        <li>
+          <form method="get" action="/except">
+            <input type="submit" value="Check log">
+          </form>
+        </li>
+
       </ul>
     </div>
 
@@ -349,7 +356,7 @@ Hello ghfghfghhfh
       <div class="col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.9s">
         <h2>Network</h2>
         <ul class="social-icon">
-          <li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
+          <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
           <li><a href="#" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
           <li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
           <li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
@@ -371,7 +378,7 @@ Hello ghfghfghhfh
 ================================================== -->
 <script src="resources/assets/js/jquery.js"></script>
 <script src="resources/assets/js/bootstrap.min.js"></script>
-<script src="resources/assets/js/smoothscroll.js"></script>
+<script src="resources/assets/js/smoothscroll.js"></script><!---->
 <script src="resources/assets/js/jquery.nav.js"></script>
 <script src="resources/assets/js/jquery.parallax.js"></script>
 <script src="resources/assets/js/owl.carousel.min.js"></script>
