@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -23,13 +24,16 @@
 </form>
 
   -->
-  <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="resources/assets/css/animate.min.css">
   <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="resources/assets/css/owl.theme.css">
   <link rel="stylesheet" href="resources/assets/css/owl.carousel.css">
   <link rel="stylesheet" href="resources/assets/css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -73,7 +77,9 @@
         <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
         <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
-        <li><a href=/login ><spring:message code="nav.section.link6"/></a></li>
+        <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-1" ><spring:message code="nav.section.link6"/></a></li>
+        <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-2" ><spring:message code="nav.section.link9"/></a></li>
+        <%--<li><a href=/login ><spring:message code="nav.section.link6"/></a></li>--%>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
       </ul>
     </div>
@@ -303,6 +309,103 @@
     </div>
   </div>
 </section>
+
+<!-- modal login
+================================================== -->
+<div class="modal" id="modal-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default active">Log In</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-2" data-dismiss="modal">Sing Up</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary  btn-block btns btn-social btn-facebook"><span class="fa fa-facebook"></span> Sign in with Facebook</button>
+        <div class="or">
+          <p><strong>or</strong></p>
+        </div >
+
+        <form:form method="post" action="/userLogin">
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+            <input type="email" class="form-control"  placeholder="Email" name="email" value="${user.email}">
+          </div>
+
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+            <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}">
+          </div>
+          <div class="sign">
+            <%--<input type="hidden" name="id" value="${user.id}">--%>
+            <input role="button" type="submit" name="id" class="btn btn-primary  btn-block" value="Sign In"/>
+          </div>
+        </form:form>
+
+        <div class="fmp">
+          <a>Forgot my password</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal registration
+================================================== -->
+
+<div class="modal" id="modal-2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-1" data-dismiss="modal" >Log In</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default active">Sing Up</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary  btn-block btns btn-social btn-facebook"><span class="fa fa-facebook"></span> Sign up with Facebook</button>
+        <div class="or">
+          <p><strong>or</strong></p>
+        </div>
+
+        <form:form action="saveUser" modelAttribute="dto" name="myForm">
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input type="text" class="form-control"  placeholder="First Name" value="${dto.firstName}" name="firstName" ng-model="firstName" ng-length="1" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input type="text" class="form-control"  placeholder="Second Name" value="${dto.secondName}" name="secondName" ng-model="secondName" ng-length="1" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span> </div>
+            <input type="email" class="form-control"  placeholder="Email" name="email" ng-model="email" value="${dto.email}" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+            <input type="password" class="form-control"  placeholder="Password" name="password" ng-model="password" ng-minlength="3" value="${dto.password}" required>
+          </div>
+          <div class="sign">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="Sign Up" ng-disabled="!myForm.firstName.$valid || !myForm.secondName.$valid || !myForm.email.$valid || !myForm.password.$valid"/>
+          </div>
+        </form:form>
+
+        <div class="policy">
+          By signing up to create an account I accept Utility Bills Terms of Use and Privacy Policy
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Footer section

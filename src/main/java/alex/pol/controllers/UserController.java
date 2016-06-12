@@ -1,5 +1,6 @@
 package alex.pol.controllers;
 
+import alex.pol.domain.UserData;
 import alex.pol.repository.UserDataService;
 import alex.pol.util.validation.UserValid;
 import alex.pol.domain.User;
@@ -53,7 +54,11 @@ public class UserController {
     @RequestMapping(value = "/regSave", method = RequestMethod.GET)
     public ModelAndView registration(){
         User user = new User();
-        return new ModelAndView(JspPath.USER_REGISTRATION,"user",user);
+        UserData userData = new UserData();
+        ModelAndView modelAndView = new ModelAndView(JspPath.USER_REGISTRATION);
+        modelAndView.addObject("user", user);
+        modelAndView.addObject("userData", userData);
+        return modelAndView;
     }
 
     /**
@@ -69,16 +74,19 @@ public class UserController {
      */
 
     @RequestMapping(value = "/regSave", method = RequestMethod.POST)
-    public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult result,
+    public String addNewUser(@Valid @ModelAttribute("user") User user,
+                             @ModelAttribute("userData") UserData userData,
+                             BindingResult result,
                              HttpServletRequest request)throws SQLException{
-        userValid.validate(user, result);
+//        userValid.validate(user, result);
         if(result.hasErrors()){
             return "users/registration";
         }
         else{
             HttpSession session = request.getSession();
-            userService.insert(user);
             session.setAttribute("user", user);
+            userService.insert(user);
+
         }
         return "redirect:/login";
     }
