@@ -71,7 +71,7 @@
         <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
         <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
         <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
-        <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
+        <%--<li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>--%>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
         <li><a href=/login ><spring:message code="nav.section.link6"/></a></li>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
@@ -196,71 +196,7 @@
 
 <!-- blog section
 ================================================== -->
-<section id="blog" class="paralla-section">
-  <div class="container">
-    <div class="row">
-
-      <h2><spring:message code="blog.section.h2"/></h2>
-      <h4><spring:message code="blog.section.h4"/></h4>
-
-      <div class="blog-masonry masonry-true">
-
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-1.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section1.h3.link"/></a></h3>
-            <small><spring:message code="blog.section1.small"/></small>
-            <p><spring:message code="blog.section1.p"/></p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-2.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section2.h3.link"/></a></h3>
-            <small><spring:message code="blog.section2.small"/></small>
-            <p><spring:message code="blog.section2.p"/></p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-3.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section3.h3.link"/></a></h3>
-            <small><spring:message code="blog.section3.small"/></small>
-            <p><spring:message code="blog.section3.p"/></p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.6s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-4.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section4.h3.link"/></a></h3>
-            <small><spring:message code="blog.section4.small"/></small>
-            <p><spring:message code="blog.section4.p"/></p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-5.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section5.h3.link"/></a></h3>
-            <small><spring:message code="blog.section5.small"/></small>
-            <p><spring:message code="blog.section5.p"/></p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="1.0s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-6.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#"><spring:message code="blog.section6.h3.link"/></a></h3>
-            <small><spring:message code="blog.section6.small"/></small>
-            <p><spring:message code="blog.section6.p"/></p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
+  <div id="whiteline"></div>
 <!-- Contact section
 ================================================== -->
 <section id="contact" class="parallax-section">

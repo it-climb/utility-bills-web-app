@@ -453,3 +453,7 @@ footer a:hover {
     font-size: 9px;
   }
 }
+
+#whiteline {
+  height: 34px;
+}
