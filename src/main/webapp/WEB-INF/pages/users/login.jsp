@@ -7,6 +7,8 @@
 <body><!-- ng-app="app" ng-controller="home as home"-->
 <form:form method="post" action="/userLogin">
     <div align="right"><strong>${email}</strong></div>
+    <div align="right"> <a href="/logout">logout</a></div>
+
     <table>
         <tr>
             <td>Email:</td>

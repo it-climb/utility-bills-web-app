@@ -45,10 +45,6 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 		</dependency-->
-		<dependency>
-			<groupId>org.springframework.security.oauth</groupId>
-			<artifactId>spring-security-oauth2</artifactId>
-		</dependency>
 
 
 <!--
@@ -122,6 +118,7 @@
 			<artifactId>spring-social-core</artifactId>
 			<version>1.1.0.RELEASE</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
@@ -137,11 +134,16 @@
 			<artifactId>spring-social-config</artifactId>
 			<version>1.1.4.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-security</artifactId>
-			<version>1.1.0.RELEASE</version>
-		</dependency>
+			<!--dependency>
+				<groupId>org.springframework.social</groupId>
+				<artifactId>spring-social-security</artifactId>
+				<version>1.1.0.RELEASE</version>
+			</dependency-->
+			<!--dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+			</dependency-->
+
 
 
 		<dependency>
@@ -156,6 +158,7 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
