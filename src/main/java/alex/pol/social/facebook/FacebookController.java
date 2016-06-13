@@ -49,15 +49,20 @@ public class FacebookController {
     @Autowired
     UserDataService userDataService;
 
+    private static final String APP_ID = "1554105688224570";
+
+    private static final String APP_SECRETE = "b9c76b95fefb25983b0d45d9ba3d8364";
+
+    private static final String REDIRECT_URL = "http://localhost:8080/callback";
+
+
     @RequestMapping(value="/facebookLogin",method = RequestMethod.GET)
     public String loginWithFacebook(HttpServletRequest request){
 
         HttpSession session = request.getSession();
         String sessionId = session.getId();
-        String appId = "1554105688224570";
-        String redirectUrl = "http://localhost:8080/callback";//localhost
         String returnValue = "https://www.facebook.com/dialog/oauth?client_id="
-                + appId + "&redirect_uri=" + redirectUrl
+                + APP_ID + "&redirect_uri=" + REDIRECT_URL
                 + "&scope=email,user_birthday&state=" + sessionId;
         return "redirect:"+returnValue;
     }
@@ -67,10 +72,7 @@ public class FacebookController {
             throws IOException, SQLException {
         HttpSession httpSession = request.getSession();
         String faceCode = request.getParameter("code");
-        //String state = request.getParameter("state");
         String accessToken = getFacebookAccessToken(faceCode);
-        //JSONObject jsonObject = getUserJSONObjectFromJsonResponse(accessToken, httpSession);
-        //String sessionID = httpSession.getId();
         AccessGrant accessGrant = new AccessGrant(accessToken);
         FacebookConnectionFactory connectionFactory =
                 new FacebookConnectionFactory("1554105688224570", "b9c76b95fefb25983b0d45d9ba3d8364");
@@ -79,18 +81,12 @@ public class FacebookController {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("connection",connection);
         modelAndView.addObject("email",facebookUserEmail);
-
-
         List<User> userList = userService.getAll();
         User facebookUser = User.newBuilder().setEmail(facebookUserEmail).setPassword("Facebook").build();
-
         if (checkListForUser(userList,facebookUser)){
             userService.insert(facebookUser);
         }
-
         httpSession.setAttribute("user", facebookUser);
-
-
         return modelAndView;
     }
 
@@ -116,20 +112,15 @@ public class FacebookController {
     private String getFacebookAccessToken(String faceCode){
         String token = null;
         if (faceCode != null && ! "".equals(faceCode)) {
-            String appId = "1554105688224570";
-            String redirectUrl = "http://localhost:8080/callback";
-            String faceAppSecret = "b9c76b95fefb25983b0d45d9ba3d8364";
             String newUrl = "https://graph.facebook.com/oauth/access_token?client_id="
-                    + appId + "&redirect_uri=" + redirectUrl + "&client_secret="
-                    + faceAppSecret + "&code=" + faceCode;
+                    + APP_ID + "&redirect_uri=" + REDIRECT_URL + "&client_secret="
+                    + APP_SECRETE + "&code=" + faceCode;
             HttpClient httpclient = new DefaultHttpClient();
             try {
                 HttpGet httpget = new HttpGet(newUrl);
                 ResponseHandler<String> responseHandler = new BasicResponseHandler();
                 String responseBody = httpclient.execute(httpget, responseHandler);
-
                 if(responseBody.contains("access_token")) {
-                    //success
                     String[] mainResponseArray = responseBody.split("&");
                     for (String string : mainResponseArray) {
                         if (string.contains("access_token")) {
@@ -137,7 +128,6 @@ public class FacebookController {
                         }
                     }
                 }
-
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -147,33 +137,5 @@ public class FacebookController {
             }
         }
         return token;
-    }
-
-    private JSONObject getUserJSONObjectFromJsonResponse(String accessToken,
-                                                      HttpSession httpSession) {
-        JSONObject json = null;
-        HttpClient httpclient = new DefaultHttpClient();
-        try {
-            if (accessToken != null && ! "".equals(accessToken)) {
-                String newUrl = "https://graph.facebook.com/me?access_token=" + accessToken;
-                httpclient = new DefaultHttpClient();
-                HttpGet httpget = new HttpGet(newUrl);
-                System.out.println("Get info from face --> executing request: "
-                        + httpget.getURI());
-                ResponseHandler<String> responseHandler = new BasicResponseHandler();
-                String responseBody = httpclient.execute(httpget, responseHandler);
-                json = (JSONObject) JSONSerializer.toJSON(responseBody);
-
-            } else {
-                System.err.println("Token for facebook is null");
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            httpclient.getConnectionManager().shutdown();
-        }
-        return json;
     }
 }
