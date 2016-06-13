@@ -1,5 +1,6 @@
 package alex.pol.controllers;
 
+import alex.pol.domain.UserData;
 import alex.pol.repository.UserDataService;
 import alex.pol.util.validation.UserValid;
 import alex.pol.domain.User;
@@ -69,11 +70,15 @@ public class UserController {//extends WebSecurityConfigurerAdapter
      * Show the page with user registration (fields asking you to enter email password and confirm password)
      * @return
      */
-    @RequestMapping(value = "/regSave", method = RequestMethod.GET)
-    public ModelAndView registration(){
-        User user = new User();
-        return new ModelAndView(JspPath.USER_REGISTRATION,"user",user);
-    }
+//    @RequestMapping(value = "/regSave", method = RequestMethod.GET)
+//    public ModelAndView registration(){
+//        User user = new User();
+//        UserData userData = new UserData();
+//        ModelAndView modelAndView = new ModelAndView(JspPath.USER_REGISTRATION);
+//        modelAndView.addObject("user", user);
+//        modelAndView.addObject("userData", userData);
+//        return modelAndView;
+//    }
 
     /**
      * Add new user in DB if you entered write information in fields of adding user(enter email password and confirm password)
@@ -87,20 +92,23 @@ public class UserController {//extends WebSecurityConfigurerAdapter
      * @throws SQLException
      */
 
-    @RequestMapping(value = "/regSave", method = RequestMethod.POST)
-    public String addNewUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-                             HttpServletRequest request)throws SQLException{
-        userValid.validate(user, result);
-        if(result.hasErrors()){
-            return "users/registration";
-        }
-        else{
-            HttpSession session = request.getSession();
-            userService.insert(user);
-            session.setAttribute("user", user);
-        }
-        return "redirect:/login";
-    }
+//    @RequestMapping(value = "/regSave", method = RequestMethod.POST)
+//    public String addNewUser(@Valid @ModelAttribute("user") User user,
+//                             @ModelAttribute("userData") UserData userData,
+//                             BindingResult result,
+//                             HttpServletRequest request)throws SQLException{
+////        userValid.validate(user, result);
+//        if(result.hasErrors()){
+//            return "users/registration";
+//        }
+//        else{
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user", user);
+//            userService.insert(user);
+//
+//        }
+//        return "redirect:/login";
+//    }
 
     /**
      *Method act when you entered your email and password

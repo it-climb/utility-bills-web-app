@@ -131,6 +131,29 @@ p {
   background-color: transparent;
 }
 
+/*/////////////////////////////////////*/
+
+.or {
+  text-align: center;
+  padding: 0px;
+}
+.sign {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.rm {
+  padding-top: 5px;
+}
+.fmp {
+  text-align: center;
+  line-height: 10px;
+}
+.policy {
+  text-align: left;
+  font-size: 10px
+}
+
+
 
 
 /* home section styles
@@ -452,4 +475,11 @@ footer a:hover {
   #home h5 {
     font-size: 9px;
   }
+
+
+
+}
+
+#whiteline {
+  height: 34px;
 }
