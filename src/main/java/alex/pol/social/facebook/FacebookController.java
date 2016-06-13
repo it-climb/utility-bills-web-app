@@ -3,7 +3,7 @@ package alex.pol.social.facebook;
 import alex.pol.domain.User;
 import alex.pol.repository.UserDataService;
 import alex.pol.repository.UserService;
-import alex.pol.social.model.SocialUserData;
+//import alex.pol.social.model.SocialUserData;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
