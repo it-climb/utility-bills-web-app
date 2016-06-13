@@ -5,7 +5,6 @@
 </head>
 <body>
 <h3 align="right">${connection.displayName} <img src="${connection.imageUrl}"/></h3>
-<h6></h6>
-<%--h6>${email}</h6--%>
+<h3 align="right">${email}</h3>
 </body>
 </html>
