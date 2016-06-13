@@ -61,7 +61,7 @@ public class AccountController {
         userData.setAge(age);
         modelAndView.addObject("email", sessionUser.getEmail());
         modelAndView.addObject("userData", userData);
-         userDataService.update(userData);
+        userDataService.update(userData);
         return modelAndView;
     }
 }

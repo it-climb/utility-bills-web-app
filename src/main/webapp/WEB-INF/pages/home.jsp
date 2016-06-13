@@ -172,6 +172,9 @@
 </section>
 
 
+
+
+
 <!-- Counter section
 ================================================== -->
 <section id="counter" class="paralla-section">
@@ -372,10 +375,10 @@
       <div class="col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.9s">
         <h2><spring:message code="footer.section3.h2"/></h2>
         <ul class="social-icon">
-          <li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
+          <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
           <li><a href="#" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
-          <li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
-          <li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
+          <li><a href="/linkedinLogin" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
+          <li><a href="/vkLogin" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
         </ul>
         <div>
 
@@ -396,7 +399,7 @@
 ================================================== -->
 <script src="resources/assets/js/jquery.js"></script>
 <script src="resources/assets/js/bootstrap.min.js"></script>
-<script src="resources/assets/js/smoothscroll.js"></script>
+<script src="resources/assets/js/smoothscroll.js"></script><!---->
 <script src="resources/assets/js/jquery.nav.js"></script>
 <script src="resources/assets/js/jquery.parallax.js"></script>
 <script src="resources/assets/js/owl.carousel.min.js"></script>

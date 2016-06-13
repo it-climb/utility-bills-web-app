@@ -38,6 +38,7 @@ public class JspPath {
     public static final String VIDEO_EDITSERIE = "video/editserie";
     public static final String VIDEO_EDITSEASON = "video/editseason";
     public static final String VIDEO_ADMINSERIE = "video/adminserie";
+    public static final String SOCIAL_LOGINFACEBOOK = "/social/loginFacebook";
 
 
 }

@@ -56,6 +56,11 @@ public class User extends BaseModel {
             return this;
         }
 
+        public Builder setVersion(Long version){
+            User.this.setVersion(version);
+            return this;
+        }
+
         public Builder setEmail(String email) {
             User.this.email = email;
             return this;
@@ -63,8 +68,10 @@ public class User extends BaseModel {
 
         public Builder setPassword(String password){
             User.this.password = password;
+            //User.this.confirmPassword = password;
             return this;
         }
+
 
         public User build() {
             return User.this;
