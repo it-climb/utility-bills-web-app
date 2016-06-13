@@ -68,7 +68,7 @@ public class User extends BaseModel {
 
         public Builder setPassword(String password){
             User.this.password = password;
-            User.this.confirmPassword = password;
+            //User.this.confirmPassword = password;
             return this;
         }
 
