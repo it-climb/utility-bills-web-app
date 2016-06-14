@@ -47,7 +47,8 @@ public class LinkidinController {
 
     private static final String APP_SECRETE ="oUGpJndR2jlLvanv";
 
-    private static final String REDIRECT_URL = "http://localhost:8080/linkedincallback";
+    private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/linkedincallback";
+            //"http://localhost:8080/linkedincallback";
 
     @RequestMapping(value="/linkedinLogin",method = RequestMethod.GET)
     public String loginWithLinkedin(HttpServletRequest request){
