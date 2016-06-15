@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -74,8 +75,8 @@
       <ul class="nav navbar-nav navbar-right main-navigation">
         <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
         <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
-        <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
-        <%--<li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>--%>
+        <%--<li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>--%>
+        <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
         <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-1" ><spring:message code="nav.section.link6"/></a></li>
         <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-2" ><spring:message code="nav.section.link9"/></a></li>
@@ -343,6 +344,23 @@
   </div>
 </div>
 
+<!-- modal add
+================================================== -->
+<c:if test="${add != null}">
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">CONGRATULATION!!!</h4>
+      </div>
+      <div class="modal-body">
+        <div>Now You Are On Our Team!</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</c:if>
 
 <!-- Footer section
 ================================================== -->
@@ -377,9 +395,6 @@
           <li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
           <li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
         </ul>
-        <div>
-
-        </div>
       </div>
 
       <div class="col-md-12 col-sm-12">
@@ -404,6 +419,12 @@
 <script src="resources/assets/js/wow.min.js"></script>
 <script src="resources/assets/js/counter.js"></script>
 <script src="resources/assets/js/custom.js"></script>
+
+<script>
+      $(document).ready(function(){
+        $("#my-modal").modal();
+      });
+</script>
 
 </body>
 </html>

@@ -31,6 +31,8 @@ public class HomeController {
     @Autowired
     UserDataService userDataService;
 
+    private StringBuilder add = null;
+
     @RequestMapping(value= {"/","/home"}, method = RequestMethod.GET)
     public ModelAndView showAll(HttpServletRequest request, HttpServletResponse response) {
 
@@ -42,6 +44,8 @@ public class HomeController {
         ModelAndView modelAndView =new ModelAndView("home");
         RegAndLogDto dto = new RegAndLogDto();
         modelAndView.addObject("dto", dto);
+        modelAndView.addObject("add", add);
+        add = null;
         if (userLog != null){
             modelAndView.addObject("email", userLog.getEmail());
         }
@@ -62,7 +66,38 @@ public class HomeController {
 
         return modelAndView;
     }
+//
+//    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+//    public ModelAndView addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
+//                             HttpServletRequest request)throws SQLException {
+//        //userValid.validate(user, result);
+////        if(result.hasErrors()){
+////            return "users/registration";
+////        }else{
+//        HttpSession session = request.getSession();
+//        User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
+//        session.setAttribute("user", user);
+//        userService.insert(user);
+//        UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
+//        userDataService.insert(userData);
+////        }
+//        ModelAndView modelAndView = new ModelAndView("home");
+//        String add = "add";
+//        modelAndView.addObject("add", add);
+//
+//        return modelAndView;
+//
+//    }
 
+    /**
+     * Add new user in DB if you entered write information in fields of adding user(enter first name, last name, email and password)
+     * in not, write about your mistakes
+     * If all is clear send you to congratulation modal window
+     * @param dto
+     * @param request
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
                              HttpServletRequest request)throws SQLException {
@@ -76,6 +111,8 @@ public class HomeController {
         userService.insert(user);
         UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
         userDataService.insert(userData);
+        add = new StringBuilder();
+        add.append("add");
 //        }
         return "redirect:/";
     }
