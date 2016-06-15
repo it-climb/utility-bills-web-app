@@ -78,8 +78,13 @@
         <%--<li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>--%>
         <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
+        <c:if test="${email == null}">
         <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-1" ><spring:message code="nav.section.link6"/></a></li>
         <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-2" ><spring:message code="nav.section.link9"/></a></li>
+        </c:if>
+        <c:if test="${email != null}">
+          <li><a class="btn btn-link btn-lg reg">${email}</a> </li>
+        </c:if>
         <%--<li><a href=/login ><spring:message code="nav.section.link6"/></a></li>--%>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
       </ul>

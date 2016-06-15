@@ -37,15 +37,15 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView show(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
-        if(sessionUser == null){
-            return new ModelAndView(JspPath.USER_LOGIN);
-        }else
-            return new ModelAndView(JspPath.USER_LOGIN, "email", sessionUser.getEmail());
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public ModelAndView show(HttpServletRequest request){
+//        HttpSession session = request.getSession();
+//        User sessionUser = (User) session.getAttribute("user");
+//        if(sessionUser == null){
+//            return new ModelAndView(JspPath.USER_LOGIN);
+//        }else
+//            return new ModelAndView(JspPath.USER_LOGIN, "email", sessionUser.getEmail());
+//    }
 
     /**
      * Show the page with user registration (fields asking you to enter email password and confirm password)
@@ -107,7 +107,7 @@ public class UserController {
             User user = userService.getByEmail(email);
         if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
                 session.setAttribute("user", user);
-                return "redirect:/success";
+                return "redirect:/";
             }else return "redirect:/loginProblems";
     }
 
