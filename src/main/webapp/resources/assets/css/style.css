@@ -131,7 +131,7 @@ p {
   background-color: transparent;
 }
 
-/*/////////////////////////////////////*/
+/*modal windows*/
 
 .modal-content {
   width: 350px;
@@ -152,11 +152,9 @@ p {
   line-height: 10px;
 }
 .policy {
-  text-align: left;
+  text-align: center;
   font-size: 10px
 }
-
-
 
 
 /* home section styles

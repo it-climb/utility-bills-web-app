@@ -75,17 +75,17 @@
       <ul class="nav navbar-nav navbar-right main-navigation">
         <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
         <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
-        <%--<li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>--%>
+        <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
         <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
         <c:if test="${email == null}">
-        <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-1" ><spring:message code="nav.section.link6"/></a></li>
-        <li><a class="btn btn-link btn-lg reg" data-toggle="modal" data-target="#modal-2" ><spring:message code="nav.section.link9"/></a></li>
+        <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-1"><spring:message code="nav.section.link6"/></a></li>
+        <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-2"><spring:message code="nav.section.link9"/></a></li>
         </c:if>
         <c:if test="${email != null}">
-          <li><a class="btn btn-link btn-lg reg">${email}</a> </li>
+          <li><a href="" class="smoothScroll">${email}</a></li>
+          <li><a href="/accountLogout" class="smoothScroll"><spring:message code="nav.section.link10"></spring:message></a> </li>
         </c:if>
-        <%--<li><a href=/login ><spring:message code="nav.section.link6"/></a></li>--%>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
       </ul>
     </div>
@@ -272,8 +272,16 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-block btns btn-primary btn-social  btn-facebook">
-          <i class="fa fa-facebook"></i>
-          <spring:message code="modal.section.button1"/>
+          <span class="fa fa-facebook-square"></span>
+          <spring:message code="modal.section.button1"/> Facebook
+        </button>
+        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-linkedin">
+          <i class="fa fa-linkedin-square"></i>
+          <spring:message code="modal.section.button1"/> Linkedin
+        </button>
+        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-twitter">
+          <i class="fa fa-twitter-square"></i>
+          <spring:message code="modal.section.button1"/> Twitter
         </button>
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
@@ -290,14 +298,13 @@
             <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}">
           </div>
           <div class="sign">
-            <%--<input type="hidden" name="id" value="${user.id}">--%>
             <input role="button" type="submit" name="id" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>"/>
           </div>
         </form:form>
 
-        <div class="fmp">
-          <a><spring:message code="modal.section.h4"/></a>
-        </div>
+        <%--<div class="fmp">--%>
+          <%--<a><spring:message code="modal.section.h4"/></a>--%>
+        <%--</div>--%>
       </div>
     </div>
   </div>
@@ -321,8 +328,16 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-block btns btn-primary btn-social  btn-facebook">
-          <i class="fa fa-facebook"></i>
-          <spring:message code="modal.section.button2"/>
+          <span class="fa fa-facebook-square"></span>
+          <spring:message code="modal.section.button1"/> Facebook
+        </button>
+        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-linkedin">
+          <i class="fa fa-linkedin-square"></i>
+          <spring:message code="modal.section.button1"/> Linkedin
+        </button>
+        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-twitter">
+          <i class="fa fa-twitter-square"></i>
+          <spring:message code="modal.section.button1"/> Twitter
         </button>
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
@@ -358,7 +373,7 @@
 
 <!-- modal add
 ================================================== -->
-<c:if test="${add != null}">
+<c:if test="${add == 'add'}">
 <div class="modal fade" id="my-modal" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
