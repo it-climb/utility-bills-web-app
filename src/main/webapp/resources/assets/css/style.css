@@ -133,6 +133,9 @@ p {
 
 /*/////////////////////////////////////*/
 
+.modal-content {
+  width: 350px;
+}
 .or {
   text-align: center;
   padding: 0px;
