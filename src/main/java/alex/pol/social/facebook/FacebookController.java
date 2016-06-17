@@ -56,39 +56,58 @@ public class FacebookController {
     private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
     //"http://localhost:8080/callback";
 
+    private static FacebookConnectionFactory facebookConnectionFactory;
+
+    private static OAuth2Operations oauthOperations;
 
     @RequestMapping(value="/facebookLogin",method = RequestMethod.GET)
-    public String loginWithFacebook(HttpServletRequest request){
+    public void loginWithFacebook(HttpServletRequest request,
+                                  HttpServletResponse response) throws IOException {
 
         HttpSession session = request.getSession();
         String sessionId = session.getId();
-        String returnValue = "https://www.facebook.com/dialog/oauth?client_id="
+
+        facebookConnectionFactory =
+                new FacebookConnectionFactory(APP_ID, APP_SECRETE);
+        oauthOperations = facebookConnectionFactory.getOAuthOperations();
+        OAuth2Parameters params = new OAuth2Parameters();
+        params.setRedirectUri(REDIRECT_URL);
+        params.setScope("email,user_birthday");
+        params.setState(sessionId);
+        String authorizeUrl = oauthOperations.buildAuthorizeUrl(params);
+        response.sendRedirect(authorizeUrl);
+
+
+        /*String returnValue = "https://www.facebook.com/dialog/oauth?client_id="
                 + APP_ID + "&redirect_uri=" + REDIRECT_URL
                 + "&scope=email,user_birthday&state=" + sessionId;
-        return "redirect:"+returnValue;
+        return "redirect:"+returnValue;*/
     }
 
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public ModelAndView getToken(HttpServletRequest request, HttpServletResponse response)
+    public String getConnection(HttpServletRequest request)
             throws IOException, SQLException {
         HttpSession httpSession = request.getSession();
-        String faceCode = request.getParameter("code");
-        String accessToken = getFacebookAccessToken(faceCode);
+        String authorizationCode = request.getParameter("code");
+        AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, REDIRECT_URL, null);
+        Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);
+
+        /*String accessToken = getFacebookAccessToken(authorizationCode);
         AccessGrant accessGrant = new AccessGrant(accessToken);
-        FacebookConnectionFactory connectionFactory =
-                new FacebookConnectionFactory("1554105688224570", "b9c76b95fefb25983b0d45d9ba3d8364");
-        Connection<Facebook> connection = connectionFactory.createConnection(accessGrant);
+        Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);*/
+
         String facebookUserEmail = connection.fetchUserProfile().getEmail();
-        ModelAndView modelAndView = new ModelAndView("index");
+        /*ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("connection",connection);
-        modelAndView.addObject("email",facebookUserEmail);
+        modelAndView.addObject("email",facebookUserEmail);*/
         List<User> userList = userService.getAll();
         User facebookUser = User.newBuilder().setEmail(facebookUserEmail).setPassword("Facebook").build();
         if (checkListForUser(userList,facebookUser)){
             userService.insert(facebookUser);
         }
         httpSession.setAttribute("user", facebookUser);
-        return modelAndView;
+        //return modelAndView;
+        return "redirect:/";
     }
 
     private boolean checkListForUser(List<User> userList, User user){

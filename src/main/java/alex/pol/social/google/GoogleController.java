@@ -55,7 +55,7 @@ public class GoogleController {
     }
 
     @RequestMapping(value = "/googleCallback", method = RequestMethod.GET)
-    public ModelAndView getAccessToken(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    public String getAccessToken(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         HttpSession httpSession = request.getSession();
         String authorizationCode = request.getParameter("code");
         GoogleConnectionFactory googleConnectionFactory =
@@ -75,7 +75,8 @@ public class GoogleController {
                 userService.insert(googleUser);
         }
             httpSession.setAttribute("user", googleUser);
-        return modelAndView;
+        //return modelAndView;
+        return "redirect:/";
     }
 
     private boolean checkListForUser(List<User> userList, User user) {

@@ -48,7 +48,7 @@ public class LinkidinController {
     private static final String APP_SECRETE ="oUGpJndR2jlLvanv";
 
     private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/linkedincallback";
-            //"http://localhost:8080/linkedincallback";
+    //"http://localhost:8080/linkedincallback";
 
     @RequestMapping(value="/linkedinLogin",method = RequestMethod.GET)
     public String loginWithLinkedin(HttpServletRequest request){
@@ -63,7 +63,7 @@ public class LinkidinController {
     }
 
     @RequestMapping(value = "/linkedincallback", method = RequestMethod.GET)
-    public ModelAndView getToken(HttpServletRequest request, HttpServletResponse response)
+    public String getToken(HttpServletRequest request, HttpServletResponse response)
             throws IOException, SQLException {
         HttpSession httpSession = request.getSession();
         String faceCode = request.getParameter("code");
@@ -82,7 +82,8 @@ public class LinkidinController {
             userService.insert(linkedinUser);
         }
         httpSession.setAttribute("user", linkedinUser);
-        return modelAndView;
+        //return modelAndView;
+        return "redirect:/";
     }
 
     private boolean checkListForUser(List<User> userList, User user){
