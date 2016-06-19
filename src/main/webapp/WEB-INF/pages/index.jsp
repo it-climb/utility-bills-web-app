@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>Hello Spring Social</title>
-    <style>
+    <link href="resources/assets/css/popup_for_twitter.css" rel="stylesheet">
+    <!--style>
         *{
             font-family: Areal;
         }
@@ -33,7 +34,7 @@
             border-radius:5px;
             box-shadow: 0px 0px 10px #000;
         }
-    </style>
+    </style-->
 </head>
 <body>
 <div class="b-popup">
