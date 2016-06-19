@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
 import org.springframework.social.connect.web.ConnectController;
@@ -35,6 +36,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import org.apache.commons.lang.RandomStringUtils;
 
 @Controller
 public class FacebookController {
@@ -53,12 +55,19 @@ public class FacebookController {
 
     private static final String APP_SECRETE = "b9c76b95fefb25983b0d45d9ba3d8364";
 
-    private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
-    //"http://localhost:8080/callback";
+    private static final String REDIRECT_URL = //"http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
+    "http://localhost:8080/callback";
 
     private static FacebookConnectionFactory facebookConnectionFactory;
 
     private static OAuth2Operations oauthOperations;
+
+    @RequestMapping(value="/facebookError",method = RequestMethod.GET)
+    public ModelAndView returnError(String s){
+        ModelAndView modelAndView = new ModelAndView("error");
+            modelAndView.addObject("error",s);
+        return modelAndView;
+    }
 
     @RequestMapping(value="/facebookLogin",method = RequestMethod.GET)
     public void loginWithFacebook(HttpServletRequest request,
@@ -86,7 +95,7 @@ public class FacebookController {
 
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
     public String getConnection(HttpServletRequest request)
-            throws IOException, SQLException {
+             {
         HttpSession httpSession = request.getSession();
         String authorizationCode = request.getParameter("code");
         AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, REDIRECT_URL, null);
@@ -100,12 +109,24 @@ public class FacebookController {
         /*ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("connection",connection);
         modelAndView.addObject("email",facebookUserEmail);*/
-        List<User> userList = userService.getAll();
-        User facebookUser = User.newBuilder().setEmail(facebookUserEmail).setPassword("Facebook").build();
-        if (checkListForUser(userList,facebookUser)){
-            userService.insert(facebookUser);
-        }
-        httpSession.setAttribute("user", facebookUser);
+
+                 //List<User> userList = null;
+                 try {
+                     //userList = userService.getAll();
+                     User facebookUser = User.newBuilder().setEmail(facebookUserEmail)
+                             .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Facebook"+
+                     userService.insert(facebookUser);
+                     httpSession.setAttribute("user", facebookUser);
+                 } catch (SQLException e) {
+                     //String s ="SQLException";
+                     e.printStackTrace();
+                     //return "redirect:/facebookError?s="+s;
+                 }/*catch(NullPointerException e){
+                     String s ="NullPointerException";
+                     e.printStackTrace();
+                     return "redirect:/facebookError?s="+s;
+                 }*/
+        //if (checkListForUser(userList,facebookUser)){}
         //return modelAndView;
         return "redirect:/";
     }
