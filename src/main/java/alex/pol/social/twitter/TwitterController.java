@@ -4,6 +4,7 @@ import alex.pol.domain.User;
 import alex.pol.repository.UserDataService;
 import alex.pol.repository.UserService;
 import alex.pol.util.validation.UserValid;
+import org.apache.commons.lang.RandomStringUtils;
 import org.glassfish.jersey.server.oauth1.OAuth1Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
@@ -56,7 +58,6 @@ public class TwitterController {
 
     private static final String REDIRECT_URL =
     "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/twitterCallback";
-    //"http://localhost:8080/twitterCallback";
     //"http://127.0.0.1:8080/twitterCallback";
 
     private static TwitterConnectionFactory twitterConnectionFactory;
@@ -64,6 +65,8 @@ public class TwitterController {
     private static OAuth1Operations oauthOperations;
 
     private static OAuthToken requestToken;
+
+    private static Connection<Twitter> connection;
 
     /*private Twitter twitter;
 
@@ -164,12 +167,22 @@ public class TwitterController {
         httpSession.setAttribute("user", googleUser);*/
         OAuthToken accessToken = oauthOperations.exchangeForAccessToken(
                 new AuthorizedRequestToken(requestToken, authVerifier), null);
-        Connection<Twitter> connection = twitterConnectionFactory.createConnection(accessToken);
+        connection = twitterConnectionFactory.createConnection(accessToken);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("connection",connection);
-        //modelAndView.addObject("token",oauthToken);
-        //modelAndView.addObject("code",authVerifier);
+        modelAndView.addObject("email","");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/addTwitterUser", method = RequestMethod.GET)
+    public String addTwitterUser(@RequestParam(required = false) String email,
+                                 HttpServletRequest request) throws SQLException {
+        HttpSession httpSession = request.getSession();
+        User twitterUser = User.newBuilder().setEmail(email)
+                .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
+        userService.insert(twitterUser);
+        httpSession.setAttribute("user", twitterUser);
+        return "redirect:/";
     }
 
     private boolean checkListForUser(List<User> userList, User user) {

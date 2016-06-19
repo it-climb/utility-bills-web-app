@@ -94,8 +94,7 @@ public class FacebookController {
     }
 
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public String getConnection(HttpServletRequest request)
-             {
+    public String getConnection(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         String authorizationCode = request.getParameter("code");
         AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, REDIRECT_URL, null);
