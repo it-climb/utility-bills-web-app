@@ -55,9 +55,9 @@ public class TwitterController {
     //private static final String ACEESS_TOKEN_SECRET = "4jYZeRuUMkim8UfxLgBmT6bQtYQnvXEp3YUH6i0WZchZW";
 
     private static final String REDIRECT_URL =
-    //"http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/twitterCallback";
+    "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/twitterCallback";
     //"http://localhost:8080/twitterCallback";
-    "http://127.0.0.1:8080/twitterCallback";
+    //"http://127.0.0.1:8080/twitterCallback";
 
     private static TwitterConnectionFactory twitterConnectionFactory;
 
