@@ -268,18 +268,14 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-facebook">
-          <span class="fa fa-facebook-square"></span>
-          <spring:message code="modal.section.button1"/> Facebook
-        </button>
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-linkedin">
-          <i class="fa fa-linkedin-square"></i>
-          <spring:message code="modal.section.button1"/> Linkedin
-        </button>
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-twitter">
-          <i class="fa fa-twitter-square"></i>
-          <spring:message code="modal.section.button1"/> Twitter
-        </button>
+        <div align="center">
+          <ul class="sign-social-icon">
+            <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn sign-facebook" data-wow-delay="0.3s"></a></li>
+            <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn sign-twitter" data-wow-delay="0.6s"></a></li>
+            <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn sign-linkedin" data-wow-delay="0.9s"></a></li>
+            <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
+          </ul>
+        </div>
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div >
@@ -324,18 +320,16 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-facebook">
-          <span class="fa fa-facebook-square"></span>
-          <spring:message code="modal.section.button1"/> Facebook
-        </button>
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-linkedin">
-          <i class="fa fa-linkedin-square"></i>
-          <spring:message code="modal.section.button1"/> Linkedin
-        </button>
-        <button type="button" class="btn btn-block btns btn-primary btn-social  btn-twitter">
-          <i class="fa fa-twitter-square"></i>
-          <spring:message code="modal.section.button1"/> Twitter
-        </button>
+
+        <div align="center">
+          <ul class="sign-social-icon">
+            <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn sign-facebook" data-wow-delay="0.3s"></a></li>
+            <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn sign-twitter" data-wow-delay="0.6s"></a></li>
+            <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn sign-linkedin" data-wow-delay="0.9s"></a></li>
+            <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
+          </ul>
+        </div>
+
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div>
@@ -416,8 +410,8 @@
         <ul class="social-icon">
           <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
           <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
-          <li><a href="/linkedinLogin" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
-          <li><a href="/googleLogin" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
+          <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn" data-wow-delay="0.9s"></a></li>
+          <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn" data-wow-delay="1.2s"></a></li>
         </ul>
       </div>
 
