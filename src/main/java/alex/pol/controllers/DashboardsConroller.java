@@ -93,10 +93,6 @@ public class DashboardsConroller {
     public ModelAndView showTable(@ModelAttribute("myUserData") UserData myUserData,
                                        HttpServletRequest request) throws SQLException {
         ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_TABLE);
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
-        userDataService.update(myUserData);
-        modelAndView.addObject("myUserData", myUserData);
         return modelAndView;
     }
 
@@ -107,17 +103,15 @@ public class DashboardsConroller {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/sendPinCode", method = RequestMethod.POST)
-    public ModelAndView sendPinCode(@ModelAttribute("myUserData") UserData myUserData,
-                                    @RequestParam(required = false) int pinCode,
+    @RequestMapping(value = "/sendPinCode", method = RequestMethod.GET)
+    public String sendPinCode(@ModelAttribute("myUserData") UserData myUserData,
+                                    @RequestParam(required = true) int pinCode,
                                     HttpServletRequest request) throws SQLException {
         ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_SENDPIN);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
         myUserData = userDataService.findByUser(sessionUser);
-        myUserData.setPinCode(pinCode);
-        userDataService.update(myUserData);
         modelAndView.addObject("myUserData", myUserData);
-        return modelAndView;
+        return "redirect:/userDash";
     }
 }
