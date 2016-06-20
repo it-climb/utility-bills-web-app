@@ -1,24 +1,14 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
 
-<title> Home </title>
-
-</head>
-<body>
-Hello ghfghfghhfh
-</body>
-
-</html>
--->
-<%--@ page contentType="text/html;charset=UTF-8" language="java" --%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-  <meta charset="utf-8">
+<head>
+  <meta charset="UTF-8" />
+
   <title>Utility Bills</title>
 
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -30,9 +20,6 @@ Hello ghfghfghhfh
   Template 2077 Modern Town
 
   http://www.tooplate.com/view/2077-modern-town
-<form method="get" action="/except">
-  <input type="submit" value="Check log">
-</form>
 
   -->
   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
@@ -42,6 +29,9 @@ Hello ghfghfghhfh
   <link rel="stylesheet" href="resources/assets/css/owl.carousel.css">
   <link rel="stylesheet" href="resources/assets/css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -54,10 +44,10 @@ Hello ghfghfghhfh
     <div class="row">
 
       <div class="col-md-12 col-sm-12">
-        <h3 class="wow fadeInDown" data-wow-delay="0.2s">FULLY RESPONSIVE HTML5 TEMPLATE</h3>
-        <h1 class="wow fadeInDown">MODERN TOWN ${name} </h1>
-        <a href="#" class="btn btn-danger wow fadeInUp" data-wow-delay="0.4s">DOWNLOAD</a>
-        <a href="#about" class="btn btn-default smoothScroll wow fadeInUp" data-wow-delay="0.6s">LEARN MORE</a>
+        <h2 class="wow fadeInDown" data-wow-delay="0.2s"><spring:message code="home.section.h2"/></h2>
+        <h1 class="wow fadeInDown"><spring:message code="home.section.h1"/></h1>
+        <a href="#" class="btn btn-danger wow fadeInUp" data-wow-delay="0.4s"><spring:message code="home.section.button1"/></a>
+        <a href="#about" class="btn btn-default smoothScroll wow fadeInUp" data-wow-delay="0.6s"><spring:message code="home.section.button2"/></a>
       </div>
 
     </div>
@@ -76,16 +66,24 @@ Hello ghfghfghhfh
         <span class="icon icon-bar"></span>
         <span class="icon icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand">Modern Town</a>
+      <a href="#" class="navbar-brand"><spring:message code="nav.section.brand"/></a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right main-navigation">
-        <li><a href="#home" class="smoothScroll">HOME</a></li>
-        <li><a href="#about" class="smoothScroll">ABOUT</a></li>
-        <li><a href="#testimonial" class="smoothScroll">TESTIMONIALS</a></li>
-        <li><a href="#blog" class="smoothScroll">BLOG</a></li>
-        <li><a href="#contact" class="smoothScroll">CONTACT</a></li>
-        <li><a href=/login >LOGIN</a></li>
+        <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
+        <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
+        <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
+        <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
+        <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
+        <c:if test="${email == null}">
+        <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-1"><spring:message code="nav.section.link6"/></a></li>
+        <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-2"><spring:message code="nav.section.link9"/></a></li>
+        </c:if>
+        <c:if test="${email != null}">
+          <li><a href="/dashboards" class="smoothScroll">${user.email}</a></li>
+          <li><a href="/accountLogout" class="smoothScroll"><spring:message code="nav.section.link10"></spring:message></a> </li>
+        </c:if>
+        <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
       </ul>
     </div>
 
@@ -105,9 +103,9 @@ Hello ghfghfghhfh
 
       <div class="col-md-6 col-sm-12">
         <div class="about-des">
-          <h4>Created by Agios & Co.</h4>
-          <h3>Living in MODERN TOWN</h3>
-          <p>This is new HTML5 template that is easy to modify and apply for any kind of your website. This layout is based on Bootstrap v3.3.5 responsive framework. Visit <a rel="nofollow" href="http://www.tooplate.com" target="_parent">Tooplate</a> for more website themes or templates. Credits go to <a rel="nofollow" href="http://unsplash.com" target="_parent">Unsplash</a> and <a rel="nofollow" href="http://pixabay.com" target="_parent">Pixabay</a> for images. Lorem ipsum dolor sit amet, maecenas eget vestibulum.</p>
+          <h4><spring:message code="about.section1.h4"/></h4>
+          <h3><spring:message code="about.section1.h3"/></h3>
+          <p><spring:message code="about.section1.p.path1"/> <a rel="nofollow" href="http://www.tooplate.com" target="_parent"><spring:message code="about.section1.p.link1"/></a> <spring:message code="about.section1.p.path2"/> <a rel="nofollow" href="http://unsplash.com" target="_parent"><spring:message code="about.section1.p.link2"/></a> <spring:message code="about.section1.p.path3"/> <a rel="nofollow" href="http://pixabay.com" target="_parent"><spring:message code="about.section1.p.link3"/></a> <spring:message code="about.section1.p.path4"/></p>
         </div>
       </div>
 
@@ -117,9 +115,9 @@ Hello ghfghfghhfh
 
       <div class="col-md-6 col-sm-12">
         <div class="about-des">
-          <h4>New Community Mall</h4>
-          <h3>Going to the NEXT Level</h3>
-          <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa. Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
+          <h4><spring:message code="about.section2.h4"/></h4>
+          <h3><spring:message code="about.section2.h3"/></h3>
+          <p><spring:message code="about.section2.p.path1"/></p>
         </div>
       </div>
 
@@ -145,8 +143,8 @@ Hello ghfghfghhfh
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <img src="resources/assets/images/testimonial-img-1.jpg" class="img-responsive img-circle" alt="testimonial img">
-              <h2>LINDA - City Planner</h2>
-              <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
+              <h2><spring:message code="service.section1.h2"/></h2>
+              <p><spring:message code="service.section1.p"/></p>
             </div>
           </div>
         </div>
@@ -154,8 +152,8 @@ Hello ghfghfghhfh
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <img src="resources/assets/images/testimonial-img-2.jpg" class="img-responsive img-circle" alt="testimonial img">
-              <h2>TANYA - Architect</h2>
-              <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
+              <h2><spring:message code="service.section2.h2"/></h2>
+              <p><spring:message code="service.section2.p"/></p>
             </div>
           </div>
         </div>
@@ -163,8 +161,8 @@ Hello ghfghfghhfh
           <div class="row">
             <div class="col-md-offset-2 col-md-8">
               <img src="resources/assets/images/testimonial-img-3.jpg" class="img-responsive img-circle" alt="testimonial img">
-              <h2>SANDAR - Developer</h2>
-              <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
+              <h2><spring:message code="service.section3.h2"/></h2>
+              <p><spring:message code="service.section3.p"/></p>
             </div>
           </div>
         </div>
@@ -188,21 +186,20 @@ Hello ghfghfghhfh
 
       <div class="col-md-3 col-sm-3 counter-item">
         <h3 class="counter-number" data-from="1" data-to="256" data-speed="1000"></h3>
-        <span class="counter-text">CUSTOMERS</span>
+        <span class="counter-text"><spring:message code="count.section1.h3"/></span>
       </div>
       <div class="col-md-3 col-sm-3 counter-item">
         <h3 class="counter-number" data-from="1" data-to="512" data-speed="2000"></h3>
-        <span class="counter-text">DEVELOPERS</span>
+        <span class="counter-text"><spring:message code="count.section2.h3"/></span>
       </div>
       <div class="col-md-3 col-sm-3 counter-item">
         <h3 class="counter-number" data-from="1" data-to="1024" data-speed="3000"></h3>
-        <span class="counter-text">AWESOME PROJECTS</span>
+        <span class="counter-text"><spring:message code="count.section3.h3"/></span>
       </div>
       <div class="col-md-3 col-sm-3 counter-item">
         <h3 class="counter-number" data-from="1" data-to="2048" data-speed="4000"></h3>
-        <span class="counter-text">DESIGNERS</span>
+        <span class="counter-text"><spring:message code="count.section4.h3"/></span>
       </div>
-
 
     </div>
   </div>
@@ -211,71 +208,7 @@ Hello ghfghfghhfh
 
 <!-- blog section
 ================================================== -->
-<section id="blog" class="paralla-section">
-  <div class="container">
-    <div class="row">
-
-      <h2>OUR BLOG</h2>
-      <h4>Simple and Powerful tips</h4>
-
-      <div class="blog-masonry masonry-true">
-
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-1.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">CITY PLANNING STEPS</a></h3>
-            <small>August 26, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales.</p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.2s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-2.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">HOW TO DEVELOP A TOWN</a></h3>
-            <small>August 22, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque.</p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-3.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">DESIGNING A BUILDING</a></h3>
-            <small>August 14, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales.</p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.6s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-4.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">ARCHITECTURE CONCEPTS</a></h3>
-            <small>July 23, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-5.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">URBAN DEVELOPMENT</a></h3>
-            <small>July 19, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque.</p>
-          </div>
-        </div>
-        <div class="post-masonry col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="1.0s">
-          <div class="blog-wrapper">
-            <img src="resources/assets/images/blog-img-6.jpg" class="img-responsive" alt="blog img">
-            <h3><a href="#">BECOME A DEVELOPER</a></h3>
-            <small>July 12, 2016</small>
-            <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate 	voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
+  <div id="whiteline"></div>
 <!-- Contact section
 ================================================== -->
 <section id="contact" class="parallax-section">
@@ -287,13 +220,13 @@ Hello ghfghfghhfh
       <div class="col-md-6 col-sm-6 wow fadeInDown" data-wow-delay="0.6s">
         <form action="#" method="post">
           <div class="col-md-12 col-sm-12">
-            <input type="text" class="form-control" placeholder="Name" name="name" id="name">
-            <input type="email" class="form-control" placeholder="Email" name="email" id="email">
-            <input type="text" class="form-control" placeholder="Subject" name="subject">
-            <textarea name="message" rows="8" class="form-control" id="message" placeholder="Message" message="message"></textarea>
+            <input type="text" class="form-control" placeholder="<spring:message code="contact.section.name"/>" name="name" id="name">
+            <input type="email" class="form-control" placeholder="<spring:message code="contact.section.email"/>" name="email" id="email">
+            <input type="text" class="form-control" placeholder="<spring:message code="contact.section.subject"/>" name="subject">
+            <textarea name="message" rows="8" class="form-control" id="message" placeholder="<spring:message code="contact.section.message"/>" message="message"></textarea>
           </div>
           <div class="col-md-6 col-sm-6">
-            <input name="submit" type="submit" class="form-control" id="submit" value="Send a message">
+            <input name="submit" type="submit" class="form-control" id="submit" value="<spring:message code="contact.section.button"/>">
           </div>
         </form>
       </div>
@@ -302,15 +235,15 @@ Hello ghfghfghhfh
       ================================================== -->
       <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.9s">
         <div class="contact-detail">
-          <h2>CONTACT US</h2>
+          <h2><spring:message code="contact.details.section.h2"/></h2>
           <div>
-            <h4>Modern Town</h4>
-            <p>160 New Smooth Road, San Francisco, California</p>
+            <h4><spring:message code="contact.details.section.h4"/></h4>
+            <p><spring:message code="contact.details.section.p"/></p>
           </div>
           <div>
-            <h4>Talk to Us</h4>
-            <p>Email: hello@company.com</p>
-            <p>Tel: 010-020-0770 &nbsp;&nbsp;&nbsp; Fax: 090-080-0430</p>
+            <h4><spring:message code="contact.details.section1.h4"/></h4>
+            <p><spring:message code="contact.details.section1.p"/></p>
+            <p><spring:message code="contact.details.section1.p1"/></p>
           </div>
         </div>
       </div>
@@ -319,6 +252,133 @@ Hello ghfghfghhfh
   </div>
 </section>
 
+<!-- modal login
+================================================== -->
+<div class="modal" id="modal-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default active"><spring:message code="nav.section.link6"/></button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-2" data-dismiss="modal"><spring:message code="nav.section.link9"/></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div align="center">
+          <ul class="sign-social-icon">
+            <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn sign-facebook" data-wow-delay="0.3s"></a></li>
+            <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn sign-twitter" data-wow-delay="0.6s"></a></li>
+            <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn sign-linkedin" data-wow-delay="0.9s"></a></li>
+            <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
+          </ul>
+        </div>
+        <div class="or">
+          <p><spring:message code="modal.section.h3"/></p>
+        </div >
+
+        <form:form method="post" action="/userLogin">
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
+            <input type="email" class="form-control"  placeholder="Email" name="email" value="${user.email}">
+          </div>
+
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+            <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}">
+          </div>
+          <div class="sign">
+            <input role="button" type="submit" name="id" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>"/>
+          </div>
+        </form:form>
+
+        <%--<div class="fmp">--%>
+          <%--<a><spring:message code="modal.section.h4"/></a>--%>
+        <%--</div>--%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal registration
+================================================== -->
+
+<div class="modal" id="modal-2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-1" data-dismiss="modal" ><spring:message code="nav.section.link6"/></button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default active"><spring:message code="nav.section.link9"/></button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <div align="center">
+          <ul class="sign-social-icon">
+            <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn sign-facebook" data-wow-delay="0.3s"></a></li>
+            <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn sign-twitter" data-wow-delay="0.6s"></a></li>
+            <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn sign-linkedin" data-wow-delay="0.9s"></a></li>
+            <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
+          </ul>
+        </div>
+
+        <div class="or">
+          <p><spring:message code="modal.section.h3"/></p>
+        </div>
+        <form:form action="saveUser" modelAttribute="dto" name="myForm">
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input type="text" class="form-control"  placeholder="First Name" value="${dto.firstName}" name="firstName" ng-model="firstName" ng-length="1" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+            <input type="text" class="form-control"  placeholder="Second Name" value="${dto.secondName}" name="secondName" ng-model="secondName" ng-length="1" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span> </div>
+            <input type="email" class="form-control"  placeholder="Email" name="email" ng-model="email" value="${dto.email}" required>
+          </div>
+          <div class="input-group email-password">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
+            <input type="password" class="form-control"  placeholder="Password" name="password" ng-model="password" ng-minlength="3" value="${dto.password}" required>
+          </div>
+          <div class="sign">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link9"/>" ng-disabled="!myForm.firstName.$valid || !myForm.secondName.$valid || !myForm.email.$valid || !myForm.password.$valid"/>
+          </div>
+        </form:form>
+
+        <div class="policy">
+          <spring:message code="modal.section.h5"/>        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal add
+================================================== -->
+<c:if test="${add == 'add'}">
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">CONGRATULATION!!!</h4>
+      </div>
+      <div class="modal-body">
+        <div>Now You Are On Our Team!</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</c:if>
 
 <!-- Footer section
 ================================================== -->
@@ -327,37 +387,32 @@ Hello ghfghfghhfh
     <div class="row">
 
       <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-        <h2>Modern Town</h2>
-        <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate voluptate neque, curabitur dolor libero sodales vitae elit massa.</p>
-        <p>Copyright &copy; 2016 Modern Town
-
-          | Design: <a rel="nofollow" href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+        <h2><spring:message code="footer.section.h2"/></h2>
+        <p><spring:message code="footer.section.p"/></p>
+        <p><spring:message code="footer.section.p1"/> <a rel="nofollow" href="http://www.tooplate.com" target="_parent"><spring:message code="footer.section.p1.link"/></a></p>
       </div>
       <div class="link-list col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.6s">
-        <h2>Company</h2>
-        <a href="#">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Team</a>
-        <a href="#">Career</a>
+        <h2><spring:message code="footer.section1.h2"/></h2>
+        <a href="#"><spring:message code="footer.section1.link1"/></a>
+        <a href="#"><spring:message code="footer.section1.link2"/></a>
+        <a href="#"><spring:message code="footer.section1.link3"/></a>
+        <a href="#"><spring:message code="footer.section1.link4"/></a>
       </div>
       <div class="link-list col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.6s">
-        <h2>Support</h2>
-        <a href="#">Email Us</a>
-        <a href="#">FAQs</a>
-        <a href="#">Service Terms</a>
-        <a href="#">Licenses</a>
+        <h2><spring:message code="footer.section2.h2"/></h2>
+        <a href="#"><spring:message code="footer.section2.link1"/></a>
+        <a href="#"><spring:message code="footer.section2.link2"/></a>
+        <a href="#"><spring:message code="footer.section2.link3"/></a>
+        <a href="#"><spring:message code="footer.section2.link4"/></a>
       </div>
       <div class="col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.9s">
-        <h2>Network</h2>
+        <h2><spring:message code="footer.section3.h2"/></h2>
         <ul class="social-icon">
-          <li><a href="#" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
-          <li><a href="#" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
-          <li><a href="#" class="fa fa-dribbble wow fadeIn" data-wow-delay="0.9s"></a></li>
-          <li><a href="#" class="fa fa-behance wow fadeIn" data-wow-delay="1s"></a></li>
+          <li><a href="/facebookLogin" class="fa fa-facebook wow fadeIn" data-wow-delay="0.3s"></a></li>
+          <li><a href="/twitterLogin" class="fa fa-twitter wow fadeIn" data-wow-delay="0.6s"></a></li>
+          <li><a href="/linkedinLogin" class="fa fa-linkedin wow fadeIn" data-wow-delay="0.9s"></a></li>
+          <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn" data-wow-delay="1.2s"></a></li>
         </ul>
-        <div>
-
-        </div>
       </div>
 
       <div class="col-md-12 col-sm-12">
@@ -374,7 +429,7 @@ Hello ghfghfghhfh
 ================================================== -->
 <script src="resources/assets/js/jquery.js"></script>
 <script src="resources/assets/js/bootstrap.min.js"></script>
-<script src="resources/assets/js/smoothscroll.js"></script>
+<script src="resources/assets/js/smoothscroll.js"></script><!---->
 <script src="resources/assets/js/jquery.nav.js"></script>
 <script src="resources/assets/js/jquery.parallax.js"></script>
 <script src="resources/assets/js/owl.carousel.min.js"></script>
@@ -382,6 +437,12 @@ Hello ghfghfghhfh
 <script src="resources/assets/js/wow.min.js"></script>
 <script src="resources/assets/js/counter.js"></script>
 <script src="resources/assets/js/custom.js"></script>
+
+<script>
+      $(document).ready(function(){
+        $("#my-modal").modal();
+      });
+</script>
 
 </body>
 </html>

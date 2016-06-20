@@ -58,10 +58,9 @@ public class AccountController {
         UserData userData = userDataService.findByUser(sessionUser);
         userData.setFirstName(firstName);
         userData.setSecondName(secondName);
-        userData.setAge(age);
         modelAndView.addObject("email", sessionUser.getEmail());
         modelAndView.addObject("userData", userData);
-         userDataService.update(userData);
+        userDataService.update(userData);
         return modelAndView;
     }
 }

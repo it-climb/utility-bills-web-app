@@ -131,6 +131,30 @@ p {
   background-color: transparent;
 }
 
+/*modal windows*/
+
+.modal-content {
+  width: 350px;
+}
+.or {
+  text-align: center;
+  padding: 0px;
+}
+.sign {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.rm {
+  padding-top: 5px;
+}
+.fmp {
+  text-align: center;
+  line-height: 10px;
+}
+.policy {
+  text-align: center;
+  font-size: 10px
+}
 
 
 /* home section styles
@@ -392,6 +416,51 @@ footer a:hover {
   background: #ffa400;
 }
 
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.sign-social-icon {
+  padding: 0;
+  margin: 0;
+}
+.sign-social-icon li {
+  list-style: none;
+  display: inline-block;
+}
+.sign-social-icon li a {
+  /*background: #286090;*/
+  border-radius: 100%;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 32px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+  margin-right: 2px;
+}
+
+.sign-facebook{
+  background: #3B5998;
+}
+
+.sign-twitter{
+  background: #55ACEE;
+}
+
+.sign-linkedin{
+  background:  #007BB6;
+}
+
+.sign-google{
+  background: #DD4B39;
+}
+
+.sign-social-icon li a:hover {
+  background: #ffa400;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
 @media (max-width: 1280px) {
@@ -452,4 +521,12 @@ footer a:hover {
   #home h5 {
     font-size: 9px;
   }
+
+
+
 }
+
+#whiteline {
+  height: 34px;
+}
+
