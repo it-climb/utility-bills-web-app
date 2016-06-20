@@ -13,8 +13,12 @@ public class JspPath {
     public static final String EMPLOYEE_EDIT = "/employees/edit";
     public static final String TRANSLATOR_HOME = "/translator/translate";
     public static final String USER_ALL = "/users/all";
-    public static final String USER_LOGIN = "/users/login";
-    public static final String USER_REGISTRATION = "users/registration";
+    public static final String USER_LOOGIN = "/users/login";
+    public static final String DASHBOARD = "/dashboards/dashboard";
+    public static final String USER_DASHBOARD = "/dashboards/user";
+    public static final String USER_DASHBOARD_TABLE = "/dashboards/table";
+    public static final String USER_DASHBOARD_MAP = "/dashboards/maps";
+    public static final String USER_DASHBOARD_SENDPIN = "/dashboards/user";
     public static final String USER_LOGIN_PROBLEM = "/users/loginProblems";
     public static final String DESCRIPTION_ALL = "/descriptions/all";
     public static final String DESCRIPTION_EDIT = "/descriptions/edit";

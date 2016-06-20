@@ -10,4 +10,7 @@ public interface UserDataService extends Service<UserData>{
 
     @Override
     UserData insert(UserData o) throws SQLException;
+
+    @Override
+    UserData update(UserData o) throws SQLException;
 }

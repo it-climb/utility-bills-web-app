@@ -20,9 +20,6 @@
   Template 2077 Modern Town
 
   http://www.tooplate.com/view/2077-modern-town
-<form method="get" action="/except">
-  <input type="submit" value="Check log">
-</form>
 
   -->
   <link rel="stylesheet" href="resources/assets/css/bootstrap.min.css">
@@ -83,7 +80,7 @@
         <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-2"><spring:message code="nav.section.link9"/></a></li>
         </c:if>
         <c:if test="${email != null}">
-          <li><a href="" class="smoothScroll">${email}</a></li>
+          <li><a href="/dashboards" class="smoothScroll">${user.email}</a></li>
           <li><a href="/accountLogout" class="smoothScroll"><spring:message code="nav.section.link10"></spring:message></a> </li>
         </c:if>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
