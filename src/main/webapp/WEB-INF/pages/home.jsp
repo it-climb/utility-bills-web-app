@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="resources/assets/css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
+  <script src="resources/assets/js/jquery.js"></script>
+  <script src="resources/assets/js/jquery.validate.min.js"></script>
+
 
 
 </head>
@@ -438,8 +441,7 @@
 <script src="resources/assets/js/wow.min.js"></script>
 <script src="resources/assets/js/counter.js"></script>
 <script src="resources/assets/js/custom.js"></script>
-<script src="resources/assets/js/jquery.js"></script>
-<script src="resources/assets/js/jquery.validate.min.js"></script>
+
 <script src="resources/assets/js/bootstrap.min.js"></script>
 <script src="resources/assets/js/additional-methods.js"></script>
 <script src="resources/assets/js/home.js"></script>
