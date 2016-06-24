@@ -33,8 +33,7 @@
   <link rel="stylesheet" href="resources/assets/css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -224,7 +223,7 @@
         <form action="#" method="post">
           <div class="col-md-12 col-sm-12">
             <input type="text" class="form-control" placeholder="<spring:message code="contact.section.name"/>" name="name" id="name">
-            <input type="email" class="form-control" placeholder="<spring:message code="contact.section.email"/>" name="email" id="email">
+            <input type="email" class="form-control" placeholder="<spring:message code="contact.section.email"/>" name="email" id="email1"> //edit id, was id="email"
             <input type="text" class="form-control" placeholder="<spring:message code="contact.section.subject"/>" name="subject">
             <textarea name="message" rows="8" class="form-control" id="message" placeholder="<spring:message code="contact.section.message"/>" message="message"></textarea>
           </div>
@@ -342,25 +341,19 @@
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div>
-        <form:form action="saveUser" modelAttribute="dto" name="myForm">
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input type="text" class="form-control"  placeholder="First Name" value="${dto.firstName}" name="firstName" ng-model="firstName" ng-length="1" required>
+
+        <form:form action="saveUser" modelAttribute="dto" name="myForm" id="contact-form" class="form-horizontal">
+          <div class="control-group controls">
+                <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="email" value="${dto.email}">
+            </div>
+          <div class="control-group controls ">
+            <input type="password" class="reg"  id="password" placeholder="<spring:message code="modal.section.h7"/>" name="password"  value="${dto.password}" >
           </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input type="text" class="form-control"  placeholder="Second Name" value="${dto.secondName}" name="secondName" ng-model="secondName" ng-length="1" required>
+          <div class="control-group controls">
+            <input type="password" class="reg" id="conf"  placeholder="<spring:message code="modal.section.h8"/>" name="conf">
           </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span> </div>
-            <input type="email" class="form-control"  placeholder="Email" name="email" ng-model="email" value="${dto.email}" required>
-          </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-            <input type="password" class="form-control"  placeholder="Password" name="password" ng-model="password" ng-minlength="3" value="${dto.password}" required>
-          </div>
-          <div class="sign">
-            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link9"/>" ng-disabled="!myForm.firstName.$valid || !myForm.secondName.$valid || !myForm.email.$valid || !myForm.password.$valid"/>
+          <div class="sign form-actions">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link9"/>">
           </div>
         </form:form>
 
@@ -436,8 +429,7 @@
 
 <!-- Javascript
 ================================================== -->
-<script src="resources/assets/js/jquery.js"></script>
-<script src="resources/assets/js/bootstrap.min.js"></script>
+
 <script src="resources/assets/js/smoothscroll.js"></script><!---->
 <script src="resources/assets/js/jquery.nav.js"></script>
 <script src="resources/assets/js/jquery.parallax.js"></script>
@@ -446,6 +438,12 @@
 <script src="resources/assets/js/wow.min.js"></script>
 <script src="resources/assets/js/counter.js"></script>
 <script src="resources/assets/js/custom.js"></script>
+<script src="resources/assets/js/jquery.js"></script>
+<script src="resources/assets/js/jquery.validate.min.js"></script>
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/additional-methods.js"></script>
+<script src="resources/assets/js/home.js"></script>
+
 
 <script>
       $(document).ready(function(){
@@ -454,4 +452,6 @@
 </script>
 
 </body>
+
+
 </html>
