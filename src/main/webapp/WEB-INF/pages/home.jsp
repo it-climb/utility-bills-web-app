@@ -289,19 +289,19 @@
           <p><spring:message code="modal.section.h3"/></p>
         </div >
 
-        <form:form method="post" action="/userLogin">
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-            <input type="email" class="form-control"  placeholder="Email" name="email" value="${user.email}">
+        <form:form method="post" action="/userLogin" id="contact-form" class="form-horizontal">
+
+          <div class="control-group controls">
+            <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="emailL" value="${dto.email}">
+          </div>
+          <div class="control-group controls ">
+            <input type="password" class="reg"  id="passwordL" placeholder="<spring:message code="modal.section.h7"/>" name="password"  value="${dto.password}" >
           </div>
 
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-            <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}">
+          <div class="sign form-actions">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>">
           </div>
-          <div class="sign">
-            <input role="button" type="submit" name="id" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>"/>
-          </div>
+
         </form:form>
 
         <%--<div class="fmp">--%>

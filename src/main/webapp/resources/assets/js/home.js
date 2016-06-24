@@ -6,10 +6,17 @@ $(document).ready(function () {
 
     $('#contact-form').validate({
         rules: {
-            password: {
+
+            emailL:{
+                requared: true,
+                email: true
+            },
+
+            passwordL: {
                 minlength: 8,
                 required: true
             },
+
             email: {
                 required: true,
                 email: mail.blur(function(){
@@ -23,6 +30,10 @@ $(document).ready(function () {
                         return false;
                     }
                 })
+            },
+            password: {
+                minlength: 8,
+                required: true
             },
             conf: {
                 minlength: 8,
