@@ -289,7 +289,7 @@
           <p><spring:message code="modal.section.h3"/></p>
         </div >
 
-        <form:form method="post" action="/userLogin" id="contact-form" class="form-horizontal">
+        <form:form method="post" action="/userLogin" id="contact-formL" class="form-horizontal">
 
           <div class="control-group controls">
             <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="emailL" value="${dto.email}">
