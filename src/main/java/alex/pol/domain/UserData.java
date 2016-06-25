@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 
 
 @Entity(name = "UserData")
-public class UserData extends BaseModel{
+public class UserData extends BaseModel {
 
     private String firstName;
 
@@ -15,7 +15,19 @@ public class UserData extends BaseModel{
 
     private Integer age;
 
-    @OneToOne(cascade = CascadeType.MERGE )
+    private String country;
+
+    private String city;
+
+    private String street;
+
+    private String house;
+
+    private String apartment;
+
+    private int pinCode;
+
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -51,9 +63,58 @@ public class UserData extends BaseModel{
         this.age = age;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getHouse() {
+        return house;
+    }
+
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
+    public String getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(String apartment) {
+        this.apartment = apartment;
+    }
+
+    public int getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(int pinCode) {
+        this.pinCode = pinCode;
+    }
+
     public static Builder newBuilder() {
         return new UserData().new Builder();
     }
+
     public class Builder {
 
         private Builder() {
@@ -76,6 +137,36 @@ public class UserData extends BaseModel{
 
         public Builder setAge(Integer age) {
             UserData.this.age = age;
+            return this;
+        }
+
+        public Builder setCountry(String country) {
+            UserData.this.country = country;
+            return this;
+        }
+
+        public Builder setCity(String city) {
+            UserData.this.city = city;
+            return this;
+        }
+
+        public Builder setStreet(String street) {
+            UserData.this.street = street;
+            return this;
+        }
+
+        public Builder setHouse(String house) {
+            UserData.this.house = house;
+            return this;
+        }
+
+        public Builder setApartment(String apartment) {
+            UserData.this.apartment = apartment;
+            return this;
+        }
+
+        public Builder setPinCode(int pinCode) {
+            UserData.this.pinCode = pinCode;
             return this;
         }
 
