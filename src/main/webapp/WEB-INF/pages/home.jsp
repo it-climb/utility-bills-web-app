@@ -32,9 +32,6 @@
 
   <script src="resources/assets/js/jquery.js"></script>
   <script src="resources/assets/js/jquery.validate.min.js"></script>
-  <script src="resources/assets/js/messages_ru.min.js"></script>
-
-
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -444,6 +441,27 @@
       $(document).ready(function(){
         $("#my-modal").modal();
       });
+</script>
+
+<script>
+  function getParameter(paramName) {
+
+    var searchString = window.location.search.substring(1),
+            i, val, params = searchString.split("&");
+
+    for (i=0; i<params.length; i++) {
+      val = params[i].split("=");
+      if (val[0] == paramName) {
+        return val[1];
+      }
+    }
+    return null;
+  }
+
+
+  if (getParameter("mylocale") == "ru")
+    $.getScript("resources/assets/js/messages_ru.min.js");
+
 </script>
 
 </body>

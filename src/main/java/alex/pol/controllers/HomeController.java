@@ -73,28 +73,6 @@ public class HomeController {
 
         return modelAndView;
     }
-//
-//    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-//    public ModelAndView addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
-//                             HttpServletRequest request)throws SQLException {
-//        //userValid.validate(user, result);
-////        if(result.hasErrors()){
-////            return "users/registration";
-////        }else{
-//        HttpSession session = request.getSession();
-//        User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
-//        session.setAttribute("user", user);
-//        userService.insert(user);
-//        UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
-//        userDataService.insert(userData);
-////        }
-//        ModelAndView modelAndView = new ModelAndView("home");
-//        String add = "add";
-//        modelAndView.addObject("add", add);
-//
-//        return modelAndView;
-//
-//    }
 
     /**
      * Add new user in DB if you entered write information in fields of adding user(enter first name, last name, email and password)
@@ -108,10 +86,7 @@ public class HomeController {
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
                              HttpServletRequest request)throws SQLException {
-        //userValid.validate(user, result);
-//        if(result.hasErrors()){
-//            return "users/registration";
-//        }else{
+
         HttpSession session = request.getSession();
         User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
         session.setAttribute("user", user);
@@ -119,7 +94,6 @@ public class HomeController {
         UserData userData = UserData.newBuilder().setUser(user).build();
         userDataService.insert(userData);
         add = new StringBuilder("add");
-//        }
         return "redirect:/";
     }
 

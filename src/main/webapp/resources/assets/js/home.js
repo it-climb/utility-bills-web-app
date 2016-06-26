@@ -1,9 +1,6 @@
 $(document).ready(function () {
 
-
-
     $('#contact-form').validate({
-        lang: 'ru',
         rules: {
 
             email: {
