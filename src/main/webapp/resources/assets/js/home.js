@@ -1,23 +1,10 @@
 $(document).ready(function () {
 
-    var pattern = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
-    var mail = $('#email');
-
-    //console.log(mail);
 
 
     $('#contact-form').validate({
+        lang: 'ru',
         rules: {
-
-            //emailL:{
-            //    requared: true,
-            //    email: true
-            //},
-            //
-            //passwordL: {
-            //    minlength: 8,
-            //    required: true
-            //},
 
             email: {
                 required: true,

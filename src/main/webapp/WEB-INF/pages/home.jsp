@@ -32,6 +32,7 @@
 
   <script src="resources/assets/js/jquery.js"></script>
   <script src="resources/assets/js/jquery.validate.min.js"></script>
+  <script src="resources/assets/js/messages_ru.min.js"></script>
 
 
 
@@ -278,6 +279,7 @@
             <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
           </ul>
         </div>
+
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div >
