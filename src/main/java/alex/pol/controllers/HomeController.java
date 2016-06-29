@@ -116,7 +116,8 @@ public class HomeController {
         User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
         session.setAttribute("user", user);
         userService.insert(user);
-        UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
+        UserData userData = UserData.newBuilder()
+                .setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
         userDataService.insert(userData);
         add = new StringBuilder("add");
 //        }
