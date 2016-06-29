@@ -31,50 +31,16 @@
 		</dependency-->
 
 		<dependency>
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-github</artifactId>
-			<version>1.0.0.BUILD-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
 
+
 		<!--dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-security</artifactId>
 		</dependency-->
-
-
-<!--
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>angularjs</artifactId>
-			<version>1.4.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator</artifactId>
-		</dependency>
--->
-
 
 
 
@@ -112,13 +78,12 @@
 			<artifactId>webjars-locator</artifactId>
 		</dependency>
 -->
-
+		<!--Social-->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-core</artifactId>
 			<version>1.1.0.RELEASE</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 			<artifactId>spring-social-facebook</artifactId>
@@ -134,16 +99,11 @@
 			<artifactId>spring-social-google</artifactId>
 			<version>1.0.0.RC1</version>
 		</dependency>
-			<dependency>
-				<groupId>org.springframework.social</groupId>
-				<artifactId>spring-social-twitter</artifactId>
-				<version>1.1.0.RELEASE</version>
-			</dependency>
-		<!--dependency>
-			<groupId>com.github.weekens</groupId>
-			<artifactId>spring-social-vkontakte</artifactId>
-			<version>1.1.3.M3</version>
-		</dependency-->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-twitter</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>com.github.weekens</groupId>
 			<artifactId>spring-social-vkontakte</artifactId>
@@ -194,30 +154,76 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
+
+
+		<!--dependency>
+			<groupId>com.github.bazar-nazar</groupId>
+			<artifactId>pgjson</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency-->
+
+
+
+		<!--dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.6-Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<!--<scope>provided</scope>-->
 		</dependency>
-
-
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
 
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
@@ -234,13 +240,28 @@
 			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
 		<!--</dependency>-->
 
-
-
-
+		<!--exclusion>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</exclusion-->
+		<!--dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<exclusions></exclusions>
+		</dependency-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4.1208.jre7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
 		</dependency>
 
 

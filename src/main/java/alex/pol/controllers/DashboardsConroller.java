@@ -20,10 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-/**
- * Created by Abashkin Aleksandr on 18.06.2016.
- */
-
 @Controller
 public class DashboardsConroller {
 
@@ -31,7 +27,6 @@ public class DashboardsConroller {
     UserService userService;
     @Autowired
     UserDataService userDataService;
-
     /**
      * This method show user login page(with fields asking you to enter your email and password)
      * or enter the page with user registration/

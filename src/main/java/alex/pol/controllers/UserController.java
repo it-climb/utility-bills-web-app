@@ -118,7 +118,9 @@ public class UserController {//extends WebSecurityConfigurerAdapter
      */
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+    public String updateOne(@RequestParam(required = true) String email,
+                            @RequestParam(required = true) String password,
+                            HttpServletRequest request) throws SQLException {
             HttpSession session = request.getSession();
             User user = userService.getByEmail(email);
         if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
