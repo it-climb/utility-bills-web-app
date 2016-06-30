@@ -1,11 +1,16 @@
 package alex.pol.social.google;
 
 import alex.pol.domain.User;
+import alex.pol.domain.UserData;
 import alex.pol.repository.UserDataService;
 import alex.pol.repository.UserService;
+import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
+import net.sf.json.JSONObject;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -64,30 +69,59 @@ public class GoogleController {
         AccessGrant accessGrant = auth2Operations.exchangeForAccess(
                 authorizationCode, REDIRECT_URL, null);
         Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
-        String googleUserEmail = connection.fetchUserProfile().getEmail();
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("connection",connection);
-        modelAndView.addObject("email",googleUserEmail);
-        List<User> userList = userService.getAll();
-        User googleUser = User.newBuilder().setEmail(googleUserEmail)
-                    .setPassword("Google").build();
-        if (checkListForUser(userList,googleUser)){
-                userService.insert(googleUser);
+        String googleUserEmail =connection.fetchUserProfile().getEmail();
+        User googleUser = userService.getByEmail(googleUserEmail);
+        if (googleUser == null) {
+            googleUser= User.newBuilder().setEmail(googleUserEmail)
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
+            userService.insert(googleUser);
+            ConnectionData connectionData = connection.createData();
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("provider", connectionData.getProviderId());
+            jsonObject.put("displayName", connectionData.getDisplayName());
+            jsonObject.put("imageUrl", connectionData.getImageUrl());
+            jsonObject.put("providerUserId", connectionData.getProviderUserId());
+            jsonObject.put("secret", connectionData.getSecret());
+            jsonObject.put("accessToken", connectionData.getAccessToken());
+            jsonObject.put("expireTime", connectionData.getExpireTime());
+            jsonObject.put("refreshToken", connectionData.getRefreshToken());
+
+            MyJson myJson = new MyJson();
+            myJson.setJsonObject(jsonObject);
+            UserData googleUserData = UserData.newBuilder().setUser(googleUser)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
         }
-            httpSession.setAttribute("user", googleUser);
-        //return modelAndView;
+        httpSession.setAttribute("user", googleUser);
         return "redirect:/";
+
     }
 
-    private boolean checkListForUser(List<User> userList, User user) {
-        if (userList == null) return false;
-        if (userList.size() == 0) return true;
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getEmail().equals(user.getEmail())
-                    && userList.get(i).getPassword().equals(user.getPassword())) {
-                return false;
-            }
+    private User addUserAndUserData(User user, Connection connection) throws SQLException {
+        if (user == null) {
+            user = User.newBuilder().setEmail(connection.fetchUserProfile().getEmail())
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
+            userService.insert(user);
+            ConnectionData connectionData = connection.createData();
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("provider", connectionData.getProviderId());
+            jsonObject.put("displayName", connectionData.getDisplayName());
+            jsonObject.put("imageUrl", connectionData.getImageUrl());
+            jsonObject.put("providerUserId", connectionData.getProviderUserId());
+            jsonObject.put("secret", connectionData.getSecret());
+            jsonObject.put("accessToken", connectionData.getAccessToken());
+            jsonObject.put("expireTime", connectionData.getExpireTime());
+            jsonObject.put("refreshToken", connectionData.getRefreshToken());
+
+            MyJson myJson = new MyJson();
+            myJson.setJsonObject(jsonObject);
+            UserData googleUserData = UserData.newBuilder().setUser(user)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
         }
-        return true;
+        return user;
     }
 }
+
