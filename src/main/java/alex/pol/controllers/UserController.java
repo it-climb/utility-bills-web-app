@@ -107,27 +107,25 @@ public class UserController {//extends WebSecurityConfigurerAdapter
 //        return "redirect:/login";
 //    }
 
-    /**
-     *Method act when you entered your email and password
-     * @param email
-     * @param password
-     * @param request
-     * @return all is write - page success (Success)
-     * something is wrong - page loginProblems ("Incorrect email ! Try again")
-     * @throws SQLException
-     */
-
-    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String updateOne(@RequestParam(required = true) String email,
-                            @RequestParam(required = true) String password,
-                            HttpServletRequest request) throws SQLException {
-            HttpSession session = request.getSession();
-            User user = userService.getByEmail(email);
-        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
-                session.setAttribute("user", user);
-                return "redirect:/";
-            }else return "redirect:/loginProblems";
-    }
+//    /**
+//     *Method act when you entered your email and password
+//     * @param email
+//     * @param password
+//     * @param request
+//     * @return all is write - page success (Success)
+//     * something is wrong - page loginProblems ("Incorrect email ! Try again")
+//     * @throws SQLException
+//     */
+//
+//    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+//    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+//            HttpSession session = request.getSession();
+//            User user = userService.getByEmail(email);
+//        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+//                session.setAttribute("user", user);
+//                return "redirect:/";
+//            }else return "redirect:/loginProblems";
+//    }
 
     /**
      *Method showing login problems when you try to add new user

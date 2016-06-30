@@ -365,10 +365,28 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">CONGRATULATION!!!</h4>
+        <h4 class="modal-title modal-center-text" id="myModalLabel"><spring:message code="modal.section.h11"/> </h4>
       </div>
       <div class="modal-body">
-        <div>Now You Are On Our Team!</div>
+        <div class="modal-center-text"><spring:message code="modal.section.h12"/></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</c:if>
+
+<!-- modal errorLogin
+================================================== -->
+<c:if test="${add == 'errorLogin'}">
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title modal-center-text" id="myModalLabel2"><p><spring:message code="modal.section.h9"/></p> </h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-center-text"><spring:message code="modal.section.h10"/></div>
       </div>
     </div>
     </div>
