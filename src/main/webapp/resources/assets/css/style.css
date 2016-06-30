@@ -180,6 +180,10 @@ label {
   font-size: 10px;
 }
 
+.modal-center-text {
+  text-align: center;
+}
+
 
 .control-group.warning .control-label,.control-group.warning .help-block,.control-group.warning .help-inline{color:#c09853;}
 .control-group.warning .checkbox,.control-group.warning .radio,.control-group.warning input,.control-group.warning select,.control-group.warning textarea{color:#c09853;}

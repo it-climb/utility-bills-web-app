@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -42,7 +39,6 @@ public class HomeController {
         HttpSession session = request.getSession();
         User userReg = new User();
         UserData userData = new UserData();
-//        System.out.println(session.getAttribute());
         User userLog = (User) session.getAttribute("user");
         if (add != null && add.toString().equals("logout")){
             userLog = null;
@@ -115,6 +111,29 @@ public class HomeController {
     @RequestMapping("/msg")
     public String msg(@RequestHeader("Accept-Language") Locale locale){
         return messageSource.getMessage("msg",null,locale);
+    }
+
+    /**
+     *Method act when you entered your email and password
+     * @param email
+     * @param password
+     * @param request
+     * @return all is write - page success (Success)
+     * something is wrong - page loginProblems ("Incorrect email ! Try again")
+     * @throws SQLException
+     */
+
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+        HttpSession session = request.getSession();
+        User user = userService.getByEmail(email);
+        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        }else {
+            add = new StringBuilder("errorLogin");
+            return "redirect:/";
+        }
     }
 }
 
