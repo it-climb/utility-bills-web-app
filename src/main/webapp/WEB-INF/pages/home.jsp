@@ -73,7 +73,7 @@
         <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
         <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
         <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
-        <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
+        <%--<li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>--%>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
         <c:if test="${email == null}">
         <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-1"><spring:message code="nav.section.link6"/></a></li>
@@ -407,7 +407,7 @@
       <div class="link-list col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.6s">
         <h2><spring:message code="footer.section1.h2"/></h2>
         <a href="#"><spring:message code="footer.section1.link1"/></a>
-        <a href="#"><spring:message code="footer.section1.link2"/></a>
+        <%--<a href="#"><spring:message code="footer.section1.link2"/></a>--%>
         <a href="#"><spring:message code="footer.section1.link3"/></a>
         <a href="#"><spring:message code="footer.section1.link4"/></a>
       </div>
