@@ -87,6 +87,11 @@ public class GoogleController {
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
         }
+        UserData googleUserData = userDataService.findByUser(googleUser);
+        if(googleUser != null && !googleUserData.getSocialData()
+                .get("provider").equals("google")){
+            googleUser = null;
+        }
         httpSession.setAttribute("user", googleUser);
         return "redirect:/";
 

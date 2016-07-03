@@ -115,6 +115,11 @@ public class TwitterController {
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
         }
+        UserData twitterUserData = userDataService.findByUser(twitterUser);
+        if(twitterUser != null && !twitterUserData.getSocialData()
+                .get("provider").equals("twitter")){
+            twitterUser = null;
+        }
         httpSession.setAttribute("user", twitterUser);
         return "redirect:/";
 

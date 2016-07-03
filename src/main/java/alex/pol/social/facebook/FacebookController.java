@@ -54,7 +54,8 @@ public class FacebookController {
 
     private static final String APP_SECRETE = "b9c76b95fefb25983b0d45d9ba3d8364";
 
-    private static final String REDIRECT_URL =  "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
+    private static final String REDIRECT_URL =
+    "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
     //"http://localhost:8080/callback";
 
     private static FacebookConnectionFactory facebookConnectionFactory;
@@ -101,7 +102,6 @@ public class FacebookController {
         Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);
         String facebookUserEmail = connection.fetchUserProfile().getEmail();
         User facebookUser = userService.getByEmail(facebookUserEmail);
-        //addUserAndUserData(facebookUser,connection);
         if (facebookUser == null){
             facebookUser = User.newBuilder().setEmail(facebookUserEmail)
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
@@ -119,6 +119,11 @@ public class FacebookController {
                     .setSocialData(myJson).build();
             userService.insert(facebookUser);
             userDataService.insert(facebookUserData);
+        }
+        UserData facebookUserData = userDataService.findByUser(facebookUser);
+        if(facebookUser != null && !facebookUserData.getSocialData()
+                .get("provider").equals("facebook")){
+            facebookUser = null;
         }
         httpSession.setAttribute("user", facebookUser);
         return "redirect:/";

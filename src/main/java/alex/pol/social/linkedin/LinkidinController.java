@@ -94,6 +94,11 @@ public class LinkidinController {
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
         }
+        UserData linkedinUserData = userDataService.findByUser(linkedinUser);
+        if(linkedinUser != null && !linkedinUserData.getSocialData()
+                .get("provider").equals("linkedin")){
+            linkedinUser = null;
+        }
         httpSession.setAttribute("user", linkedinUser);
         return "redirect:/";
     }
