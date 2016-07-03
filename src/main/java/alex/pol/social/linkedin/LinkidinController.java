@@ -19,20 +19,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.linkedin.api.LinkedIn;
-import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 
 @Controller
@@ -83,18 +80,16 @@ public class LinkidinController {
             linkedinUser = User.newBuilder().setEmail(linkedinUserEmail)
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
             userService.insert(linkedinUser);
-            JSONObject jsonObject = new JSONObject();
-            ConnectionData connectionData = connection.createData();
-            jsonObject.put("provider", connectionData.getProviderId());
-            jsonObject.put("displayName", connectionData.getDisplayName());
-            jsonObject.put("imageUrl", connectionData.getImageUrl());
-            jsonObject.put("providerUserId", connectionData.getProviderUserId());
-            jsonObject.put("secret", connectionData.getSecret());
-            jsonObject.put("accessToken", connectionData.getAccessToken());
-            jsonObject.put("expireTime", connectionData.getExpireTime());
-            jsonObject.put("refreshToken", connectionData.getRefreshToken());
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            ConnectionData connectionData = connection.createData();
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
             UserData googleUserData = UserData.newBuilder().setUser(linkedinUser)
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
@@ -103,28 +98,26 @@ public class LinkidinController {
         return "redirect:/";
     }
 
-    private void addUserAndUserData(User user, Connection connection) throws SQLException {
+    /*private void addUserAndUserData(User user, Connection connection) throws SQLException {
         if (user == null) {
             user = User.newBuilder().setEmail(connection.fetchUserProfile().getEmail())
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
             userService.insert(user);
-            JSONObject jsonObject = new JSONObject();
             ConnectionData connectionData = connection.createData();
-            jsonObject.put("provider", connectionData.getProviderId());
-            jsonObject.put("displayName", connectionData.getDisplayName());
-            jsonObject.put("imageUrl", connectionData.getImageUrl());
-            jsonObject.put("providerUserId", connectionData.getProviderUserId());
-            jsonObject.put("secret", connectionData.getSecret());
-            jsonObject.put("accessToken", connectionData.getAccessToken());
-            jsonObject.put("expireTime", connectionData.getExpireTime());
-            jsonObject.put("refreshToken", connectionData.getRefreshToken());
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
             UserData googleUserData = UserData.newBuilder().setUser(user)
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
         }
-    }
+    }*/
 
     private String getLinkedinAccessToken(String faceCode){
         String token = null;

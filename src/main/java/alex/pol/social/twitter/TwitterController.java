@@ -8,30 +8,18 @@ import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.RandomStringUtils;
-import org.glassfish.jersey.server.oauth1.OAuth1Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth1.*;
-import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.OAuth2Operations;
-import org.springframework.social.oauth2.OAuth2Template;
-import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -86,7 +74,7 @@ public class TwitterController {
         oauthOperations = twitterConnectionFactory.getOAuthOperations();
         requestToken = oauthOperations.fetchRequestToken(REDIRECT_URL, null);
         String authorizeUrl = oauthOperations.buildAuthorizeUrl(requestToken.getValue(), OAuth1Parameters.NONE);
-        response.sendRedirect(authorizeUrl);/**/
+        response.sendRedirect(authorizeUrl);
     }
 
     @RequestMapping(value = "/twitterCallback", method = RequestMethod.GET)
@@ -113,18 +101,16 @@ public class TwitterController {
             twitterUser = User.newBuilder().setEmail(email)
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
             userService.insert(twitterUser);
-            JSONObject jsonObject = new JSONObject();
             ConnectionData connectionData = connection.createData();
-            jsonObject.put("provider", connectionData.getProviderId());
-            jsonObject.put("displayName", connectionData.getDisplayName());
-            jsonObject.put("imageUrl", connectionData.getImageUrl());
-            jsonObject.put("providerUserId", connectionData.getProviderUserId());
-            jsonObject.put("secret", connectionData.getSecret());
-            jsonObject.put("accessToken", connectionData.getAccessToken());
-            jsonObject.put("expireTime", connectionData.getExpireTime());
-            jsonObject.put("refreshToken", connectionData.getRefreshToken());
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
             UserData googleUserData = UserData.newBuilder().setUser(twitterUser)
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
@@ -134,7 +120,7 @@ public class TwitterController {
 
     }
 
-    private void addUserAndUserData(User user, Connection connection,String email) throws SQLException {
+    /*private void addUserAndUserData(User user, Connection connection,String email) throws SQLException {
         if (user == null) {
             user = User.newBuilder().setEmail(email)
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
@@ -150,7 +136,7 @@ public class TwitterController {
             jsonObject.put("expireTime", connectionData.getExpireTime());
             jsonObject.put("refreshToken", connectionData.getRefreshToken());
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            myJson.setSocialData(jsonObject);
             UserData googleUserData = UserData.newBuilder().setUser(user)
                     .setSocialData(myJson).build();
             userDataService.insert(googleUserData);
@@ -169,5 +155,5 @@ public class TwitterController {
             }
         }
         return true;
-    }
-}/**/
+    }*/
+}
