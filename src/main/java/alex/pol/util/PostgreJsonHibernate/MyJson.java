@@ -1,21 +1,22 @@
 package alex.pol.util.PostgreJsonHibernate;
 
-import com.google.gson.Gson;
 import net.sf.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MyJson implements Serializable {
+public class MyJson extends HashMap<String,Object> implements Serializable {
 
-    private JSONObject jsonObject;
+    /*private JSONObject socialData;
 
-    public JSONObject getJsonObject() {
-        return jsonObject;
+    public JSONObject getSocialData() {
+        return socialData;
     }
 
-    public void setJsonObject(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
-    }
+    public void setSocialData(JSONObject socialData) {
+        this.socialData = socialData;
+    }*/
     //Gson gson;
 
 

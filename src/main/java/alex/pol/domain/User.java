@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
  */
 public class User extends BaseModel {
 
-//    @Unique(message = "This email already exists")
+    @Unique(message = "This email already exists")
 //    @UserEmail(message = "Invalid email")
     private String email;
 

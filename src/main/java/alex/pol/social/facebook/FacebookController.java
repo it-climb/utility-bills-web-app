@@ -9,7 +9,6 @@ import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -17,11 +16,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
-import org.springframework.social.connect.support.OAuth2ConnectionFactory;
-import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.Facebook;
 
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
@@ -110,17 +106,15 @@ public class FacebookController {
             facebookUser = User.newBuilder().setEmail(facebookUserEmail)
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
             ConnectionData connectionData = connection.createData();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("provider", connectionData.getProviderId());
-            jsonObject.put("displayName", connectionData.getDisplayName());
-            jsonObject.put("imageUrl", connectionData.getImageUrl());
-            jsonObject.put("providerUserId", connectionData.getProviderUserId());
-            jsonObject.put("secret", connectionData.getSecret());
-            jsonObject.put("accessToken", connectionData.getAccessToken());
-            jsonObject.put("expireTime", connectionData.getExpireTime());
-            jsonObject.put("refreshToken", connectionData.getRefreshToken());
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
             UserData facebookUserData = UserData.newBuilder().setUser(facebookUser)
                     .setSocialData(myJson).build();
             userService.insert(facebookUser);
@@ -147,7 +141,7 @@ public class FacebookController {
             jsonObject.put("refreshToken", connectionData.getRefreshToken());
 
             MyJson myJson = new MyJson();
-            myJson.setJsonObject(jsonObject);
+            //myJson.setSocialData(jsonObject);
             UserData facebookUserData = UserData.newBuilder().setUser(user)
                     .setSocialData(myJson).build();
 

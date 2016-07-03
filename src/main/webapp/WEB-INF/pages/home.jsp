@@ -427,7 +427,7 @@
           <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn" data-wow-delay="1.2s"></a></li>
         </ul>
       </div>
-
+      <!--/vkLogin-->
       <div class="col-md-12 col-sm-12">
         <div class="copyright-text wow bounceIn">
 
