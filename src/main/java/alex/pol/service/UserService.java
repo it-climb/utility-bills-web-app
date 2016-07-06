@@ -1,4 +1,4 @@
-package alex.pol.repository;
+package alex.pol.service;
 
 import alex.pol.domain.User;
 

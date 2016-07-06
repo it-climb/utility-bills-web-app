@@ -1,8 +1,8 @@
 package alex.pol.social.google;
 
 import alex.pol.domain.User;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
 import alex.pol.util.validation.UserValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;

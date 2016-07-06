@@ -1,7 +1,7 @@
-package alex.pol.repository.impl;
+package alex.pol.service.impl;
 
 
-import alex.pol.repository.UserService;
+import alex.pol.service.UserService;
 import alex.pol.dao.UserDao;
 import alex.pol.domain.User;
 import org.springframework.stereotype.Service;

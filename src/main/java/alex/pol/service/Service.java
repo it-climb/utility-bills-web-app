@@ -1,5 +1,6 @@
-package alex.pol.repository;
+package alex.pol.service;
 
+import alex.pol.domain.Country;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;

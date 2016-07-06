@@ -1,8 +1,8 @@
 package alex.pol.social.linkedin;
 
 import alex.pol.domain.User;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
@@ -15,7 +15,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.linkedin.api.LinkedIn;
-import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.stereotype.Controller;

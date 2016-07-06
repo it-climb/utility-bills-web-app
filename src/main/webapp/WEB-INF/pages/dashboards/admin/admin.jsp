@@ -1,38 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Utility bills</title>
-    <meta charset="utf-8"/>
-    <link rel="icon" type="image/png" href="/resources/dashboards/assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <meta name="viewport" content="width=device-width"/>
-
-    <!-- Bootstrap core CSS     -->
-    <link href="/resources/dashboards/assets/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Animation library for notifications   -->
-    <link href="/resources/dashboards/assets/css/animate.min.css" rel="stylesheet"/>
-
-    <!--  Light Bootstrap Table core CSS    -->
-    <link href="/resources/dashboards/assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="/resources/dashboards/assets/css/demo.css" rel="stylesheet"/>
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="/resources/dashboards/assets/css/pe-icon-7-stroke.css" rel="stylesheet"/>
-
+    <jsp:include page="/WEB-INF/pages/dashboards/template/header.jsp"/>
 </head>
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-image="/resources/dashboards/assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-color="purple" data-image="/resources/dashboards/assets/img/sidebar-4.jpg">
 
         <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
@@ -53,17 +31,17 @@
                 <%--</a>--%>
                 <%--</li>--%>
                 <li class="active">
-                    <a href="/userDash">
+                    <a href="/adminDash">
                         <i class="pe-7s-user"></i>
 
-                        <p>User Profile</p>
+                        <p>Admin Profile</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/showTable">
+                    <a href="/listOfUsers">
                         <i class="pe-7s-note2"></i>
 
-                        <p>List Bills</p>
+                        <p>List users</p>
                     </a>
                 </li>
                 <%--<li>--%>
@@ -95,11 +73,11 @@
                 <%--</a>--%>
                 <%--</li>--%>
                 <%--<li class="active-pro">--%>
-                    <%--<a href="upgrade.jsp">--%>
-                        <%--<i class="pe-7s-rocket"></i>--%>
+                <%--<a href="upgrade.jsp">--%>
+                <%--<i class="pe-7s-rocket"></i>--%>
 
-                        <%--<p>Upgrade to PRO</p>--%>
-                    <%--</a>--%>
+                <%--<p>Upgrade to PRO</p>--%>
+                <%--</a>--%>
                 <%--</li>--%>
             </ul>
         </div>
@@ -121,51 +99,51 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <%--<li>--%>
-                            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
-                                <%--<i class="fa fa-dashboard"></i>--%>
-                            <%--</a>--%>
+                        <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
+                        <%--<i class="fa fa-dashboard"></i>--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                         <%--<li class="dropdown">--%>
-                            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
-                                <%--<i class="fa fa-globe"></i>--%>
-                                <%--<b class="caret"></b>--%>
-                                <%--<span class="notification">5</span>--%>
-                            <%--</a>--%>
-                            <%--<ul class="dropdown-menu">--%>
-                                <%--<li><a href="#">Notification 1</a></li>--%>
-                                <%--<li><a href="#">Notification 2</a></li>--%>
-                                <%--<li><a href="#">Notification 3</a></li>--%>
-                                <%--<li><a href="#">Notification 4</a></li>--%>
-                                <%--<li><a href="#">Another notification</a></li>--%>
-                            <%--</ul>--%>
+                        <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
+                        <%--<i class="fa fa-globe"></i>--%>
+                        <%--<b class="caret"></b>--%>
+                        <%--<span class="notification">5</span>--%>
+                        <%--</a>--%>
+                        <%--<ul class="dropdown-menu">--%>
+                        <%--<li><a href="#">Notification 1</a></li>--%>
+                        <%--<li><a href="#">Notification 2</a></li>--%>
+                        <%--<li><a href="#">Notification 3</a></li>--%>
+                        <%--<li><a href="#">Notification 4</a></li>--%>
+                        <%--<li><a href="#">Another notification</a></li>--%>
+                        <%--</ul>--%>
                         <%--</li>--%>
                         <%--<li>--%>
-                            <%--<a href="">--%>
-                                <%--<i class="fa fa-search"></i>--%>
-                            <%--</a>--%>
+                        <%--<a href="">--%>
+                        <%--<i class="fa fa-search"></i>--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <%--<li>--%>
-                            <%--<a href="/userDash">--%>
-                                <%--Account--%>
-                            <%--</a>--%>
+                        <%--<a href="/userDash">--%>
+                        <%--Account--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                         <%--<li class="dropdown">--%>
-                            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
-                                <%--Dropdown--%>
-                                <%--<b class="caret"></b>--%>
-                            <%--</a>--%>
-                            <%--<ul class="dropdown-menu">--%>
-                                <%--<li><a href="#">Action</a></li>--%>
-                                <%--<li><a href="#">Another action</a></li>--%>
-                                <%--<li><a href="#">Something</a></li>--%>
-                                <%--<li><a href="#">Another action</a></li>--%>
-                                <%--<li><a href="#">Something</a></li>--%>
-                                <%--<li class="divider"></li>--%>
-                                <%--<li><a href="#">Separated link</a></li>--%>
-                            <%--</ul>--%>
+                        <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
+                        <%--Dropdown--%>
+                        <%--<b class="caret"></b>--%>
+                        <%--</a>--%>
+                        <%--<ul class="dropdown-menu">--%>
+                        <%--<li><a href="#">Action</a></li>--%>
+                        <%--<li><a href="#">Another action</a></li>--%>
+                        <%--<li><a href="#">Something</a></li>--%>
+                        <%--<li><a href="#">Another action</a></li>--%>
+                        <%--<li><a href="#">Something</a></li>--%>
+                        <%--<li class="divider"></li>--%>
+                        <%--<li><a href="#">Separated link</a></li>--%>
+                        <%--</ul>--%>
                         <%--</li>--%>
                         <li>
                             <a href="/accountLogout">
@@ -187,7 +165,7 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form action="/userEdit" method="post">
+                                <form action="/adminEdit" method="post">
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -211,9 +189,22 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Street</label>
-                                                <input type="text" class="form-control" name="street"
-                                                       placeholder="Enter your street"
-                                                       value="${myUserData.street}">
+
+                                                <select path="streetList" name="streetId" class="form-control">
+                                                    <option value="">Select to Edit</option>
+                                                    <c:forEach var="street" items="${streetList}">
+                                                        <option
+
+                                                                <c:if test="${street.id == myUserData.street.id}">
+                                                                    <c:out value="selected"/>
+                                                                </c:if>
+
+                                                                value="${street.id}">
+                                                                ${street.name}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+
                                             </div>
                                         </div>
 
@@ -242,16 +233,39 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input type="text" class="form-control" placeholder="City" name="city"
-                                                       value="${myUserData.city}">
+                                                <select path="cityList" name="cityId" class="form-control">
+                                                    <option value="">Select to Edit</option>
+                                                    <c:forEach var="city" items="${cityList}">
+                                                        <option
+
+                                                                <c:if test="${city.id == myUserData.city.id}">
+                                                                    <c:out value="selected"/>
+                                                                </c:if>
+
+                                                                value="${city.id}">
+                                                                ${city.name}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Country</label>
-                                                <input type="text" class="form-control" placeholder="Country"
-                                                       name="country"
-                                                       value="${myUserData.country}">
+                                                <select path="countryList" name="countryId" class="form-control">
+                                                    <option value="">Select to Edit</option>
+                                                    <c:forEach var="country" items="${countryList}">
+                                                        <option
+
+                                                                <c:if test="${country.id == myUserData.country.id}">
+                                                                    <c:out value="selected"/>
+                                                                </c:if>
+
+                                                                value="${country.id}">
+                                                                ${country.name}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -262,7 +276,7 @@
                                 <div class="row">
                                 </div>
 
-                                <form action="/sendPinCode" method="get">
+                                <%--<form action="/sendPinCode" method="get">--%>
                                     <div class="row">
 
                                         <div class="col-md-4">
@@ -270,21 +284,21 @@
                                                 <%--<label for="exampleInputEmail">Email address</label>--%>
                                                 <label>Email address</label>
                                                 <input type="email" class="form-control" disabled
-                                                       placeholder="${user.email}">
+                                                       placeholder="${email}">
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Pin Code</label>
-                                                <input type="number" class="form-control" name="pinCode"
-                                                       placeholder="your pin-code..." value="${user.hashCode()}">
-                                            </div>
-                                        </div>
+                                        <%--<div class="col-md-4">--%>
+                                            <%--<div class="form-group">--%>
+                                                <%--<label>Pin Code</label>--%>
+                                                <%--<input type="number" class="form-control" name="pinCode"--%>
+                                                       <%--placeholder="your pin-code..." value="${user.hashCode()}">--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Send PIN
-                                        code
-                                    </button>
+                                    <%--<button type="submit" class="btn btn-info btn-fill pull-right">Send PIN--%>
+                                        <%--code--%>
+                                    <%--</button>--%>
                                 </form>
 
                                 <div class="clearfix"></div>
@@ -309,8 +323,8 @@
                                     </a>
                                 </div>
                                 <%--<p class="description text-center"> "Lamborghini Mercy <br>--%>
-                                    <%--Your chick she so thirsty <br>--%>
-                                    <%--I'm in that two seat Lambo"--%>
+                                <%--Your chick she so thirsty <br>--%>
+                                <%--I'm in that two seat Lambo"--%>
                                 <%--</p>--%>
                             </div>
                             <hr>
@@ -339,19 +353,19 @@
                             </a>
                         </li>
                         <%--<li>--%>
-                            <%--<a href="#">--%>
-                                <%--Company--%>
-                            <%--</a>--%>
+                        <%--<a href="#">--%>
+                        <%--Company--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                         <%--<li>--%>
-                            <%--<a href="#">--%>
-                                <%--Portfolio--%>
-                            <%--</a>--%>
+                        <%--<a href="#">--%>
+                        <%--Portfolio--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                         <%--<li>--%>
-                            <%--<a href="#">--%>
-                                <%--Blog--%>
-                            <%--</a>--%>
+                        <%--<a href="#">--%>
+                        <%--Blog--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                     </ul>
                 </nav>
@@ -367,26 +381,6 @@
 
 </body>
 
-<!--   Core JS Files   -->
-<script src="../../../resources/dashboards/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="../../../resources/dashboards/assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-<!--  Checkbox, Radio & Switch Plugins -->
-<script src="../../../resources/dashboards/assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-<!--  Charts Plugin -->
-<script src="../../../resources/dashboards/assets/js/chartist.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="../../../resources/dashboards/assets/js/bootstrap-notify.js"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="../../../resources/dashboards/assets/js/light-bootstrap-dashboard.js"></script>
-
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="../../../resources/dashboards/assets/js/demo2.js"></script>
+<jsp:include page="/WEB-INF/pages/dashboards/template/footer.jsp"/>
 
 </html>
