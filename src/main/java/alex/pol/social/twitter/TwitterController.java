@@ -3,19 +3,34 @@ package alex.pol.social.twitter;
 import alex.pol.domain.User;
 import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
+import alex.pol.domain.UserData;
+import alex.pol.repository.UserDataService;
+import alex.pol.repository.UserService;
+import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.RandomStringUtils;
+import org.glassfish.jersey.server.oauth1.OAuth1Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.oauth1.*;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Template;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,32 +71,6 @@ public class TwitterController {
 
     private static Connection<Twitter> connection;
 
-    /*private Twitter twitter;
-
-    private ConnectionRepository connectionRepository;
-
-    @Inject
-    public TwitterController(Twitter twitter, ConnectionRepository connectionRepository) {
-        this.twitter = twitter;
-        this.connectionRepository = connectionRepository;
-    }
-
-    @RequestMapping(value = "/twitterLogin1", method=RequestMethod.POST)
-    public String helloTwitter(Model model) {
-        if (connectionRepository.findPrimaryConnection(Twitter.class) == null) {
-            return "redirect:/connect/twitter";
-        }
-
-        twitter.userOperations().getUserProfile().getName();
-
-        model.addAttribute("connection", twitter.userOperations().getUserProfile().getName());
-        model.addAttribute("code", twitter.userOperations().getUserProfile().getProfileImageUrl());
-        model.addAttribute("token",twitter.userOperations().getUserProfile().getId());
-        //CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriends();
-        //model.addAttribute("friends", friends);
-        return "test";
-    }
-*/
 
 
     @RequestMapping(value = "/twitterLogin", method = RequestMethod.GET)
@@ -96,38 +85,7 @@ public class TwitterController {
         oauthOperations = twitterConnectionFactory.getOAuthOperations();
         requestToken = oauthOperations.fetchRequestToken(REDIRECT_URL, null);
         String authorizeUrl = oauthOperations.buildAuthorizeUrl(requestToken.getValue(), OAuth1Parameters.NONE);
-        response.sendRedirect(authorizeUrl);/**/
-
-// upon receiving the callback from the provider:
-        /*OAuthToken accessToken = oauthOperations.exchangeForAccessToken(
-                new AuthorizedRequestToken(requestToken, oauthVerifier), null);*/
-
-        /*OAuthToken accessToken = new OAuthToken(ACCESS_TOKEN,ACEESS_TOKEN_SECRET);
-        Connection<Twitter> connection = twitterConnectionFactory.createConnection(accessToken);*/
-
-        /*twitter = new TwitterTemplate(APP_ID, APP_SECRET, ACCESS_TOKEN, ACEESS_TOKEN_SECRET);
-        modelAndView.addObject("connection",twitter.userOperations().getUserProfile().getName());
-        OAuth2Template oauth2 = new OAuth2Template(APP_ID, APP_SECRET, "", "https://api.twitter.com/oauth2/token");
-        String accesstoken= oauth2.authenticateClient().getAccessToken();
-        modelAndView.addObject("token",accesstoken);
-        modelAndView.addObject("code",ACCESS_TOKEN);*/
-       // modelAndView.addObject("connection",connection);
-        //return modelAndView;
-
-        /*twitterConnectionFactory =
-                new TwitterConnectionFactory(APP_ID, APP_SECRET);
-        oauthOperations = twitterConnectionFactory.getOAuthOperations();
-        OAuthToken requestToken = oauthOperations.fetchRequestToken(REDIRECT_URL, null);
-        String authorizeUrl = oauthOperations.buildAuthorizeUrl(requestToken.getValue(),
-                OAuth1Parameters.NONE);
-        response.sendRedirect(authorizeUrl);*/
-
-
-        /*String returnValue =
-                "https://accounts.google.com/o/oauth2/v2/auth?scope=email+profile&"//email,profile&"//%20
-                        + "redirect_uri=" + REDIRECT_URL//"state=%2Fprofile&"
-                        + "&response_type=code&client_id=" + APP_ID;
-        return "redirect:" + returnValue;*/
+        response.sendRedirect(authorizeUrl);
     }
 
     @RequestMapping(value = "/twitterCallback", method = RequestMethod.GET)
@@ -135,24 +93,6 @@ public class TwitterController {
         HttpSession httpSession = request.getSession();
         String oauthToken = request.getParameter("oauth_token");
         String authVerifier = request.getParameter("oauth_verifier");
-        /*twitterConnectionFactory = new TwitterConnectionFactory(APP_ID, APP_SECRET);
-        GoogleConnectionFactory googleConnectionFactory =
-                new GoogleConnectionFactory(APP_ID, APP_SECRET);
-        OAuth2Operations auth2Operations = googleConnectionFactory.getOAuthOperations();
-        AccessGrant accessGrant = auth2Operations.exchangeForAccess(
-                authorizationCode, REDIRECT_URL, null);
-        Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
-        String googleUserEmail = connection.fetchUserProfile().getEmail();
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("connection",connection);
-        modelAndView.addObject("email",googleUserEmail);
-        List<User> userList = userService.getAll();
-        User googleUser = User.newBuilder().setEmail(googleUserEmail)
-                .setPassword("Google").build();
-        if (checkListForUser(userList,googleUser)){
-            userService.insert(googleUser);
-        }
-        httpSession.setAttribute("user", googleUser);*/
         OAuthToken accessToken = oauthOperations.exchangeForAccessToken(
                 new AuthorizedRequestToken(requestToken, authVerifier), null);
         connection = twitterConnectionFactory.createConnection(accessToken);
@@ -166,11 +106,57 @@ public class TwitterController {
     public String addTwitterUser(@RequestParam(required = false) String email,
                                  HttpServletRequest request) throws SQLException {
         HttpSession httpSession = request.getSession();
-        User twitterUser = User.newBuilder().setEmail(email)
-                .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
-        userService.insert(twitterUser);
+        User twitterUser = userService.getByEmail(email);
+        //addUserAndUserData(twitterUser, connection, email);
+        if (twitterUser == null) {
+            twitterUser = User.newBuilder().setEmail(email)
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
+            userService.insert(twitterUser);
+            ConnectionData connectionData = connection.createData();
+            MyJson myJson = new MyJson();
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
+            UserData googleUserData = UserData.newBuilder().setUser(twitterUser)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
+        }
+        UserData twitterUserData = userDataService.findByUser(twitterUser);
+        if(twitterUser != null && !twitterUserData.getSocialData()
+                .get("provider").equals("twitter")){
+            twitterUser = null;
+        }
         httpSession.setAttribute("user", twitterUser);
         return "redirect:/";
+
+    }
+
+    /*private void addUserAndUserData(User user, Connection connection,String email) throws SQLException {
+        if (user == null) {
+            user = User.newBuilder().setEmail(email)
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
+            userService.insert(user);
+            JSONObject jsonObject = new JSONObject();
+            ConnectionData connectionData = connection.createData();
+            jsonObject.put("provider", connectionData.getProviderId());
+            jsonObject.put("displayName", connectionData.getDisplayName());
+            jsonObject.put("imageUrl", connectionData.getImageUrl());
+            jsonObject.put("providerUserId", connectionData.getProviderUserId());
+            jsonObject.put("secret", connectionData.getSecret());
+            jsonObject.put("accessToken", connectionData.getAccessToken());
+            jsonObject.put("expireTime", connectionData.getExpireTime());
+            jsonObject.put("refreshToken", connectionData.getRefreshToken());
+            MyJson myJson = new MyJson();
+            myJson.setSocialData(jsonObject);
+            UserData googleUserData = UserData.newBuilder().setUser(user)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
+        }
     }
 
     private boolean checkListForUser(List<User> userList, User user) {
@@ -178,10 +164,12 @@ public class TwitterController {
         if (userList.size() == 0) return true;
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getEmail().equals(user.getEmail())
-                    && userList.get(i).getPassword().equals(user.getPassword())) {
+                    //&& userList.get(i).getPassword().equals(user.getPassword())
+                    ) {
+                user = userList.get(i);
                 return false;
             }
         }
         return true;
-    }
-}/**/
+    }*/
+}

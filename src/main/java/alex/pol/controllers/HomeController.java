@@ -48,7 +48,6 @@ public class HomeController {
         HttpSession session = request.getSession();
         User userReg = new User();
         UserData userData = new UserData();
-//        System.out.println(session.getAttribute());
         User userLog = (User) session.getAttribute("user");
         if (add != null && add.toString().equals("logout")) {
             userLog = null;
@@ -84,28 +83,6 @@ public class HomeController {
 
         return modelAndView;
     }
-//
-//    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-//    public ModelAndView addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
-//                             HttpServletRequest request)throws SQLException {
-//        //userValid.validate(user, result);
-////        if(result.hasErrors()){
-////            return "users/registration";
-////        }else{
-//        HttpSession session = request.getSession();
-//        User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
-//        session.setAttribute("user", user);
-//        userService.insert(user);
-//        UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
-//        userDataService.insert(userData);
-////        }
-//        ModelAndView modelAndView = new ModelAndView("home");
-//        String add = "add";
-//        modelAndView.addObject("add", add);
-//
-//        return modelAndView;
-//
-//    }
 
     /**
      * Add new user in DB if you entered write information in fields of adding user(enter first name, last name, email and password)
@@ -119,11 +96,8 @@ public class HomeController {
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
-                             HttpServletRequest request) throws SQLException {
-        //userValid.validate(user, result);
-//        if(result.hasErrors()){
-//            return "users/registration";
-//        }else{
+                             HttpServletRequest request)throws SQLException {
+
         HttpSession session = request.getSession();
         User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
 
@@ -196,6 +170,29 @@ public class HomeController {
     @RequestMapping("/msg")
     public String msg(@RequestHeader("Accept-Language") Locale locale) {
         return messageSource.getMessage("msg", null, locale);
+    }
+
+    /**
+     *Method act when you entered your email and password
+     * @param email
+     * @param password
+     * @param request
+     * @return all is write - page success (Success)
+     * something is wrong - page loginProblems ("Incorrect email ! Try again")
+     * @throws SQLException
+     */
+
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+        HttpSession session = request.getSession();
+        User user = userService.getByEmail(email);
+        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
+        }else {
+            add = new StringBuilder("errorLogin");
+            return "redirect:/";
+        }
     }
 }
 

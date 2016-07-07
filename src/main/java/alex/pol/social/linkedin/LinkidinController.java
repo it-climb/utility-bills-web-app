@@ -3,9 +3,14 @@ package alex.pol.social.linkedin;
 import alex.pol.domain.User;
 import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
+import alex.pol.domain.UserData;
+import alex.pol.repository.UserDataService;
+import alex.pol.repository.UserService;
+import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -14,7 +19,9 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.stereotype.Controller;
@@ -72,30 +79,55 @@ public class LinkidinController {
                 new LinkedInConnectionFactory(APP_ID, APP_SECRETE);
         Connection<LinkedIn> connection = connectionFactory.createConnection(accessGrant);
         String linkedinUserEmail = connection.fetchUserProfile().getEmail();
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("connection",connection);
-        modelAndView.addObject("email",linkedinUserEmail);
-        List<User> userList = userService.getAll();
-        User linkedinUser = User.newBuilder().setEmail(linkedinUserEmail).setPassword("Linkedin").build();
-        if (checkListForUser(userList,linkedinUser)){
+        User linkedinUser = userService.getByEmail(linkedinUserEmail);
+        //addUserAndUserData(linkedinUser,connection);
+        if (linkedinUser == null) {
+            linkedinUser = User.newBuilder().setEmail(linkedinUserEmail)
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
             userService.insert(linkedinUser);
+            MyJson myJson = new MyJson();
+            ConnectionData connectionData = connection.createData();
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
+            UserData googleUserData = UserData.newBuilder().setUser(linkedinUser)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
+        }
+        UserData linkedinUserData = userDataService.findByUser(linkedinUser);
+        if(linkedinUser != null && !linkedinUserData.getSocialData()
+                .get("provider").equals("linkedin")){
+            linkedinUser = null;
         }
         httpSession.setAttribute("user", linkedinUser);
-        //return modelAndView;
         return "redirect:/";
     }
 
-    private boolean checkListForUser(List<User> userList, User user){
-        if (userList==null) return false;
-        if (userList.size()==0)return true;
-        for (int i = 0; i < userList.size(); i++) {
-            if(userList.get(i).getEmail().equals(user.getEmail())
-                    && userList.get(i).getPassword().equals(user.getPassword())){
-                return false;
-            }
+    /*private void addUserAndUserData(User user, Connection connection) throws SQLException {
+        if (user == null) {
+            user = User.newBuilder().setEmail(connection.fetchUserProfile().getEmail())
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Google"
+            userService.insert(user);
+            ConnectionData connectionData = connection.createData();
+            MyJson myJson = new MyJson();
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
+            UserData googleUserData = UserData.newBuilder().setUser(user)
+                    .setSocialData(myJson).build();
+            userDataService.insert(googleUserData);
         }
-        return true;
-    }
+    }*/
 
     private String getLinkedinAccessToken(String faceCode){
         String token = null;

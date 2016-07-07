@@ -4,7 +4,18 @@ import javax.persistence.*;
 import java.util.List;
 
 
+import alex.pol.util.PostgreJsonHibernate.MyJson;
+import alex.pol.util.PostgreJsonHibernate.MyJsonType;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.google.gson.Gson;
+import net.sf.json.JSONObject;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import javax.persistence.*;
+
 @Entity(name = "UserData")
+@TypeDef(name = "MyJsonType",typeClass = MyJsonType.class)
 public class UserData extends BaseModel {
 
     private String firstName;
@@ -30,6 +41,10 @@ public class UserData extends BaseModel {
     private String apartment;
 
     private int pinCode;
+
+    @Column
+    @Type(type = "MyJsonType")
+    private MyJson socialData;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
@@ -115,6 +130,11 @@ public class UserData extends BaseModel {
         this.pinCode = pinCode;
     }
 
+
+    public MyJson getSocialData(){return socialData;}
+
+    public void setSocialData(MyJson socialData){this.socialData = socialData;}
+
     public static Builder newBuilder() {
         return new UserData().new Builder();
     }
@@ -178,6 +198,11 @@ public class UserData extends BaseModel {
             UserData.this.user = user;
             return this;
         }
+
+        public Builder setSocialData(MyJson socialData) {
+            UserData.this.socialData = socialData;
+            return this;
+        }/**/
 
 
         public UserData build() {

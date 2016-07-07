@@ -3,6 +3,7 @@ package alex.pol.controllers.dashboards;
 import alex.pol.domain.*;
 import alex.pol.service.*;
 import alex.pol.util.JspPath;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
-
-/**
- * Created by Abashkin Aleksandr on 18.06.2016.
- */
 
 @Controller
 public class UserDashController {

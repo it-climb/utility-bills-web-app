@@ -6,9 +6,18 @@ import alex.pol.domain.User;
 import alex.pol.service.UserService;
 import alex.pol.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.connect.UserProfile;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.sql.SQLException;
 
 
@@ -95,40 +106,25 @@ public class UserController {//extends WebSecurityConfigurerAdapter
 //        return "redirect:/login";
 //    }
 
-    /**
-     * Method act when you entered your email and password
-     *
-     * @param email
-     * @param password
-     * @param request
-     * @return all is write - page success (Success)
-     * something is wrong - page loginProblems ("Incorrect email ! Try again")
-     * @throws SQLException
-     */
-
-    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
-        HttpSession session = request.getSession();
-        User user = userService.getByEmail(email);
-        if (user != null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+//    /**
+//     *Method act when you entered your email and password
+//     * @param email
+//     * @param password
+//     * @param request
+//     * @return all is write - page success (Success)
+//     * something is wrong - page loginProblems ("Incorrect email ! Try again")
+//     * @throws SQLException
+//     */
+//
+//    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+//    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+//            HttpSession session = request.getSession();
+//            User user = userService.getByEmail(email);
+//        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
 //                session.setAttribute("user", user);
 //                return "redirect:/";
 //            }else return "redirect:/loginProblems";
-            if (user.getEmail().equals("admin@admin.com")) {
-                User admin = userService.getByEmail(email);
-                session.setAttribute("admin", admin);
-                session.setAttribute("email", user.getEmail());
-                return "redirect:/";
-
-            } else if ((!(user.getEmail().equals("admin@admin.com")) && (user.getEmail() != null))) {
-                session.setAttribute("user", user);
-                return "redirect:/";
-
-            }
-        }
-        return "redirect:/loginProblems";
-
-    }
+//    }
 
     /**
      * Method showing login problems when you try to add new user
