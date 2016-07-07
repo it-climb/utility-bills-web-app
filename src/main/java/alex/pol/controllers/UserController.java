@@ -6,36 +6,24 @@ import alex.pol.domain.User;
 import alex.pol.service.UserService;
 import alex.pol.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.connect.UserProfile;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.sql.SQLException;
 
 
 //@SpringBootApplication
 //@EnableOAuth2Sso
 @Controller
-public class UserController {//extends WebSecurityConfigurerAdapter
+public class UserController {
+
+//extends WebSecurityConfigurerAdapter
 
 
     @Autowired

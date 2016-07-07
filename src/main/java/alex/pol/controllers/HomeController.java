@@ -12,10 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -121,7 +118,7 @@ public class HomeController {
         if (userService.getByEmail("admin@admin.com") == null) {
             RegAndLogDto dto = new RegAndLogDto();
             dto.setEmail("admin@admin.com");
-            dto.setPassword("123456");
+            dto.setPassword("12345678");
             User admin = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
             userService.insert(admin);
             UserData userData = UserData.newBuilder().setUser(admin).setFirstName("Вася").setSecondName("Админ").build();

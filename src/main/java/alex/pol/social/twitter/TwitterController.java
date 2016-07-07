@@ -4,39 +4,26 @@ import alex.pol.domain.User;
 import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
 import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
 import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang.RandomStringUtils;
-import org.glassfish.jersey.server.oauth1.OAuth1Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.oauth1.*;
-import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.OAuth2Operations;
-import org.springframework.social.oauth2.OAuth2Template;
-import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.TwitterProfile;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class TwitterController {

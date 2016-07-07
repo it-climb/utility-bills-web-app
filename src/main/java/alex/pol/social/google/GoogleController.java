@@ -4,8 +4,6 @@ import alex.pol.domain.User;
 import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
 import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
 import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
