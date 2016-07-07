@@ -1,9 +1,9 @@
 package alex.pol.social.google;
 
 import alex.pol.domain.User;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
 import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
 import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
@@ -18,12 +18,14 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class GoogleController {

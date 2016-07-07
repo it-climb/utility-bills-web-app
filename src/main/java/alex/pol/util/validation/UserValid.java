@@ -2,8 +2,8 @@ package alex.pol.util.validation;
 
 
 import alex.pol.domain.User;
-import alex.pol.repository.UserService;
-
+import alex.pol.service.UserService;
+;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

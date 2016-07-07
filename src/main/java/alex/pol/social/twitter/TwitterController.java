@@ -1,12 +1,11 @@
 package alex.pol.social.twitter;
 
 import alex.pol.domain.User;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
 import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
 import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.Connection;
@@ -25,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class TwitterController {

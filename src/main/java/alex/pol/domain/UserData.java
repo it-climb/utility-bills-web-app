@@ -1,5 +1,7 @@
 package alex.pol.domain;
 
+import javax.persistence.*;
+import java.util.List;
 
 
 import alex.pol.util.PostgreJsonHibernate.MyJson;
@@ -22,11 +24,17 @@ public class UserData extends BaseModel {
 
     private Integer age;
 
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
-    private String city;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    private String street;
+    @ManyToOne
+    @JoinColumn(name = "street_id")
+    private Street street;
 
     private String house;
 
@@ -74,27 +82,27 @@ public class UserData extends BaseModel {
         this.age = age;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
-    public String getStreet() {
+    public Street getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(Street street) {
         this.street = street;
     }
 
@@ -156,17 +164,17 @@ public class UserData extends BaseModel {
             return this;
         }
 
-        public Builder setCountry(String country) {
+        public Builder setCountry(Country country) {
             UserData.this.country = country;
             return this;
         }
 
-        public Builder setCity(String city) {
+        public Builder setCity(City city) {
             UserData.this.city = city;
             return this;
         }
 
-        public Builder setStreet(String street) {
+        public Builder setStreet(Street street) {
             UserData.this.street = street;
             return this;
         }
@@ -202,3 +210,4 @@ public class UserData extends BaseModel {
         }
     }
 }
+
