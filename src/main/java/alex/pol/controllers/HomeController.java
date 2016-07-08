@@ -179,17 +179,45 @@ public class HomeController {
      * @throws SQLException
      */
 
+//    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+//    public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
+//        HttpSession session = request.getSession();
+//        User user = userService.getByEmail(email);
+//        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+//            session.setAttribute("user", user);
+//            return "redirect:/";
+//        }else {
+//            add = new StringBuilder("errorLogin");
+//            return "redirect:/";
+//        }
+//    }
+
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession();
         User user = userService.getByEmail(email);
-        if(user!=null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
-            session.setAttribute("user", user);
-            return "redirect:/";
-        }else {
-            add = new StringBuilder("errorLogin");
-            return "redirect:/";
+        if (user != null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
+//                session.setAttribute("user", user);
+//                return "redirect:/";
+//            }else return "redirect:/loginProblems";
+            if (user.getEmail().equals("admin@admin.com")) {
+                User admin = userService.getByEmail(email);
+                session.setAttribute("admin", admin);
+                session.setAttribute("email", user.getEmail());
+                return "redirect:/";
+
+            } else if ((!(user.getEmail().equals("admin@admin.com")) && (user.getEmail() != null))) {
+                session.setAttribute("user", user);
+                return "redirect:/";
+
+            }
         }
+        return "redirect:/loginProblems";
+
     }
+
+
+
+
 }
 
