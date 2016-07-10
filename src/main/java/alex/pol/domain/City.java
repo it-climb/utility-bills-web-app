@@ -1,27 +1,18 @@
 package alex.pol.domain;
 
+import alex.pol.util.validation.Unique;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name = "cities")
-public class City {
+public class City extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    @Unique(message = "This City already exists")
     private String name;
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "city", fetch = FetchType.LAZY)
     private Set<UserData> userData;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
