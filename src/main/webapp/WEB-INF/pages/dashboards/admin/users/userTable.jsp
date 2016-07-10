@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="icon" type="image/png" href="../../../../resources/dashboards/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" href="../../../../../resources/dashboards/assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
     <title>Utility bills</title>
@@ -49,7 +49,28 @@
                     <a href="/listOfUsers">
                         <i class="pe-7s-note2"></i>
 
-                        <p>List users</p>
+                        <p>List of users</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/listOfCountry">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of country</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/listOfCity">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of city</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/listOfStreets">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of streets</p>
                     </a>
                 </li>
                 <%--<li>--%>
@@ -201,8 +222,9 @@
                                     </tbody>
                                     <tr>
                                         <td>
-                                           <a href="/addNewUser" class="btn btn-primary btn-sm custom-width pull-right">New
-                                            User</a></td>
+                                            <a href="/addNewUser"
+                                               class="btn btn-primary btn-sm custom-width pull-right">New
+                                                User</a></td>
                                     </tr>
                                 </table>
 

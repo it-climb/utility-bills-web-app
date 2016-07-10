@@ -41,9 +41,31 @@
                     <a href="/listOfUsers">
                         <i class="pe-7s-note2"></i>
 
-                        <p>List users</p>
+                        <p>List of users</p>
                     </a>
                 </li>
+                <li>
+                    <a href="/listOfCountry">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of country</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/listOfCity">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of city</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/listOfStreet">
+                        <i class="pe-7s-note2"></i>
+
+                        <p>List of streets</p>
+                    </a>
+                </li>
+
                 <%--<li>--%>
                 <%--<a href="typography.html">--%>
                 <%--<i class="pe-7s-news-paper"></i>--%>
@@ -277,28 +299,28 @@
                                 </div>
 
                                 <%--<form action="/sendPinCode" method="get">--%>
-                                    <div class="row">
+                                <div class="row">
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <%--<label for="exampleInputEmail">Email address</label>--%>
-                                                <label>Email address</label>
-                                                <input type="email" class="form-control" disabled
-                                                       placeholder="${email}">
-                                            </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <%--<label for="exampleInputEmail">Email address</label>--%>
+                                            <label>Email address</label>
+                                            <input type="email" class="form-control" disabled
+                                                   placeholder="${email}">
                                         </div>
-
-                                        <%--<div class="col-md-4">--%>
-                                            <%--<div class="form-group">--%>
-                                                <%--<label>Pin Code</label>--%>
-                                                <%--<input type="number" class="form-control" name="pinCode"--%>
-                                                       <%--placeholder="your pin-code..." value="${user.hashCode()}">--%>
-                                            <%--</div>--%>
-                                        <%--</div>--%>
                                     </div>
-                                    <%--<button type="submit" class="btn btn-info btn-fill pull-right">Send PIN--%>
-                                        <%--code--%>
-                                    <%--</button>--%>
+
+                                    <%--<div class="col-md-4">--%>
+                                    <%--<div class="form-group">--%>
+                                    <%--<label>Pin Code</label>--%>
+                                    <%--<input type="number" class="form-control" name="pinCode"--%>
+                                    <%--placeholder="your pin-code..." value="${user.hashCode()}">--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                </div>
+                                <%--<button type="submit" class="btn btn-info btn-fill pull-right">Send PIN--%>
+                                <%--code--%>
+                                <%--</button>--%>
                                 </form>
 
                                 <div class="clearfix"></div>
