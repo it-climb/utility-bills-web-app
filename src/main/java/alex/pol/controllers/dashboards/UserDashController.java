@@ -30,6 +30,8 @@ public class UserDashController {
     CountryService countryService;
     @Autowired
     CityService cityService;
+    @Autowired
+    AvatarService avatarService;
 
 
 
@@ -45,10 +47,13 @@ public class UserDashController {
         List<Street> streetList = this.streetService.getAll();
         List<Country> countryList = this.countryService.getAll();
         List<City> cityList = this.cityService.getAll();
+        List<Avatar> avatarList = this.avatarService.getAll();
         modelAndView.addObject("myUserData", myUserData);
         modelAndView.addObject("streetList", streetList);
         modelAndView.addObject("cityList", cityList);
         modelAndView.addObject("countryList", countryList);
+        modelAndView.addObject("avatarList", avatarList);
+        System.out.println(avatarList.toString());
         return modelAndView;
     }
 

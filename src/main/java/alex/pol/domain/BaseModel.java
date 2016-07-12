@@ -47,4 +47,9 @@ public class BaseModel {
         hash = hash * 31 + (id == null ? 0 : id.hashCode());
         return hash;
     }
+
+
+
+
+
 }
