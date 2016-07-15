@@ -9,6 +9,7 @@ import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
 import alex.pol.util.ClassNameUtil;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;

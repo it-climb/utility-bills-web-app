@@ -50,13 +50,29 @@ public class AvatarServerController {
     @RequestMapping(value = "/uploadAvatar", method = RequestMethod.POST)
     public String updateAvatar(@ModelAttribute("myUserData") UserData myUserData,
                                @RequestParam("avatarFile") MultipartFile avatarFile,
-                               @RequestParam(required = false) Integer avatarId,
+                               @RequestParam(required = false) Integer Id,
                                HttpServletRequest request) throws SQLException, IOException {
         HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~Костыль~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        User sessionUser;
+        String[] partEmail;
+
+        if(Id == 1){
+
+            sessionUser = (User) session.getAttribute("admin");
+            partEmail = userDataService.getById(1).getUser().getEmail().split("@");
+
+        } else {
+
+            sessionUser = (User) session.getAttribute("user");
+            partEmail = sessionUser.getEmail().split("@");
+
+        }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         myUserData = userDataService.findByUser(sessionUser);
 
-        String[] partEmail = sessionUser.getEmail().split("@");
         String bucketName = "test-avatars-test";
         String keyName = partEmail[0] + "/" + avatarFile.getOriginalFilename();
 

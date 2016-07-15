@@ -34,6 +34,10 @@ public class AdminDashController {
     CountryService countryService;
     @Autowired
     CityService cityService;
+    @Autowired
+    AvatarService avatarService;
+
+
 
     @RequestMapping(value = "/adminDash", method = RequestMethod.GET)
     public ModelAndView showAdminDashboard(@ModelAttribute("myUserData") UserData myUserData,
@@ -43,14 +47,19 @@ public class AdminDashController {
         ModelAndView modelAndView = new ModelAndView(JspPath.ADMIN_DASHBOARD);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("admin");
+
         myUserData = userDataService.findByUser(sessionUser);
         List<Street> streetList = this.streetService.getAll();
         List<Country> countryList = this.countryService.getAll();
         List<City> cityList = this.cityService.getAll();
+        List<Avatar> avatarList = this.avatarService.getAll();
+
         modelAndView.addObject("myUserData", myUserData);
         modelAndView.addObject("streetList", streetList);
         modelAndView.addObject("cityList", cityList);
         modelAndView.addObject("countryList", countryList);
+        modelAndView.addObject("avatarList", avatarList);
+
         return modelAndView;
     }
 

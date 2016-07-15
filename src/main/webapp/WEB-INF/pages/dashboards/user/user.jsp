@@ -425,7 +425,7 @@
                                        name="avatarFile">
                             </span>
                         </label>
-
+                        <input type="hidden" class="form-control" name="Id" value="${myUserData.id}">
                         <input type="text" class="form-control" readonly>
                     </div>
 
