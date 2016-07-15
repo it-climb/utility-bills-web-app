@@ -36,6 +36,10 @@ public class UserData extends BaseModel {
     @JoinColumn(name = "street_id")
     private Street street;
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
+
     private String house;
 
     private String apartment;
@@ -105,6 +109,19 @@ public class UserData extends BaseModel {
     public void setStreet(Street street) {
         this.street = street;
     }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+
+
+
+
 
     public String getHouse() {
         return house;
@@ -176,6 +193,11 @@ public class UserData extends BaseModel {
 
         public Builder setStreet(Street street) {
             UserData.this.street = street;
+            return this;
+        }
+
+        public Builder setAvatar(Avatar avatar) {
+            UserData.this.avatar = avatar;
             return this;
         }
 
