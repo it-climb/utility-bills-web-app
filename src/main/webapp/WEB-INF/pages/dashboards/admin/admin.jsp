@@ -336,14 +336,28 @@
                             </div>
                             <div class="content">
                                 <div class="author">
-                                    <a href="#">
-                                        <img class="avatar border-gray"
-                                             src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>
 
-                                        <h4 class="title">${myUserData.firstName}<br/>
-                                            <small>${myUserData.secondName}</small>
-                                        </h4>
+                                    <a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-3">
+                                        <c:if test="${empty myUserData.avatar.id}">
+                                            <img class="avatar border-gray"
+                                                 src="/resources/dashboards/assets/img/default-avatar.png"/>
+                                            <%--src="/resources/dashboards/assets/img/avatars/agios@agios.com2/AVBtq51sFG0.jpg"/>--%>
+                                        </c:if>
+                                        <c:if test="${not empty myUserData.avatar.id}">
+                                            <img class="avatar border-gray"
+                                                 src="${myUserData.avatar.path}"/>
+                                        </c:if>
                                     </a>
+
+                                    <%--<a href="#">--%>
+                                    <%--<img class="avatar border-gray"--%>
+                                    <%--src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>--%>
+                                    <%--</a>--%>
+
+                                    <h4 class="title">${myUserData.firstName}<br/>
+                                        <small>${myUserData.secondName}</small>
+                                    </h4>
+
                                 </div>
                                 <%--<p class="description text-center"> "Lamborghini Mercy <br>--%>
                                 <%--Your chick she so thirsty <br>--%>
@@ -398,6 +412,45 @@
             </div>
         </footer>
 
+    </div>
+</div>
+
+<div id="modal-3" class="modal fade test-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Change Photo</h4>
+            </div>
+            <div class="modal-body">
+                <form:form enctype="multipart/form-data" method="post" action="/uploadAvatar">
+
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-primary upload btn-color">
+                                Browse&hellip;
+                                <input id="upload-file-input"
+                                       type="file"
+                                       style="display: none;"
+                                       accept="image/png,image/jpeg"
+                                       name="avatarFile">
+                            </span>
+                        </label>
+
+                        <input type="text" class="form-control" readonly>
+                    </div>
+
+                    <span class="help-block">
+                        You can download an image in JPG or PNG format. Size image 120x120
+                    </span>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary btn-fill btn-color">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+
+                </form:form>
+            </div>
+        </div>
     </div>
 </div>
 
