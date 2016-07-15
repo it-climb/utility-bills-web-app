@@ -83,6 +83,10 @@ public class AvatarServerController {
                     myUserData.setAvatar(this.avatarService.getByPath(avatarPath));
                     log.info("user changed avatar with Path " + avatarPath + " and  id " + avatar.getId());
                     userDataService.update(myUserData);
+
+             if(partEmail[0].equals("admin")){
+                 return "redirect:/adminDash";
+             }
                     return "redirect:/userDash";
                 }
             }
@@ -96,6 +100,10 @@ public class AvatarServerController {
         log.info("user adding new avatar with Path " + avatarPath + " and  id " + avatar.getId());
         userDataService.update(myUserData);
 
+        }
+
+        if(partEmail[0].equals("admin")){
+            return "redirect:/adminDash";
         }
 
         return "redirect:/userDash";
