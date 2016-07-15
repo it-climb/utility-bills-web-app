@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class AvatarServerController {
 
-        private static final Logger log = Logger.getLogger(ClassNameUtil.getCurrentClassName());
+    private static final Logger log = Logger.getLogger(ClassNameUtil.getCurrentClassName());
 
     @Autowired
     UserService userService;
@@ -83,6 +83,10 @@ public class AvatarServerController {
                     myUserData.setAvatar(this.avatarService.getByPath(avatarPath));
                     log.info("user changed avatar with Path " + avatarPath + " and  id " + avatar.getId());
                     userDataService.update(myUserData);
+
+                    if(partEmail[0].equals("admin")){
+                        return "redirect:/adminDash";
+                    }
                     return "redirect:/userDash";
                 }
             }
@@ -93,9 +97,13 @@ public class AvatarServerController {
                 myUserData.setAvatar(this.avatarService.getById(avatar.getId()));
             }
 
-        log.info("user adding new avatar with Path " + avatarPath + " and  id " + avatar.getId());
-        userDataService.update(myUserData);
+            log.info("user adding new avatar with Path " + avatarPath + " and  id " + avatar.getId());
+            userDataService.update(myUserData);
 
+        }
+
+        if(partEmail[0].equals("admin")){
+            return "redirect:/adminDash";
         }
 
         return "redirect:/userDash";
