@@ -61,9 +61,7 @@ public class HomeController {
 
 
         List<Street> streetList = streetService.getAll();
-        for (Street street : streetList) {
-            System.out.println("--" + street.getName());
-        }
+
         return modelAndView;
     }
 

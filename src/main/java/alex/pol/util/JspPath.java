@@ -21,7 +21,19 @@ public class JspPath {
     public static final String USER_DASHBOARD_SENDPIN = "/dashboards/user/user";
 
     public static final String ADMIN_DASHBOARD = "/dashboards/admin/admin";
-    public static final String ADMIN_DASHBOARD_TABLE = "/dashboards/admin/table";
+
+    public static final String ADMIN_DASHBOARD_USER_TABLE = "/dashboards/admin/users/userTable";
+    public static final String ADMIN_DASHBOARD_USER_EDIT = "/dashboards/admin/users/userEdit";
+
+    public static final String ADMIN_DASHBOARD_COUNTRY_TABLE = "/dashboards/admin/countries/countryTable";
+    public static final String ADMIN_DASHBOARD_COUNTRY_EDIT = "/dashboards/admin/countries/countryEdit";
+
+    public static final String ADMIN_DASHBOARD_CITY_TABLE = "/dashboards/admin/cities/cityTable";
+    public static final String ADMIN_DASHBOARD_CITY_EDIT = "/dashboards/admin/cities/cityEdit";
+
+    public static final String ADMIN_DASHBOARD_STREET_TABLE = "/dashboards/admin/streets/streetTable";
+    public static final String ADMIN_DASHBOARD_STREET_EDIT = "/dashboards/admin/streets/streetEdit";
+
     public static final String ADMIN_DASHBOARD_MAP = "/dashboards/admin/maps";
     public static final String ADMIN_DASHBOARD_REGISTRATION = "/dashboards/admin/registration";
     public static final String ADMIN_DASHBOARD_SENDPIN = "/dashboards/admin/user";

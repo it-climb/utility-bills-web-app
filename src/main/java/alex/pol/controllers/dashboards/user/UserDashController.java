@@ -1,4 +1,4 @@
-package alex.pol.controllers.dashboards;
+package alex.pol.controllers.dashboards.user;
 
 import alex.pol.domain.*;
 import alex.pol.service.*;
