@@ -82,7 +82,15 @@ public class AvatarServerController {
 
         AmazonS3 s3client = new AmazonS3Client(credentials);
 
+        Avatar preAva = null;
+
         if (!avatarFile.isEmpty()) {
+
+            if (userDataService.getById(Id).getAvatar() != null) {
+                preAva = (userDataService.getById(Id)).getAvatar();
+                deleteAvatarOnS3(bucketName,keyName,s3client);
+
+            }
 
             uploadOnS3(bucketName, keyName, s3client, avatarFile);
 
@@ -90,10 +98,8 @@ public class AvatarServerController {
 
             Avatar avatar = new Avatar();
             List<Avatar> avatarList = avatarService.getAll();
-////
-////            String[] test = filePath.split("webapp");
-////            String avatarPath = test[1];
-////
+
+
             for (Avatar myAvatar : avatarList) {
                 if (avatarPath.equals(myAvatar.getPath())) {
                     myUserData.setAvatar(this.avatarService.getByPath(avatarPath));
@@ -109,8 +115,15 @@ public class AvatarServerController {
 
             avatar.setPath(avatarPath);
             avatarService.insert(avatar);
+
             if (avatar.getId() != null) {
+
                 myUserData.setAvatar(this.avatarService.getById(avatar.getId()));
+
+                if(preAva != null) {
+                    avatarService.delete(preAva);
+                    log.info("user deleted pre avatar from db with Path " + preAva.getPath() + " and  id " + preAva.getId());
+                }
             }
 
             log.info("user adding new avatar with Path " + avatarPath + " and  id " + avatar.getId());
@@ -165,4 +178,35 @@ public class AvatarServerController {
         }
 
     }
+
+    public void deleteAvatarOnS3(String bucketName, String keyName, AmazonS3 s3client) throws IOException {
+        try {
+
+            String[] dirPath = keyName.split("/");
+            String folderPath = dirPath[0];
+            for (S3ObjectSummary file : s3client.listObjects(bucketName, folderPath).getObjectSummaries()) {
+                s3client.deleteObject(bucketName, file.getKey());
+                log.info("user deleted avatar with Path " + file.getKey());
+            }
+        } catch (AmazonServiceException ase) {
+            System.out.println("Caught an AmazonServiceException.");
+            System.out.println("Error Message:    " + ase.getMessage());
+            System.out.println("HTTP Status Code: " + ase.getStatusCode());
+            System.out.println("AWS Error Code:   " + ase.getErrorCode());
+            System.out.println("Error Type:       " + ase.getErrorType());
+            System.out.println("Request ID:       " + ase.getRequestId());
+        } catch (AmazonClientException ace) {
+            System.out.println("Caught an AmazonClientException.");
+            System.out.println("Error Message: " + ace.getMessage());
+        }
+
+
+
+
+
+    }
+
+
+
+
 }
