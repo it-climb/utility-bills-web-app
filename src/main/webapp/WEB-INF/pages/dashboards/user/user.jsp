@@ -405,6 +405,7 @@
     <%--</div>--%>
 <%--</div>--%>
 
+
 <div id="modal-3" class="modal fade test-modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -413,25 +414,28 @@
             </div>
             <div class="modal-body">
                 <form:form enctype="multipart/form-data" method="post" action="/uploadAvatar">
-
                     <div class="input-group">
                         <label class="input-group-btn">
-                            <span class="btn btn-primary upload btn-color">
+                            <label class="btn btn-primary btn-file upload btn-color">
                                 Browse&hellip;
                                 <input id="upload-file-input"
                                        type="file"
                                        style="display: none;"
+                                       onchange="$('.form-control').val($(this).val());"
                                        accept="image/png,image/jpeg"
                                        name="avatarFile">
-                            </span>
+                            </label>
                         </label>
-                        <input type="hidden" class="form-control" name="Id" value="${myUserData.id}">
-                        <input type="text" class="form-control" readonly>
+                            <input type="text" class="form-control" readonly>
                     </div>
+
+                    <input type="hidden" name="Id" value="${myUserData.id}">
+
 
                     <span class="help-block">
                         You can download an image in JPG or PNG format. Size image 120x120
                     </span>
+
 
                     <div class="btn-group">
                         <button type="submit" class="btn btn-primary btn-fill btn-color">Submit</button>
@@ -439,6 +443,7 @@
                     </div>
 
                 </form:form>
+
                 </div>
         </div>
     </div>
@@ -449,3 +454,4 @@
 </body>
 <jsp:include page="/WEB-INF/pages/dashboards/template/footer.jsp" />
 </html>
+

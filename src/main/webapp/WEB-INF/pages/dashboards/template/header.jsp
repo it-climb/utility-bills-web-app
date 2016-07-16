@@ -31,4 +31,4 @@
 <link href="<c:url value='/resources/dashboards/assets/css/bootstrap.css' />" rel="stylesheet">
 <link href="<c:url value='/resources/dashboards/assets/css/app.css' />" rel="stylesheet">
 
-<script type="text/javascript" src="/resources/dashboards/assets/js/file-upload.js"></script>
+<%--<script type="text/javascript" src="/resources/dashboards/assets/js/upload-file.js"></script>--%>

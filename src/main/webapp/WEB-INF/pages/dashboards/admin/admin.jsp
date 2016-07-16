@@ -427,21 +427,20 @@
 
                     <div class="input-group">
                         <label class="input-group-btn">
-                            <span class="btn btn-primary upload btn-color">
+                            <label class="btn btn-primary upload btn-color">
                                 Browse&hellip;
                                 <input id="upload-file-input"
                                        type="file"
                                        style="display: none;"
+                                       onchange="$('.form-control').val($(this).val());"
                                        accept="image/png,image/jpeg"
                                        name="avatarFile">
-                            </span>
+                            </label>
                         </label>
 
                         <input type="text" class="form-control" readonly>
-                        <input type="hidden" class="form-control" name="Id" value="${myUserData.id}">
-
-
                     </div>
+                    <input type="hidden" name="Id" value="${myUserData.id}">
 
                     <span class="help-block">
                         You can download an image in JPG or PNG format. Size image 120x120
