@@ -304,6 +304,7 @@
 		</dependency>
 
 		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 		<dependency>
 			<groupId>com.j256.simplemagic</groupId>
 			<artifactId>simplemagic</artifactId>
@@ -322,6 +323,14 @@
 		</dependency>
 
 		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--~~~~~~~~~~~Send Email~~~~~~~~~~~~~~~~-->
+
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
 
 
 	</dependencies>
