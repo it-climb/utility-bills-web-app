@@ -213,7 +213,8 @@ public class HomeController {
 
             }
         }
-        return "redirect:/loginProblems";
+        add = new StringBuilder("errorLogin");
+        return "redirect:/";
 
     }
 
