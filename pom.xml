@@ -21,6 +21,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<version.jackson>1.9.13</version.jackson>
+		<!-- jackson -->
+		<jackson.version>2.5.2</jackson.version>
+		<jackson.mapper.version>1.9.13</jackson.mapper.version>
 	</properties>
 
 	<dependencies>
@@ -30,12 +34,29 @@
 			<version>3.0.6.RELEASE</version>
 		</dependency-->
 
+		<!-- Apache Commons -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+			<version>4.5.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.2</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
 
+		<!--TokenGenerating-->
+		<!--dependency>
+			<groupId>com.github.Dmytriy-Litvinenko</groupId>
+			<artifactId>TokenGenerator</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency-->
 
 		<!--dependency>
 		<groupId>org.springframework.boot</groupId>
