@@ -5,16 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<h3>${responseFromServer}</h3>
-
-
 <form:form method="post" action="/web5">
-
     <input type="submit" value="Ok">
-
-                <%--input type="hidden" name="id" value="${user.id}"--%>
-
-
 </form:form>
 </body>
 </html>
