@@ -324,6 +324,40 @@
 			<version>2.0.12</version>
 		</dependency>
 
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+		<dependency>
+			<groupId>com.j256.simplemagic</groupId>
+			<artifactId>simplemagic</artifactId>
+			<version>1.5</version>
+		</dependency>
+
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+		<!--~~~~~~~~~~~Amazon s3~~~~~~~~~~~~~~~~~-->
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.10.63</version>
+		</dependency>
+
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--~~~~~~~~~~~Send Email~~~~~~~~~~~~~~~~-->
+
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.5</version>
+		</dependency>
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
 
 	</dependencies>
 	<repositories>

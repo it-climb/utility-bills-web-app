@@ -21,6 +21,7 @@
 
 <!--  CSS for Demo Purpose, don't include it in your project     -->
 <link href="/resources/dashboards/assets/css/demo.css" rel="stylesheet"/>
+<%--<link rel="stylesheet" href="resources/assets/css/style.css">--%>
 
 <!--     Fonts and icons     -->
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -29,3 +30,5 @@
 
 <link href="<c:url value='/resources/dashboards/assets/css/bootstrap.css' />" rel="stylesheet">
 <link href="<c:url value='/resources/dashboards/assets/css/app.css' />" rel="stylesheet">
+
+<%--<script type="text/javascript" src="/resources/dashboards/assets/js/upload-file.js"></script>--%>

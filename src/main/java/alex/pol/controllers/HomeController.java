@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,10 +92,11 @@ public class HomeController {
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
-                             HttpServletRequest request)throws SQLException {
+                             HttpServletRequest request) throws SQLException, MessagingException {
 
         HttpSession session = request.getSession();
         User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
+
 
         if (user.getEmail().equals("admin@admin.com")) {
             session.setAttribute("admin", user);
@@ -105,9 +107,10 @@ public class HomeController {
             UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
             userDataService.insert(userData);
             add = new StringBuilder("add");
+
+
         }
 
-//        }
         return "redirect:/";
     }
 
@@ -210,7 +213,8 @@ public class HomeController {
 
             }
         }
-        return "redirect:/loginProblems";
+        add = new StringBuilder("errorLogin");
+        return "redirect:/";
 
     }
 

@@ -314,14 +314,28 @@
                             </div>
                             <div class="content">
                                 <div class="author">
-                                    <a href="#">
-                                        <img class="avatar border-gray"
-                                             src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>
 
-                                        <h4 class="title">${myUserData.firstName}<br/>
+                                    <a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-3">
+                                        <c:if test="${empty myUserData.avatar.id}">
+                                            <img class="avatar border-gray"
+                                                 src="/resources/dashboards/assets/img/default-avatar.png"/>
+                                                 <%--src="/resources/dashboards/assets/img/avatars/agios@agios.com2/AVBtq51sFG0.jpg"/>--%>
+                                        </c:if>
+                                        <c:if test="${not empty myUserData.avatar.id}">
+                                            <img class="avatar border-gray"
+                                                 src="${myUserData.avatar.path}"/>
+                                        </c:if>
+                                    </a>
+
+                                            <%--<a href="#">--%>
+                                                <%--<img class="avatar border-gray"--%>
+                                                     <%--src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>--%>
+                                                <%--</a>--%>
+
+                                    <h4 class="title">${myUserData.firstName}<br/>
                                             <small>${myUserData.secondName}</small>
                                         </h4>
-                                    </a>
+
                                 </div>
                                 <%--<p class="description text-center"> "Lamborghini Mercy <br>--%>
                                 <%--Your chick she so thirsty <br>--%>
@@ -379,7 +393,65 @@
     </div>
 </div>
 
+<!-- modal login
+================================================== -->
+<%--<div class="modal" id="modal-3">--%>
+    <%--<div class="modal-dialog modal-sm">--%>
+        <%--<div class="modal-content">--%>
+            <%--<div class="modal-body">--%>
+
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+
+<div id="modal-3" class="modal fade test-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Change Photo</h4>
+            </div>
+            <div class="modal-body">
+                <form:form enctype="multipart/form-data" method="post" action="/uploadAvatar">
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <label class="btn btn-primary btn-file upload btn-color">
+                                Browse&hellip;
+                                <input id="upload-file-input"
+                                       type="file"
+                                       style="display: none;"
+                                       onchange="$('.form-control').val($(this).val());"
+                                       accept="image/png,image/jpeg"
+                                       name="avatarFile">
+                            </label>
+                        </label>
+                            <input type="text" class="form-control" readonly>
+                    </div>
+
+                    <input type="hidden" name="Id" value="${myUserData.id}">
+
+
+                    <span class="help-block">
+                        You can download an image in JPG or PNG format. Size image 120x120
+                    </span>
+
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary btn-fill btn-color">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+
+                </form:form>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
 
 </body>
 <jsp:include page="/WEB-INF/pages/dashboards/template/footer.jsp" />
 </html>
+

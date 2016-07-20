@@ -30,6 +30,8 @@ public class UserDashController {
     CountryService countryService;
     @Autowired
     CityService cityService;
+    @Autowired
+    AvatarService avatarService;
 
 
 
@@ -41,14 +43,18 @@ public class UserDashController {
         ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
+
         myUserData = userDataService.findByUser(sessionUser);
         List<Street> streetList = this.streetService.getAll();
         List<Country> countryList = this.countryService.getAll();
         List<City> cityList = this.cityService.getAll();
+        List<Avatar> avatarList = this.avatarService.getAll();
+
         modelAndView.addObject("myUserData", myUserData);
         modelAndView.addObject("streetList", streetList);
         modelAndView.addObject("cityList", cityList);
         modelAndView.addObject("countryList", countryList);
+        modelAndView.addObject("avatarList", avatarList);
         return modelAndView;
     }
 
