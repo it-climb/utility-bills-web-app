@@ -1,14 +1,11 @@
-package alex.pol.repository.impl;
+package alex.pol.service.impl;
 
 
-import alex.pol.repository.UserDataService;
+import alex.pol.service.UserDataService;
 import alex.pol.dao.UserDataDao;
 import alex.pol.domain.User;
 import alex.pol.domain.UserData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
 
 @Service
 public class UserDataServiceImpl extends BaseService<UserData, UserDataDao> implements UserDataService {

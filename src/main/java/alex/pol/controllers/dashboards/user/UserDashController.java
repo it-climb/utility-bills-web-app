@@ -1,11 +1,7 @@
-package alex.pol.controllers;
+package alex.pol.controllers.dashboards.user;
 
-import alex.pol.domain.User;
-import alex.pol.domain.UserData;
-import alex.pol.dto.RegAndLogDto;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
-import alex.pol.repository.impl.UserDataServiceImpl;
+import alex.pol.domain.*;
+import alex.pol.service.*;
 import alex.pol.util.JspPath;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,105 +15,98 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-
-/**
- * Created by Abashkin Aleksandr on 18.06.2016.
- */
+import java.util.List;
 
 @Controller
-public class DashboardsConroller {
+public class UserDashController {
 
     @Autowired
     UserService userService;
     @Autowired
     UserDataService userDataService;
+    @Autowired
+    StreetService streetService;
+    @Autowired
+    CountryService countryService;
+    @Autowired
+    CityService cityService;
+    @Autowired
+    AvatarService avatarService;
 
-    /**
-     * This method show user login page(with fields asking you to enter your email and password)
-     * or enter the page with user registration/
-     *
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
-    public String selectDashboard(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
-        if (sessionUser == null) {
-            return "redirect:/userDash";
-        } else
-            return "redirect:/userDash";
-    }
+
 
     @RequestMapping(value = "/userDash", method = RequestMethod.GET)
     public ModelAndView showUserDashboard(@ModelAttribute("myUserData") UserData myUserData,
                                           @RequestParam(required = false) String firstName,
                                           @RequestParam(required = false) String secondName,
-                                          HttpServletRequest request) throws SQLException {
+                                          HttpServletRequest request) throws SQLException, InstantiationException, IllegalAccessException {
         ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
+
         myUserData = userDataService.findByUser(sessionUser);
+        List<Street> streetList = this.streetService.getAll();
+        List<Country> countryList = this.countryService.getAll();
+        List<City> cityList = this.cityService.getAll();
+        List<Avatar> avatarList = this.avatarService.getAll();
+
         modelAndView.addObject("myUserData", myUserData);
+        modelAndView.addObject("streetList", streetList);
+        modelAndView.addObject("cityList", cityList);
+        modelAndView.addObject("countryList", countryList);
+        modelAndView.addObject("avatarList", avatarList);
         return modelAndView;
     }
 
     @RequestMapping(value = "/userEdit", method = RequestMethod.POST)
-    public ModelAndView updateUserData(@ModelAttribute("myUserData") UserData myUserData,
+    public String updateUserData(@ModelAttribute("myUserData") UserData myUserData,
                                        @RequestParam(required = false) String firstName,
                                        @RequestParam(required = false) String secondName,
-                                       @RequestParam(required = false) String country,
-                                       @RequestParam(required = false) String city,
-                                       @RequestParam(required = false) String street,
+                                       @RequestParam(required = false) Integer countryId,
+                                       @RequestParam(required = false) Integer cityId,
+                                       @RequestParam(required = false) Integer streetId,
                                        @RequestParam(required = false) String house,
                                        @RequestParam(required = false) String apartment,
                                        HttpServletRequest request) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
         myUserData = userDataService.findByUser(sessionUser);
         myUserData.setFirstName(firstName);
         myUserData.setSecondName(secondName);
-        myUserData.setCountry(country);
-        myUserData.setCity(city);
-        myUserData.setStreet(street);
+        if (countryId != null){
+            myUserData.setCountry(this.countryService.getById(countryId));
+        }
+        if (cityId != null){
+            myUserData.setCity(this.cityService.getById(cityId));
+        }
+        if (streetId != null){
+            myUserData.setStreet(this.streetService.getById(streetId));
+        }
         myUserData.setHouse(house);
         myUserData.setApartment(apartment);
         userDataService.update(myUserData);
-        modelAndView.addObject("myUserData", myUserData);
-        return modelAndView;
+        return "redirect:/userDash";
+
     }
 
 
     @RequestMapping(value = "/showTable", method = RequestMethod.GET)
     public ModelAndView showTable(@ModelAttribute("myUserData") UserData myUserData,
-                                       HttpServletRequest request) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_TABLE);
-        HttpSession session = request.getSession();
-        User sessionUser = (User) session.getAttribute("user");
-        userDataService.update(myUserData);
-        modelAndView.addObject("myUserData", myUserData);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/showMap", method = RequestMethod.GET)
-    public ModelAndView showMap(@ModelAttribute("myUserData") UserData myUserData,
                                   HttpServletRequest request) throws SQLException {
-        ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_MAP);
+        ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_TABLE);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/sendPinCode", method = RequestMethod.POST)
-    public ModelAndView sendPinCode(@ModelAttribute("myUserData") UserData myUserData,
-                                    @RequestParam(required = false) int pinCode,
-                                    HttpServletRequest request) throws SQLException {
+    @RequestMapping(value = "/sendPinCode", method = RequestMethod.GET)
+    public String sendPinCode(@ModelAttribute("myUserData") UserData myUserData,
+                              @RequestParam(required = true) int pinCode,
+                              HttpServletRequest request) throws SQLException {
         ModelAndView modelAndView = new ModelAndView(JspPath.USER_DASHBOARD_SENDPIN);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("user");
         myUserData = userDataService.findByUser(sessionUser);
-        myUserData.setPinCode(pinCode);
-        userDataService.update(myUserData);
         modelAndView.addObject("myUserData", myUserData);
-        return modelAndView;
+        return "redirect:/userDash";
     }
+
 }

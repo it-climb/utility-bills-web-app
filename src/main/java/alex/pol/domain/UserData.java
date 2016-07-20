@@ -1,12 +1,21 @@
 package alex.pol.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
+
+import alex.pol.util.PostgreJsonHibernate.MyJson;
+import alex.pol.util.PostgreJsonHibernate.MyJsonType;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.google.gson.Gson;
+import net.sf.json.JSONObject;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
+import javax.persistence.*;
 
 @Entity(name = "UserData")
+@TypeDef(name = "MyJsonType",typeClass = MyJsonType.class)
 public class UserData extends BaseModel {
 
     private String firstName;
@@ -15,17 +24,31 @@ public class UserData extends BaseModel {
 
     private Integer age;
 
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
-    private String city;
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    private String street;
+    @ManyToOne
+    @JoinColumn(name = "street_id")
+    private Street street;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
 
     private String house;
 
     private String apartment;
 
     private int pinCode;
+
+    @Column
+    @Type(type = "MyJsonType")
+    private MyJson socialData;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
@@ -63,29 +86,42 @@ public class UserData extends BaseModel {
         this.age = age;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
-    public String getStreet() {
+    public Street getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(Street street) {
         this.street = street;
     }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+
+
+
+
 
     public String getHouse() {
         return house;
@@ -110,6 +146,11 @@ public class UserData extends BaseModel {
     public void setPinCode(int pinCode) {
         this.pinCode = pinCode;
     }
+
+
+    public MyJson getSocialData(){return socialData;}
+
+    public void setSocialData(MyJson socialData){this.socialData = socialData;}
 
     public static Builder newBuilder() {
         return new UserData().new Builder();
@@ -140,18 +181,23 @@ public class UserData extends BaseModel {
             return this;
         }
 
-        public Builder setCountry(String country) {
+        public Builder setCountry(Country country) {
             UserData.this.country = country;
             return this;
         }
 
-        public Builder setCity(String city) {
+        public Builder setCity(City city) {
             UserData.this.city = city;
             return this;
         }
 
-        public Builder setStreet(String street) {
+        public Builder setStreet(Street street) {
             UserData.this.street = street;
+            return this;
+        }
+
+        public Builder setAvatar(Avatar avatar) {
+            UserData.this.avatar = avatar;
             return this;
         }
 
@@ -175,9 +221,15 @@ public class UserData extends BaseModel {
             return this;
         }
 
+        public Builder setSocialData(MyJson socialData) {
+            UserData.this.socialData = socialData;
+            return this;
+        }/**/
+
 
         public UserData build() {
             return UserData.this;
         }
     }
 }
+

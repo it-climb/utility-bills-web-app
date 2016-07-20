@@ -1,13 +1,13 @@
 package alex.pol.social.facebook;
 
 import alex.pol.domain.User;
-import alex.pol.repository.UserDataService;
-import alex.pol.repository.UserService;
-//import alex.pol.social.model.SocialUserData;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
+import alex.pol.domain.UserData;
+import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -15,10 +15,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.support.OAuth2ConnectionFactory;
-import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.facebook.api.Facebook;
 
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
@@ -55,7 +53,8 @@ public class FacebookController {
 
     private static final String APP_SECRETE = "b9c76b95fefb25983b0d45d9ba3d8364";
 
-    private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
+    private static final String REDIRECT_URL =
+    "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
     //"http://localhost:8080/callback";
 
     private static FacebookConnectionFactory facebookConnectionFactory;
@@ -94,48 +93,74 @@ public class FacebookController {
     }
 
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public String getConnection(HttpServletRequest request) {
+    public String getConnection(HttpServletRequest request) throws SQLException {
         HttpSession httpSession = request.getSession();
         String authorizationCode = request.getParameter("code");
-        AccessGrant accessGrant = oauthOperations.exchangeForAccess(authorizationCode, REDIRECT_URL, null);
+        AccessGrant accessGrant = oauthOperations.exchangeForAccess(
+                authorizationCode, REDIRECT_URL, null);
         Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);
-
-        /*String accessToken = getFacebookAccessToken(authorizationCode);
-        AccessGrant accessGrant = new AccessGrant(accessToken);
-        Connection<Facebook> connection = facebookConnectionFactory.createConnection(accessGrant);*/
-
         String facebookUserEmail = connection.fetchUserProfile().getEmail();
-        /*ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("connection",connection);
-        modelAndView.addObject("email",facebookUserEmail);*/
-
-                 //List<User> userList = null;
-                 try {
-                     //userList = userService.getAll();
-                     User facebookUser = User.newBuilder().setEmail(facebookUserEmail)
-                             .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();//"Facebook"+
-                     userService.insert(facebookUser);
-                     httpSession.setAttribute("user", facebookUser);
-                 } catch (SQLException e) {
-                     //String s ="SQLException";
-                     e.printStackTrace();
-                     //return "redirect:/facebookError?s="+s;
-                 }/*catch(NullPointerException e){
-                     String s ="NullPointerException";
-                     e.printStackTrace();
-                     return "redirect:/facebookError?s="+s;
-                 }*/
-        //if (checkListForUser(userList,facebookUser)){}
-        //return modelAndView;
+        User facebookUser = userService.getByEmail(facebookUserEmail);
+        if (facebookUser == null){
+            facebookUser = User.newBuilder().setEmail(facebookUserEmail)
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
+            ConnectionData connectionData = connection.createData();
+            MyJson myJson = new MyJson();
+            myJson.put("provider", connectionData.getProviderId());
+            myJson.put("displayName", connectionData.getDisplayName());
+            myJson.put("imageUrl", connectionData.getImageUrl());
+            myJson.put("providerUserId", connectionData.getProviderUserId());
+            myJson.put("secret", connectionData.getSecret());
+            myJson.put("accessToken", connectionData.getAccessToken());
+            myJson.put("expireTime", connectionData.getExpireTime());
+            myJson.put("refreshToken", connectionData.getRefreshToken());
+            UserData facebookUserData = UserData.newBuilder().setUser(facebookUser)
+                    .setSocialData(myJson).build();
+            userService.insert(facebookUser);
+            userDataService.insert(facebookUserData);
+        }
+        UserData facebookUserData = userDataService.findByUser(facebookUser);
+        if(facebookUser != null && !facebookUserData.getSocialData()
+                .get("provider").equals("facebook")){
+            facebookUser = null;
+        }
+        httpSession.setAttribute("user", facebookUser);
         return "redirect:/";
     }
 
+    private void addUserAndUserData(User user, Connection connection) throws SQLException {
+        if (user == null){
+            user = User.newBuilder().setEmail(connection.fetchUserProfile().getEmail())
+                    .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
+
+            ConnectionData connectionData = connection.createData();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("provider", connectionData.getProviderId());
+            jsonObject.put("displayName", connectionData.getDisplayName());
+            jsonObject.put("imageUrl", connectionData.getImageUrl());
+            jsonObject.put("providerUserId", connectionData.getProviderUserId());
+            jsonObject.put("secret", connectionData.getSecret());
+            jsonObject.put("accessToken", connectionData.getAccessToken());
+            jsonObject.put("expireTime", connectionData.getExpireTime());
+            jsonObject.put("refreshToken", connectionData.getRefreshToken());
+
+            MyJson myJson = new MyJson();
+            //myJson.setSocialData(jsonObject);
+            UserData facebookUserData = UserData.newBuilder().setUser(user)
+                    .setSocialData(myJson).build();
+
+            userService.insert(user);
+            userDataService.insert(facebookUserData);
+        }
+    }
     private boolean checkListForUser(List<User> userList, User user){
         if (userList==null) return false;
         if (userList.size()==0)return true;
         for (int i = 0; i < userList.size(); i++) {
             if(userList.get(i).getEmail().equals(user.getEmail())
-                    && userList.get(i).getPassword().equals(user.getPassword())){
+                    //&& userList.get(i).getPassword().equals(user.getPassword())
+                    ){
+                user = userList.get(i);
                 return false;
             }
         }
@@ -147,7 +172,7 @@ public class FacebookController {
         HttpSession session=request.getSession();
         session.invalidate();
         return "redirect:http://localhost:8080/login";
-    }
+    }/**/
 
     private String getFacebookAccessToken(String faceCode){
         String token = null;
@@ -178,4 +203,29 @@ public class FacebookController {
         }
         return token;
     }
+
+    private String getFacebookJson(String faceCode){
+        String string = null;
+        if (faceCode != null && ! "".equals(faceCode)) {
+            String newUrl = "https://graph.facebook.com/oauth/access_token?client_id="
+                    + APP_ID + "&redirect_uri=" + REDIRECT_URL + "&client_secret="
+                    + APP_SECRETE + "&code=" + faceCode;
+            HttpClient httpclient = new DefaultHttpClient();
+            try {
+                HttpGet httpget = new HttpGet(newUrl);
+                ResponseHandler<String> responseHandler = new BasicResponseHandler();
+                String responseBody = httpclient.execute(httpget, responseHandler);
+                JSONObject jsonObject = (JSONObject)JSONSerializer.toJSON(responseBody);
+                string=jsonObject.toString();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                httpclient.getConnectionManager().shutdown();
+            }
+        }
+        return string;
+    }
+
 }

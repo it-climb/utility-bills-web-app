@@ -1416,7 +1416,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   font-size: 16px;
 }
 .navbar.fixed {
-  width: calc(100% - $sidebar-width);
+  /*width: calc(100% - $sidebar-width);*/
   right: 0;
   left: auto;
   border-radius: 0;
@@ -1899,6 +1899,7 @@ body > .navbar-collapse[data-color="purple"]:after {
   border-radius: 50%;
   margin-right: 5px;
 }
+
 .card .description {
   font-size: 14px;
   color: #333;
@@ -3390,4 +3391,53 @@ body > .navbar-collapse[data-color="purple"]:after {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch;
   }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 }
+.test-modal {
+  position: absolute !important;
+  z-index: 1041 !important;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.upload {
+  height: 34px;
+}
+
+.modal-content {
+  width: 350px;
+}
+
+.btn-color{
+  background-color: #3472F7 !important;
+  border-color: #204d74 !important;
+}
+
+.btn-color:hover{
+  background-color: #DA8910 !important;
+  border-color: #204d74 !important;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 999px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

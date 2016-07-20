@@ -1,7 +1,7 @@
-package alex.pol.repository.impl;
+package alex.pol.service.impl;
 
 
-import alex.pol.repository.Service;
+import alex.pol.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 

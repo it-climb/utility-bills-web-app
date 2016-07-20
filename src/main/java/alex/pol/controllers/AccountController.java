@@ -1,9 +1,9 @@
 package alex.pol.controllers;
 
 
-import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
 import alex.pol.domain.User;
+import alex.pol.domain.UserData;
+import alex.pol.service.UserDataService;
 import alex.pol.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

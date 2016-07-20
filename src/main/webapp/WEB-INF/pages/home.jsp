@@ -30,8 +30,8 @@
   <link rel="stylesheet" href="resources/assets/css/style.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="resources/assets/js/jquery.js"></script>
+  <script src="resources/assets/js/jquery.validate.min.js"></script>
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -73,14 +73,14 @@
         <li><a href="#home" class="smoothScroll"><spring:message code="nav.section.link1"/></a></li>
         <li><a href="#about" class="smoothScroll"><spring:message code="nav.section.link2"/></a></li>
         <li><a href="#testimonial" class="smoothScroll"><spring:message code="nav.section.link3"/></a></li>
-        <li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>
+        <%--<li><a href="#blog" class="smoothScroll"><spring:message code="nav.section.link4"/></a></li>--%>
         <li><a href="#contact" class="smoothScroll"><spring:message code="nav.section.link5"/></a></li>
         <c:if test="${email == null}">
         <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-1"><spring:message code="nav.section.link6"/></a></li>
         <li><a href="" class="smoothScroll" data-toggle="modal" data-target="#modal-2"><spring:message code="nav.section.link9"/></a></li>
         </c:if>
         <c:if test="${email != null}">
-          <li><a href="/dashboards" class="smoothScroll">${user.email}</a></li>
+          <li><a href="/dashboards" class="smoothScroll">${email}</a></li>
           <li><a href="/accountLogout" class="smoothScroll"><spring:message code="nav.section.link10"></spring:message></a> </li>
         </c:if>
         <a href="home?mylocale=en"><spring:message code="nav.section.link7"/></a> | <a href="home?mylocale=ru"><spring:message code="nav.section.link8"/></a>
@@ -221,7 +221,7 @@
         <form action="#" method="post">
           <div class="col-md-12 col-sm-12">
             <input type="text" class="form-control" placeholder="<spring:message code="contact.section.name"/>" name="name" id="name">
-            <input type="email" class="form-control" placeholder="<spring:message code="contact.section.email"/>" name="email" id="email">
+            <input type="email" class="form-control" placeholder="<spring:message code="contact.section.email"/>" name="email" id="email1"> //edit id, was id="email"
             <input type="text" class="form-control" placeholder="<spring:message code="contact.section.subject"/>" name="subject">
             <textarea name="message" rows="8" class="form-control" id="message" placeholder="<spring:message code="contact.section.message"/>" message="message"></textarea>
           </div>
@@ -276,23 +276,24 @@
             <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn sign-google" data-wow-delay="1.2s"></a></li>
           </ul>
         </div>
+
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div >
 
-        <form:form method="post" action="/userLogin">
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-            <input type="email" class="form-control"  placeholder="Email" name="email" value="${user.email}">
+        <form:form method="post" action="/userLogin" id="contact-formL" class="form-horizontal">
+
+          <div class="control-group controls">
+            <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="emailL" value="${dto.email}">
+          </div>
+          <div class="control-group controls ">
+            <input type="password" class="reg"  id="passwordL" placeholder="<spring:message code="modal.section.h7"/>" name="password"  value="${dto.password}" >
           </div>
 
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-            <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}">
+          <div class="sign form-actions">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>">
           </div>
-          <div class="sign">
-            <input role="button" type="submit" name="id" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link6"/>"/>
-          </div>
+
         </form:form>
 
         <%--<div class="fmp">--%>
@@ -333,25 +334,19 @@
         <div class="or">
           <p><spring:message code="modal.section.h3"/></p>
         </div>
-        <form:form action="saveUser" modelAttribute="dto" name="myForm">
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input type="text" class="form-control"  placeholder="First Name" value="${dto.firstName}" name="firstName" ng-model="firstName" ng-length="1" required>
+
+        <form:form action="saveUser" modelAttribute="dto" name="myForm" id="contact-form" class="form-horizontal">
+          <div class="control-group controls">
+                <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="email" value="${dto.email}">
+            </div>
+          <div class="control-group controls ">
+            <input type="password" class="reg"  id="password" placeholder="<spring:message code="modal.section.h7"/>" name="password"  value="${dto.password}" >
           </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-            <input type="text" class="form-control"  placeholder="Second Name" value="${dto.secondName}" name="secondName" ng-model="secondName" ng-length="1" required>
+          <div class="control-group controls">
+            <input type="password" class="reg" id="conf"  placeholder="<spring:message code="modal.section.h8"/>" name="conf">
           </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span> </div>
-            <input type="email" class="form-control"  placeholder="Email" name="email" ng-model="email" value="${dto.email}" required>
-          </div>
-          <div class="input-group email-password">
-            <div class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></div>
-            <input type="password" class="form-control"  placeholder="Password" name="password" ng-model="password" ng-minlength="3" value="${dto.password}" required>
-          </div>
-          <div class="sign">
-            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link9"/>" ng-disabled="!myForm.firstName.$valid || !myForm.secondName.$valid || !myForm.email.$valid || !myForm.password.$valid"/>
+          <div class="sign form-actions">
+            <input role="button" type="submit" class="btn btn-primary  btn-block" value="<spring:message code="nav.section.link9"/>">
           </div>
         </form:form>
 
@@ -370,10 +365,28 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">CONGRATULATION!!!</h4>
+        <h4 class="modal-title modal-center-text" id="myModalLabel"><spring:message code="modal.section.h11"/> </h4>
       </div>
       <div class="modal-body">
-        <div>Now You Are On Our Team!</div>
+        <div class="modal-center-text"><spring:message code="modal.section.h12"/></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</c:if>
+
+<!-- modal errorLogin
+================================================== -->
+<c:if test="${add == 'errorLogin'}">
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title modal-center-text" id="myModalLabel2"><p><spring:message code="modal.section.h9"/></p> </h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-center-text"><spring:message code="modal.section.h10"/></div>
       </div>
     </div>
     </div>
@@ -394,7 +407,7 @@
       <div class="link-list col-md-2 col-sm-2 wow fadeInUp" data-wow-delay="0.6s">
         <h2><spring:message code="footer.section1.h2"/></h2>
         <a href="#"><spring:message code="footer.section1.link1"/></a>
-        <a href="#"><spring:message code="footer.section1.link2"/></a>
+        <%--<a href="#"><spring:message code="footer.section1.link2"/></a>--%>
         <a href="#"><spring:message code="footer.section1.link3"/></a>
         <a href="#"><spring:message code="footer.section1.link4"/></a>
       </div>
@@ -414,7 +427,7 @@
           <li><a href="/googleLogin" class="fa fa-google-plus wow fadeIn" data-wow-delay="1.2s"></a></li>
         </ul>
       </div>
-
+      <!--/vkLogin-->
       <div class="col-md-12 col-sm-12">
         <div class="copyright-text wow bounceIn">
 
@@ -427,8 +440,7 @@
 
 <!-- Javascript
 ================================================== -->
-<script src="resources/assets/js/jquery.js"></script>
-<script src="resources/assets/js/bootstrap.min.js"></script>
+
 <script src="resources/assets/js/smoothscroll.js"></script><!---->
 <script src="resources/assets/js/jquery.nav.js"></script>
 <script src="resources/assets/js/jquery.parallax.js"></script>
@@ -438,11 +450,39 @@
 <script src="resources/assets/js/counter.js"></script>
 <script src="resources/assets/js/custom.js"></script>
 
+<script src="resources/assets/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/additional-methods.js"></script>
+<script src="resources/assets/js/home.js"></script>
+
+
 <script>
       $(document).ready(function(){
         $("#my-modal").modal();
       });
 </script>
 
+<script>
+  function getParameter(paramName) {
+
+    var searchString = window.location.search.substring(1),
+            i, val, params = searchString.split("&");
+
+    for (i=0; i<params.length; i++) {
+      val = params[i].split("=");
+      if (val[0] == paramName) {
+        return val[1];
+      }
+    }
+    return null;
+  }
+
+
+  if (getParameter("mylocale") == "ru")
+    $.getScript("resources/assets/js/messages_ru.min.js");
+
+</script>
+
 </body>
+
+
 </html>
