@@ -22,6 +22,9 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +49,13 @@ public class AvatarServerController {
     CityService cityService;
     @Autowired
     AvatarService avatarService;
+
+    @Value("${cloud.aws.credentials.accesskey}")
+    String accesskey;
+
+    @Value("${cloud.aws.credentials.secretkey}")
+    String secretkey;
+
 
     @RequestMapping(value = "/uploadAvatar", method = RequestMethod.POST)
     public String updateAvatar(@ModelAttribute("myUserData") UserData myUserData,
@@ -76,9 +86,12 @@ public class AvatarServerController {
         String bucketName = "test-avatars-test";
         String keyName = partEmail[0] + "/" + avatarFile.getOriginalFilename();
 
+
+
+
         AWSCredentials credentials = new BasicAWSCredentials(
-                "AKIAIIT3A6ZJYYAL7PXQ",
-                "d/eRw4LdHCB9JULbTf+Qy10aQu1QE6+jlvshRdND");
+                    accesskey,secretkey
+        );
 
         AmazonS3 s3client = new AmazonS3Client(credentials);
 
