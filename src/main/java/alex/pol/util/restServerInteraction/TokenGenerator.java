@@ -4,7 +4,7 @@ package alex.pol.util.restServerInteraction;
 import java.util.Date;
 
 public class TokenGenerator {
-    private static Date date = new Date();//.getTime());
+    private static Date date = new Date();
 
     public static char[] generateRandomCharArray(int length) {
         char[] values = {'a','b','c','d','e','f','g','h','i','j',
@@ -39,4 +39,3 @@ public class TokenGenerator {
         return out.toCharArray();
     }
 }
-/**/
