@@ -12,6 +12,9 @@ public class Street extends BaseModel {
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "street", fetch = FetchType.LAZY)
     private Set<UserData> userData;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public Set<UserData> getUserData() {
         return userData;
@@ -27,6 +30,14 @@ public class Street extends BaseModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
 

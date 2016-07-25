@@ -14,6 +14,9 @@ public class Country extends BaseModel{
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "country", fetch = FetchType.LAZY)
     private Set<UserData> userData;
 
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "country", fetch = FetchType.LAZY)
+    private Set<City> city;
+
     public String getName() {
         return name;
     }
@@ -30,4 +33,11 @@ public class Country extends BaseModel{
         this.userData = userData;
     }
 
+    public Set<City> getCity() {
+        return city;
+    }
+
+    public void setCity(Set<City> city) {
+        this.city = city;
+    }
 }

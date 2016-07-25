@@ -113,19 +113,44 @@
                                 <form action="/addNewCity" method="post">
                                     <form method="post" action="/addNewCity">
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>City Name</label>
-                                                <input type="hidden" name="cityId" value=${city.id}>
-                                                <input type="text" name="cityName" class="form-control"
-                                                       value="${city.name}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>City Name</label>
+                                                    <input type="hidden" name="cityId" value=${city.id}>
+                                                    <input type="text" name="cityName" class="form-control"
+                                                           value="${city.name}">
+                                                </div>
+                                            </div>
 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <select path="countryList" name="countryId" class="form-control">
+                                                        <option value="">Select to Edit</option>
+                                                        <c:forEach var="country" items="${countryList}">
+                                                            <option
+
+                                                                    <c:if test="${country.id == currentCountry.id}">
+                                                                        <c:out value="selected"/>
+                                                                    </c:if>
+
+                                                                    value="${country.id}">
+                                                                    ${country.name}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                        <input type="submit" class="btn btn-danger btn-sm custom-width"
-                                               value="Accept">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="submit" class="btn btn-danger btn-sm custom-width"
+                                                       value="Accept">
+                                            </div>
+                                        </div>
+
                                     </form>
 
                                 </form>
@@ -135,33 +160,33 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-user">
-                            <div class="image">
-                                <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                                     alt="..."/>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                    <a href="#">
-                                        <img class="avatar border-gray"
-                                             src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>
+                    <%--<div class="col-md-4">--%>
+                    <%--<div class="card card-user">--%>
+                    <%--<div class="image">--%>
+                    <%--<img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"--%>
+                    <%--alt="..."/>--%>
+                    <%--</div>--%>
+                    <%--<div class="content">--%>
+                    <%--<div class="author">--%>
+                    <%--<a href="#">--%>
+                    <%--<img class="avatar border-gray"--%>
+                    <%--src="/resources/dashboards/assets/img/faces/face-3.jpg" alt="..."/>--%>
 
-                                        <h4 class="title">${myUserData.firstName}<br/>
-                                            <small>${myUserData.secondName}</small>
-                                        </h4>
-                                    </a>
-                                </div>
+                    <%--<h4 class="title">${myUserData.firstName}<br/>--%>
+                    <%--<small>${myUserData.secondName}</small>--%>
+                    <%--</h4>--%>
+                    <%--</a>--%>
+                    <%--</div>--%>
 
-                            </div>
-                            <hr>
-                            <div class="text-center">
+                    <%--</div>--%>
+                    <%--<hr>--%>
+                    <%--<div class="text-center">--%>
 
-                                </button>
+                    <%--</button>--%>
 
-                            </div>
-                        </div>
-                    </div>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
 
                 </div>
             </div>

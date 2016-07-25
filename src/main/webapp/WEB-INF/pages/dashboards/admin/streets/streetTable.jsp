@@ -124,6 +124,8 @@
                                     <thead>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>City</th>
+                                    <th>Country</th>
 
                                     </thead>
                                     <tbody>
@@ -132,6 +134,8 @@
                                     <tr>
                                         <td>${street.id}</td>
                                         <td>${street.name}</td>
+                                        <td>${street.city.name}</td>
+                                        <td>${street.city.country.name}</td>
 
                                         <td>
                                             <form method="post" action="/streetEdit">

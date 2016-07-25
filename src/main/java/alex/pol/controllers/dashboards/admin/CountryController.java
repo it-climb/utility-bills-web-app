@@ -1,7 +1,10 @@
 package alex.pol.controllers.dashboards.admin;
 
-import alex.pol.domain.*;
-import alex.pol.service.*;
+import alex.pol.domain.Country;
+import alex.pol.domain.UserData;
+import alex.pol.service.CountryService;
+import alex.pol.service.UserDataService;
+import alex.pol.service.UserService;
 import alex.pol.util.ClassNameUtil;
 import alex.pol.util.JspPath;
 import org.apache.log4j.Logger;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -98,6 +100,7 @@ public class CountryController {
             Country country = countryService.getById(countryId);
             modelAndView.addObject("country", country);
         }
+
         return modelAndView;
     }
 

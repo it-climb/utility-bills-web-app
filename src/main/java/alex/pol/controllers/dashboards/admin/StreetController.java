@@ -1,6 +1,9 @@
 package alex.pol.controllers.dashboards.admin;
 
-import alex.pol.domain.*;
+import alex.pol.domain.City;
+import alex.pol.domain.Country;
+import alex.pol.domain.Street;
+import alex.pol.domain.UserData;
 import alex.pol.service.*;
 import alex.pol.util.ClassNameUtil;
 import alex.pol.util.JspPath;
@@ -59,13 +62,14 @@ public class StreetController {
      * @throws SQLException
      */
     @RequestMapping(value = "/addNewStreet", method = RequestMethod.POST)
-    public String addNewStreet(@RequestParam(required = false) Integer streetId, @RequestParam(required = true) String streetName) throws SQLException {
+    public String addNewStreet(@RequestParam(required = false) Integer streetId,
+                               @RequestParam(required = true) String streetName,
+                               @RequestParam(required = true) Integer cityId,
+                               @RequestParam(required = true) Integer countryId) throws SQLException {
 
-        System.out.println("streetId = " + streetId);
-        System.out.println("streetName = " + streetName);
         if (streetId == null) {
             Street street = new Street();
-            if (streetName == null) {
+            if (streetName == null || cityId == null || countryId == null) {
                 return "redirect:/except";
             }
             List<Street> streetList = streetService.getAll();
@@ -75,14 +79,17 @@ public class StreetController {
                 }
             }
             street.setName(streetName);
+            City city = this.cityService.getById(cityId);
+            street.setCity(city);
             log.info("admin adding new street with name " + streetName + " and  id" + streetId);
             streetService.insert(street);
         } else {
-
             try {
                 Street street = streetService.getById(streetId);
                 street.setName(streetName);
-//                Street street = Street.newBuilder().setName(streetName).setId(streetId).build();
+                City city = this.cityService.getById(cityId);
+                city.setCountry(this.countryService.getById(countryId));
+                street.setCity(city);
                 log.info("admin update the name of street on " + streetName + " and  id" + streetId);
                 streetService.update(street);
             } catch (Exception e) {
@@ -107,8 +114,16 @@ public class StreetController {
         ModelAndView modelAndView = new ModelAndView(JspPath.ADMIN_DASHBOARD_STREET_EDIT);
         if (streetId != null) {
             Street street = streetService.getById(streetId);
+            City city = streetService.getById(streetId).getCity();
             modelAndView.addObject("street", street);
+            modelAndView.addObject("currentCity", city);
+
         }
+
+        List<Country> countryList = this.countryService.getAll();
+        List<City> cityList = this.cityService.getAll();
+        modelAndView.addObject("cityList", cityList);
+        modelAndView.addObject("countryList", countryList);
         return modelAndView;
     }
 

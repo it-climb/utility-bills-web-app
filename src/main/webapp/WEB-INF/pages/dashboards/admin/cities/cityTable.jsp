@@ -126,6 +126,7 @@
                                     <thead>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Country</th>
                                     </thead>
                                     <tbody>
                                     <tr>
@@ -133,6 +134,7 @@
                                     <tr>
                                         <td>${city.id}</td>
                                         <td>${city.name}</td>
+                                        <td>${city.country.name}</td>
 
                                         <td>
                                             <form method="post" action="/cityEdit">

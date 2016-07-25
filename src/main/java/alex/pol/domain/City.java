@@ -11,8 +11,15 @@ public class City extends BaseModel {
     @Unique(message = "This City already exists")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "city", fetch = FetchType.LAZY)
     private Set<UserData> userData;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "city", fetch = FetchType.LAZY)
+    private Set<Street> street;
 
     public String getName() {
         return name;
@@ -30,4 +37,19 @@ public class City extends BaseModel {
         this.userData = userData;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Set<Street> getStreet() {
+        return street;
+    }
+
+    public void setStreet(Set<Street> street) {
+        this.street = street;
+    }
 }
