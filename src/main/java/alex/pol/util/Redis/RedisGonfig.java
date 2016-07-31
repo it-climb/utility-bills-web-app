@@ -30,8 +30,10 @@ public class RedisGonfig {
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-        jedisConFactory.setHostName("127.0.0.1");//52.41.214.255:6379
+        jedisConFactory.setHostName("52.41.214.255");//127.0.0.1:6379
         jedisConFactory.setPort(6379);
+        jedisConFactory.setDatabase(0);
+        jedisConFactory.setPassword("ZaqwsX12");
         return jedisConFactory;
     }
 
