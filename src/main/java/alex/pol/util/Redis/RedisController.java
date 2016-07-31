@@ -40,7 +40,7 @@ public class RedisController {
         //template.opsForValue().set( key, "Dima" );
         String key = "token";
         template.opsForValue().set(key, new String(TokenGenerator.generateRandomCharArray(10)));
-        template.expire( key, 60, TimeUnit.SECONDS);
+        template.expire( key, 3 , TimeUnit.DAYS);
         String outputString =(String) template.opsForValue().get(key);
         return  outputString;
     }
