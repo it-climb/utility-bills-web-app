@@ -1,5 +1,6 @@
 package alex.pol.controllers;
 
+import alex.pol.domain.Role;
 import alex.pol.domain.Street;
 import alex.pol.domain.User;
 import alex.pol.domain.UserData;
@@ -91,23 +92,26 @@ public class HomeController {
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String addNewUser(@ModelAttribute("dto") RegAndLogDto dto,
-                             HttpServletRequest request)throws SQLException {
+                             HttpServletRequest request) throws SQLException {
 
-        HttpSession session = request.getSession();
-        User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
 
-        if (user.getEmail().equals("admin@admin.com")) {
-            session.setAttribute("admin", user);
-            session.setAttribute("email", user.getEmail());
-        } else {
-            session.setAttribute("user", user);
-            userService.insert(user);
-            UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
-            userDataService.insert(userData);
-            add = new StringBuilder("add");
+        for (User user : userService.getAll()) {
+            if (user.getEmail().equals(dto.getEmail())){
+                return "redirect:/loginProblems";
+            }
         }
 
-//        }
+        HttpSession session = request.getSession();
+        User user = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).setRole(Role.USER).build();
+
+        session.setAttribute("user", user);
+        session.setAttribute("email", user.getEmail());
+
+        userService.insert(user);
+        UserData userData = UserData.newBuilder().setUser(user).setFirstName(dto.getFirstName()).setSecondName(dto.getSecondName()).build();
+        userDataService.insert(userData);
+        add = new StringBuilder("add");
+
         return "redirect:/";
     }
 
@@ -117,7 +121,7 @@ public class HomeController {
             RegAndLogDto dto = new RegAndLogDto();
             dto.setEmail("admin@admin.com");
             dto.setPassword("12345678");
-            User admin = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).build();
+            User admin = User.newBuilder().setEmail(dto.getEmail()).setPassword(dto.getPassword()).setRole(Role.ADMIN).build();
             userService.insert(admin);
             UserData userData = UserData.newBuilder().setUser(admin).setFirstName("Вася").setSecondName("Админ").build();
             userDataService.insert(userData);
@@ -168,7 +172,8 @@ public class HomeController {
     }
 
     /**
-     *Method act when you entered your email and password
+     * Method act when you entered your email and password
+     *
      * @param email
      * @param password
      * @param request
@@ -189,33 +194,42 @@ public class HomeController {
 //            return "redirect:/";
 //        }
 //    }
-
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public String updateOne(@RequestParam(required = true) String email, @RequestParam(required = true) String password, HttpServletRequest request) throws SQLException {
         HttpSession session = request.getSession();
         User user = userService.getByEmail(email);
+        System.out.println("проверка пароля и имейла с  БД");
         if (user != null && user.getPassword().equals(password/*Integer.toString(password.hashCode())*/)) {
 //                session.setAttribute("user", user);
 //                return "redirect:/";
 //            }else return "redirect:/loginProblems";
-            if (user.getEmail().equals("admin@admin.com")) {
-                User admin = userService.getByEmail(email);
-                session.setAttribute("admin", admin);
-                session.setAttribute("email", user.getEmail());
-                return "redirect:/";
-
-            } else if ((!(user.getEmail().equals("admin@admin.com")) && (user.getEmail() != null))) {
+            session.setAttribute("email", user.getEmail());
+            System.out.println("ЛОГИНИТСЯ!!!");
+            if (userService.getByEmail(email).getRole().equals(Role.USER)) {
+                System.out.println("SALUT USER!!");
                 session.setAttribute("user", user);
                 return "redirect:/";
-
+            } else if (userService.getByEmail(email).getRole().equals(Role.MODERATOR)) {
+                System.out.println("SALUT MODERATOR!!");
+                session.setAttribute("moderator", user);
+                return "redirect:/";
+            } else if (userService.getByEmail(email).getRole().equals(Role.ADMIN)) {
+                System.out.println("SALUT ADMIN!!");
+                session.setAttribute("admin", user);
+                return "redirect:/";
             }
+
         }
         return "redirect:/loginProblems";
 
     }
 
 
-
-
 }
+
+
+
+
+
+
 

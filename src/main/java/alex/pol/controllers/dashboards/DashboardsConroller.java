@@ -1,5 +1,7 @@
 package alex.pol.controllers.dashboards;
 
+import alex.pol.domain.Role;
+import alex.pol.domain.User;
 import alex.pol.service.UserDataService;
 import alex.pol.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class DashboardsConroller {
-    private String sessionAdminName = "admin";
-    private String sessionModeratorName = "moderator";
-    private String sessionUserName = "user";
 
     @Autowired
     UserService userService;
@@ -34,28 +33,30 @@ public class DashboardsConroller {
      */
     @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
     public String selectDashboard(HttpServletRequest request) {
+        System.out.println("method selectDashboard!!");
         HttpSession session = request.getSession();
-        System.out.println(session.getAttribute(sessionAdminName));
-        System.out.println(session.getAttribute(sessionModeratorName));
-        System.out.println(session.getAttribute(sessionUserName));
-
-        if (session.getAttribute(sessionAdminName) != null) {
-//            User admin = (User) session.getAttribute(sessionAdminName);
-//            request.setAttribute("admin", admin);
-            return "redirect:/adminDash";
-        }
-        if (session.getAttribute(sessionModeratorName) != null) {
-//            User moderator = (User) session.getAttribute(sessionModeratorName);
-//            request.setAttribute(sessionModeratorName, moderator);
-            return "redirect:/moderatorDash";
-        }
-        if (session.getAttribute(sessionUserName) != null) {
-//            User user = (User) session.getAttribute(sessionUserName);
-//            request.setAttribute(sessionUserName, user);
+        User user = userService.getByEmail((String) session.getAttribute("email"));
+        System.out.println("СМОТРИ СЮДА = " + user);
+//        if (userDataService.findByUser(user).getRole().equals(Role.USER)) {
+        if (userService.getByEmail(user.getEmail()).getRole().equals(Role.USER)) {
+            System.out.println("USER want to open dashboard!!");
+            session.setAttribute("user", user);
             return "redirect:/userDash";
+//        } else if (userDataService.findByUser(user).getRole().equals(Role.MODERATOR)) {
+        } else if (userService.getByEmail(user.getEmail()).getRole().equals(Role.MODERATOR)) {
+            System.out.println("Moderator want to open dashboard!!");
+            session.setAttribute("moderator", user);
+            return "redirect:/moderatorDash";
+//        } else if (userDataService.findByUser(user).getRole().equals(Role.ADMIN)) {
+        } else if (userService.getByEmail(user.getEmail()).getRole().equals(Role.ADMIN)) {
+            System.out.println("ADMIN want to open dashboard!!");
+            session.setAttribute("admin", user);
+            return "redirect:/adminDash";
         } else {
+            System.out.println("LAST ELSE IS WORKING");
             return "redirect:/home";
         }
+
     }
 
 }

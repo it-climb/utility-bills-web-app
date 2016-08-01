@@ -6,6 +6,8 @@ import alex.pol.util.validation.UserPassword;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Size;
 
 /**
@@ -28,6 +30,9 @@ public class User extends BaseModel {
     @Size(min = 6, max = 16, message = "Your password must between 6 and 16 characters")
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public String getPassword() {
         return password;
     }
@@ -42,6 +47,14 @@ public class User extends BaseModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public static Builder newBuilder(){return new User().new Builder();}
@@ -72,9 +85,17 @@ public class User extends BaseModel {
             return this;
         }
 
+        public Builder setRole(Role role) {
+            User.this.role = role;
+            return this;
+        }
+
+
 
         public User build() {
             return User.this;
         }
     }
+
+
 }
