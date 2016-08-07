@@ -15,6 +15,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.facebook.api.Facebook;
@@ -49,13 +51,15 @@ public class FacebookController {
     @Autowired
     UserDataService userDataService;
 
-    private static final String APP_ID = "1554105688224570";
+    @Value("${spring.social.facebook.app-id}")
+    private String APP_ID;
 
-    private static final String APP_SECRETE = "b9c76b95fefb25983b0d45d9ba3d8364";
+    @Value("${spring.social.facebook.app-secret}")
+    private String APP_SECRETE;
 
     private static final String REDIRECT_URL =
-    "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
-    //"http://localhost:8080/callback";
+    //"http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
+    "http://localhost:8080/callback";
 
     private static FacebookConnectionFactory facebookConnectionFactory;
 
@@ -69,8 +73,8 @@ public class FacebookController {
     }
 
     @RequestMapping(value="/facebookLogin",method = RequestMethod.GET)
-    public void loginWithFacebook(HttpServletRequest request,
-                                  HttpServletResponse response) throws IOException {
+    public void loginWithFacebook(HttpServletRequest request, HttpServletResponse response
+    ) throws IOException {
 
         HttpSession session = request.getSession();
         String sessionId = session.getId();
@@ -128,7 +132,7 @@ public class FacebookController {
         return "redirect:/";
     }
 
-    private void addUserAndUserData(User user, Connection connection) throws SQLException {
+    /*private void addUserAndUserData(User user, Connection connection) throws SQLException {
         if (user == null){
             user = User.newBuilder().setEmail(connection.fetchUserProfile().getEmail())
                     .setPassword(RandomStringUtils.randomAlphanumeric(16)).build();
@@ -165,16 +169,16 @@ public class FacebookController {
             }
         }
         return true;
-    }
+    }*/
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
     private String logoutUser(HttpServletRequest request){
         HttpSession session=request.getSession();
         session.invalidate();
         return "redirect:http://localhost:8080/login";
-    }/**/
+    }*/
 
-    private String getFacebookAccessToken(String faceCode){
+    /*private String getFacebookAccessToken(String faceCode){
         String token = null;
         if (faceCode != null && ! "".equals(faceCode)) {
             String newUrl = "https://graph.facebook.com/oauth/access_token?client_id="
@@ -226,6 +230,6 @@ public class FacebookController {
             }
         }
         return string;
-    }
+    }*/
 
 }

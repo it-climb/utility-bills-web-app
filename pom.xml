@@ -286,6 +286,9 @@
 			<artifactId>gson</artifactId>
 			<version>2.2.4</version>
 		</dependency>
+
+		<!--Testing-->
+
 		<!--dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
