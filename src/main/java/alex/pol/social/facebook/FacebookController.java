@@ -58,8 +58,8 @@ public class FacebookController {
     private String APP_SECRETE;
 
     private static final String REDIRECT_URL =
-    //"http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
-    "http://localhost:8080/callback";
+    "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/callback";
+    //"http://localhost:8080/callback";
 
     private static FacebookConnectionFactory facebookConnectionFactory;
 

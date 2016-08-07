@@ -16,6 +16,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.linkedin.api.LinkedIn;
@@ -47,9 +48,11 @@ public class LinkidinController {
     @Autowired
     UserDataService userDataService;
 
-    private static final String APP_ID ="773o2rdlcyfr20";
+    @Value("${spring.social.linkedin.app-id}")
+    private String APP_ID;
 
-    private static final String APP_SECRETE ="oUGpJndR2jlLvanv";
+    @Value("${spring.social.linkedin.app-secret}")
+    private String APP_SECRET;
 
     private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/linkedincallback";
     //"http://localhost:8080/linkedincallback";
@@ -74,7 +77,7 @@ public class LinkidinController {
         String accessToken = getLinkedinAccessToken(faceCode);
         AccessGrant accessGrant = new AccessGrant(accessToken);
         LinkedInConnectionFactory connectionFactory =
-                new LinkedInConnectionFactory(APP_ID, APP_SECRETE);
+                new LinkedInConnectionFactory(APP_ID, APP_SECRET);
         Connection<LinkedIn> connection = connectionFactory.createConnection(accessGrant);
         String linkedinUserEmail = connection.fetchUserProfile().getEmail();
         User linkedinUser = userService.getByEmail(linkedinUserEmail);
@@ -133,7 +136,7 @@ public class LinkidinController {
             String newUrl = "https://www.linkedin.com/oauth/v2/accessToken?"
                 + "grant_type=authorization_code&code=" + faceCode
                 + "&redirect_uri=" + REDIRECT_URL
-                + "&client_id=" + APP_ID + "&client_secret=" + APP_SECRETE;
+                + "&client_id=" + APP_ID + "&client_secret=" + APP_SECRET;
             HttpClient httpclient = new DefaultHttpClient();
             try {
                 HttpGet httpget = new HttpGet(newUrl);

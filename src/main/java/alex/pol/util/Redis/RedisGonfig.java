@@ -1,5 +1,6 @@
 package alex.pol.util.Redis;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
@@ -27,13 +28,25 @@ public class RedisGonfig {
         return template;
 
     }*/
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    @Value("${spring.redis.password}")
+    private String redisPassword;
+
+    @Value("${spring.redis.database}")
+    private int redisDatabase;
+
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-        jedisConFactory.setHostName("52.41.214.255");//127.0.0.1:6379
-        jedisConFactory.setPort(6379);
-        jedisConFactory.setDatabase(0);
-        jedisConFactory.setPassword("ZaqwsX12");
+        jedisConFactory.setHostName(redisHost);//127.0.0.1:6379
+        jedisConFactory.setPort(redisPort);
+        jedisConFactory.setDatabase(redisDatabase);
+        jedisConFactory.setPassword(redisPassword);
         return jedisConFactory;
     }
 
