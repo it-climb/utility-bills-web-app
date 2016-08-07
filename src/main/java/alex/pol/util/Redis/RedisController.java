@@ -51,5 +51,16 @@ public class RedisController {
         String outputString =(String) template.opsForValue().get(key);
         return  outputString;
     }
+
+    @RequestMapping("/putCharArrayToRedis")
+    public String saveKeyValuePairAsCharArray() throws InterruptedException {
+        String key = "token";
+        char [] tokenArray =TokenGenerator.generateRandomCharArray(10);
+        template.opsForValue().set(key, tokenArray);
+        template.expire( key, 2 , TimeUnit.MINUTES);
+        char [] outputCharArray = (char[]) template.opsForValue().get(key);
+        return "sent token = " + new String(tokenArray) +
+                ", token received from redis = " + new String(outputCharArray);
+    }
 }
 //
