@@ -15,29 +15,8 @@ public class RedisController {
     @Autowired
     private RedisTemplate< String, Object> template;
 
-    //@Autowired private HashOperations hashOps;
-
-    /*
-    @RequestMapping("/redis")
-    public String saveKeyValuePair() throws InterruptedException {
-        String key="name";
-        template.opsForValue().set( key, "Dima" );
-        template.expire( key, 10, TimeUnit.SECONDS);
-        String outputString =(String) template.opsForValue().get(key);
-        return  outputString;
-    }
-
-    @RequestMapping("/redis1")
-    public String getValueByKey() throws InterruptedException {
-        String key="name";
-        String outputString =(String) template.opsForValue().get(key);
-        return  outputString;
-    }*/
-
     @RequestMapping("/putTokenToRedis")
     public String saveKeyValuePairRemote() throws InterruptedException {
-        //String key="name";
-        //template.opsForValue().set( key, "Dima" );
         String key = "token";
         template.opsForValue().set(key, new String(TokenGenerator.generateRandomCharArray(10)));
         template.expire( key, 3 , TimeUnit.DAYS);

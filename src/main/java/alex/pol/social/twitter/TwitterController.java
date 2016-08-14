@@ -8,6 +8,7 @@ import alex.pol.util.PostgreJsonHibernate.MyJson;
 import alex.pol.util.validation.UserValid;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.oauth1.*;
@@ -38,9 +39,11 @@ public class TwitterController {
     @Autowired
     UserDataService userDataService;
 
-    private static final String APP_ID = "PKCZbhANQr8j2crAhjg2mpHBe";
+    @Value("${spring.social.twitter.app-id}")
+    private String APP_ID;
 
-    private static final String APP_SECRET = "LjdLyDgRqWjHLk2WbWUd2p0kia2Vivmv25L3LmG0jKf37Eny1l";
+    @Value("${spring.social.twitter.app-secret}")
+    private String APP_SECRET;
 
     //private static final String ACCESS_TOKEN="742722266186797056-ha3zCmesK3pLZ5geHlEbXcr0zm6taM7";
 

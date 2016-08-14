@@ -9,6 +9,7 @@ import alex.pol.util.validation.UserValid;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.google.api.Google;
@@ -40,9 +41,11 @@ public class GoogleController {
     @Autowired
     UserDataService userDataService;
 
-    private static final String APP_ID = "1011007286985-m3j1tdo57usehe66vh7knlpc9rd3en93.apps.googleusercontent.com";
+    @Value("${spring.social.google.app-id}")
+    private String APP_ID;
 
-    private static final String APP_SECRETE = "qtBbMeRj02xbdIqoeARnrHI1";
+    @Value("${spring.social.google.app-secret}")
+    private String APP_SECRETE;
 
     private static final String REDIRECT_URL = "http://utilitybillswebapp.unnt7pfuqq.eu-central-1.elasticbeanstalk.com/googleCallback";
     //"http://localhost:8080/googleCallback";
