@@ -6,6 +6,7 @@ import alex.pol.util.ClassNameUtil;
 import alex.pol.util.JspPath;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,15 @@ public class AdminDashController {
     @Autowired
     CityService cityService;
 
+
+    //    @PreAuthorize(value = "hasRole('ADMIN')")
+//    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/adminDash", method = RequestMethod.GET)
     public ModelAndView showAdminDashboard(@ModelAttribute("myUserData") UserData myUserData,
                                            @RequestParam(required = false) String firstName,
                                            @RequestParam(required = false) String secondName,
                                            HttpServletRequest request) throws SQLException {
+        System.out.println("method /adminDash");
         ModelAndView modelAndView = new ModelAndView(JspPath.ADMIN_DASHBOARD);
         HttpSession session = request.getSession();
         User sessionUser = (User) session.getAttribute("admin");

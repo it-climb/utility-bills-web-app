@@ -130,7 +130,6 @@ public class UserData extends BaseModel {
         this.pinCode = pinCode;
     }
 
-
     public MyJson getSocialData(){return socialData;}
 
     public void setSocialData(MyJson socialData){this.socialData = socialData;}
@@ -202,12 +201,29 @@ public class UserData extends BaseModel {
         public Builder setSocialData(MyJson socialData) {
             UserData.this.socialData = socialData;
             return this;
-        }/**/
+        }
 
 
         public UserData build() {
             return UserData.this;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", age=" + age +
+                ", country=" + country +
+                ", city=" + city +
+                ", street=" + street +
+                ", house='" + house + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", pinCode=" + pinCode +
+                ", socialData=" + socialData +
+                ", user=" + user +
+                '}';
     }
 }
 

@@ -335,7 +335,7 @@
           <p><spring:message code="modal.section.h3"/></p>
         </div>
 
-        <form:form action="saveUser" modelAttribute="dto" name="myForm" id="contact-form" class="form-horizontal">
+        <form:form action="/saveUser" modelAttribute="dto" name="myForm" id="contact-form" class="form-horizontal">
           <div class="control-group controls">
                 <input type="email" class="reg"  placeholder="<spring:message code="modal.section.h6"/>" name="email" id="email" value="${dto.email}">
             </div>
