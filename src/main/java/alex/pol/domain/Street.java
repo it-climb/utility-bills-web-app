@@ -1,5 +1,7 @@
 package alex.pol.domain;
+
 import alex.pol.util.validation.Unique;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -9,7 +11,8 @@ public class Street extends BaseModel {
     @Unique(message = "This street already exists")
     private String name;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "street", fetch = FetchType.LAZY)
+    //    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "street", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "street", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserData> userData;
 
     @ManyToOne
