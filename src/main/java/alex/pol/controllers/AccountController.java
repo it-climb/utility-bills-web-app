@@ -1,9 +1,9 @@
 package alex.pol.controllers;
 
 
-import alex.pol.domain.UserData;
-import alex.pol.repository.UserDataService;
 import alex.pol.domain.User;
+import alex.pol.domain.UserData;
+import alex.pol.service.UserDataService;
 import alex.pol.util.JspPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,10 +58,9 @@ public class AccountController {
         UserData userData = userDataService.findByUser(sessionUser);
         userData.setFirstName(firstName);
         userData.setSecondName(secondName);
-        userData.setAge(age);
         modelAndView.addObject("email", sessionUser.getEmail());
         modelAndView.addObject("userData", userData);
-         userDataService.update(userData);
+        userDataService.update(userData);
         return modelAndView;
     }
 }
